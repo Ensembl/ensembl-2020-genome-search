@@ -1,41 +1,51 @@
 import requests
-import json
+import json, os
 import urllib.parse as urlparse
 
 
 
-#def parse_next_request_url(url):
-#  parsed = urlparse.urlparse(url)
-#print(urlparse.parse_qs(parsed.query)['def'])
-
-def do_rest_request(**kwargs):
+def do_rest_request(rest_endpoint='http://test-metadata.ensembl.org/genome', query_params={"format" : "json"}, **kwargs):
    
-    "This funtion expects a full_url to query or in absence of which construct a full URL from doamin and endpoints" 
-
+    "This funtion expects a full_url to query or in absence of which construct a full URL from domain and endpoints" 
 
     if 'full_url' in kwargs:
        query_url = kwargs['full_url']
-    elif 'domain' in kwargs:
-       query_url = kwargs['domain'] + '/'
-       if 'endpoint' in kwargs:
-          query_url += kwargs['endpoint']
-       if 'request_params' in kwargs:
-          query_url = query_url + '?' + urlparse.urlencode(kwargs['request_params'])
-    else:
-       return
+    else: 
+       query_url = rest_endpoint + '?' + urlparse.urlencode(query_params)
 
-#    print(query_url)
-    
+    print("Querying {}".format(query_url))
+
     rest_response = requests.get(query_url, headers = {'content-type':'application/json'})
 
     if rest_response.status_code != 200:
-       raise Exception('Cannot fetch species info: {}'.format(rest_response.status_code))
+       raise Exception('Cannot fetch info: {}'.format(rest_response.status_code))
     
     response_data = json.loads(rest_response.text)
-#    print(response_data)
+
     return response_data
 
 
+def create_json_files(data):
+  "Parse the response data and create json data files"
+
+  if 'results' not in data: return
+  #if 'results' not in data: raise Exception('Cannot parse data')
+
+  for species_info in data['results']:
+    with open("data/"+species_info['organism']['name']+".json", "w") as write_file:
+     json.dump(species_info, write_file)
+
+
+
+
+# Create data direcrtory where all the json files are stored
+try:
+         data_files_path = os.getcwd()+"/data"
+         os.makedirs(data_files_path, exist_ok=True)
+except OSError:
+         print("Creation of the directory {} failed".format(data_files_path))
+else:
+         print("Successfully created the directory {}".format(data_files_path))
 
 
 fungi_params = {
@@ -45,12 +55,11 @@ fungi_params = {
           "format" : "json",
         }
  
-response_data = do_rest_request(domain="http://test-metadata.ensembl.org", endpoint="genome", request_params = fungi_params)
+response_data = do_rest_request(query_params = fungi_params)
 
-while 'next' in response_data:
-    print(response_data['next'])
+create_json_files(response_data)
+
+while 'next' in response_data and response_data['next'] is not None:
     response_data = do_rest_request(full_url=response_data['next'])
+    create_json_files(response_data)
 
-
-#for species in response_data['results']:
-#    print(json.dumps(species))
