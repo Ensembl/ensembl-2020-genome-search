@@ -14,8 +14,6 @@ class Species(object):
         self.url_name         = species_info.get('organism', {}).get('url_name')
         self.assembly         = species_info.get('assembly', {}).get('assembly_name')
         self.test             = species_info.get('test', {}).get('test')
-        tokenization          = Tokenization(test = 'test')
-        self.tokens           = tokenization.create_tokens(self.genome)
         self.__process_strains_info(**species_info)
 
 
@@ -71,16 +69,20 @@ def do_rest_request(rest_endpoint='http://test-metadata.ensembl.org/genome', que
     return response_data
 
 
-def create_json_files(data, directory):
+def prepare_dump_files(data, directory):
   "Parse the response data and create json data files"
 
   if 'results' not in data: return
   #if 'results' not in data: raise Exception('Cannot parse data')
-
+  
+  tokenization = Tokenization()
+  
   for species_info in data['results']:
-    with open(directory+"/"+species_info['organism']['name']+".json", "w") as write_file:
-     json.dump(Species(**species_info), write_file, default=convert_to_dict)
+    species = Species(**species_info)
+    tokens  = tokenization.create_tokens(species.genome)
 
+    with open(directory+"/"+species.genome+".json", "w") as write_file:
+     json.dump(species, write_file, default=convert_to_dict)
 
 
 def convert_to_dict(obj):
@@ -120,11 +122,11 @@ else:
 
 response_data = do_rest_request(query_params = params)
 
-create_json_files(response_data, data_files_path)
+prepare_dump_files(response_data, data_files_path)
 
 while 'next' in response_data and response_data['next'] is not None:
     response_data = do_rest_request(full_url=response_data['next'])
-    create_json_files(response_data, data_files_path)
+    prepare_dump_files(response_data, data_files_path)
 
 
 
