@@ -15,6 +15,8 @@ class Species(object):
         self.assembly =  species_info.get('assembly', {}).get('assembly_name')
         self.test =  species_info.get('test', {}).get('test')
         self.__process_strains_info(**species_info)
+        tokenization = Tokenization(test = 'test')
+        self.tokens = tokenization.create_tokens(self.genome)
 
 
     def __process_strains_info(self,  **species_info):
@@ -28,6 +30,21 @@ class Species(object):
     
 
 
+class Tokenization(object):
+     def __init__(self, **kwargs):
+
+       self.char_translate = {'_':' ', '-':'', '(':' ', ')':' ', '[':' ', ']':' '} 
+
+
+     def create_tokens(self, string):
+       print(string) 
+       translation_table = string.maketrans(self.char_translate)
+       translated_string = string.translate(translation_table)
+       translated_string_splitted = translated_string.split(' ')
+       leading_0s_removed = list(map(lambda s: s.lstrip('0'), translated_string_splitted))
+       print(leading_0s_removed)
+
+       
 
 
 ############################
@@ -109,4 +126,23 @@ create_json_files(response_data, data_files_path)
 while 'next' in response_data and response_data['next'] is not None:
     response_data = do_rest_request(full_url=response_data['next'])
     create_json_files(response_data, data_files_path)
+
+
+
+
+
+
+
+
+################################################
+
+# End of species dump
+
+################################################
+
+
+
+
+
+
 
