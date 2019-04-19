@@ -8,24 +8,24 @@ class Species(object):
     def __init__(self, **species_info):
        
         # Use dict get method so that we get None value instead of KeyError when a key is not found 
-        self.genome = species_info.get('organism', {}).get('name')
-        self.common_name = species_info.get('organism', {}).get('display_name')
-        self.scientific_name =  species_info.get('organism', {}).get('scientific_name')
-        self.url_name =  species_info.get('organism', {}).get('url_name')
-        self.assembly =  species_info.get('assembly', {}).get('assembly_name')
-        self.test =  species_info.get('test', {}).get('test')
+        self.genome           = species_info.get('organism', {}).get('name')
+        self.common_name      = species_info.get('organism', {}).get('display_name')
+        self.scientific_name  = species_info.get('organism', {}).get('scientific_name')
+        self.url_name         = species_info.get('organism', {}).get('url_name')
+        self.assembly         = species_info.get('assembly', {}).get('assembly_name')
+        self.test             = species_info.get('test', {}).get('test')
+        tokenization          = Tokenization(test = 'test')
+        self.tokens           = tokenization.create_tokens(self.genome)
         self.__process_strains_info(**species_info)
-        tokenization = Tokenization(test = 'test')
-        self.tokens = tokenization.create_tokens(self.genome)
 
 
     def __process_strains_info(self,  **species_info):
       
         if species_info.get('organism', {}).get('strain') is None:
-          self.is_strain = True
+          self.is_strain      = True
           self.parent_species = species_info.get('organism', {}).get('scientific_name')
         else:
-          self.is_strain = False  
+          self.is_strain      = False  
           self.parent_species = None 
     
 
@@ -38,12 +38,11 @@ class Tokenization(object):
 
      def create_tokens(self, string):
        print(string) 
-       translation_table = string.maketrans(self.char_translate)
-       translated_string = string.translate(translation_table)
+       translation_table          = string.maketrans(self.char_translate)
+       translated_string          = string.translate(translation_table)
        translated_string_splitted = translated_string.split(' ')
-       leading_0s_removed = list(map(lambda s: s.lstrip('0'), translated_string_splitted))
+       leading_0s_removed         = list(map(lambda s: s.lstrip('0'), translated_string_splitted))
        print(leading_0s_removed)
-
        
 
 
