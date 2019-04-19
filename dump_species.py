@@ -40,8 +40,8 @@ class Tokenization(object):
        translated_string          = string.translate(translation_table)
        translated_string_splitted = translated_string.split(' ')
        leading_0s_removed         = list(map(lambda s: s.lstrip('0'), translated_string_splitted))
-       print(leading_0s_removed)
-       
+#       print(leading_0s_removed)
+       return leading_0s_removed 
 
 
 ############################
@@ -80,7 +80,9 @@ def prepare_dump_files(data, directory):
   for species_info in data['results']:
     species = Species(**species_info)
     tokens  = tokenization.create_tokens(species.genome)
-
+    for token in tokens:
+      all_tokens.setdefault(token, set()).add(species.genome)
+#    print(all_tokens)  
     with open(directory+"/"+species.genome+".json", "w") as write_file:
      json.dump(species, write_file, default=convert_to_dict)
 
@@ -109,6 +111,7 @@ params = {
           "format" : "json",
         }
         
+all_tokens = {}
 
 # Create data direcrtory where all the json files are stored
 try:
@@ -128,7 +131,7 @@ while 'next' in response_data and response_data['next'] is not None:
     response_data = do_rest_request(full_url=response_data['next'])
     prepare_dump_files(response_data, data_files_path)
 
-
+print(all_tokens)
 
 
 
