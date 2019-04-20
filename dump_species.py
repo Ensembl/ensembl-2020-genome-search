@@ -32,16 +32,21 @@ class Tokenization(object):
      def __init__(self, **kwargs):
 
        self.char_translate = {'_':' ', '-':'', '(':' ', ')':' ', '[':' ', ']':' '} 
-
+       self.min_token_length = 3
 
      def create_tokens(self, string):
-       print(string) 
+#       print(string) 
        translation_table          = string.maketrans(self.char_translate)
        translated_string          = string.translate(translation_table)
        translated_string_splitted = translated_string.split(' ')
        leading_0s_removed         = list(map(lambda s: s.lstrip('0'), translated_string_splitted))
 #       print(leading_0s_removed)
-       return leading_0s_removed 
+       edge_ngram_tokens = [] 
+       for token in leading_0s_removed:
+         for i in range(self.min_token_length, len(token) + 1):
+#           print(token[:i])
+           edge_ngram_tokens.append(token[:i])
+       return edge_ngram_tokens 
 
 
 ############################
@@ -81,7 +86,7 @@ def prepare_dump_files(data, directory):
     species = Species(**species_info)
     tokens  = tokenization.create_tokens(species.genome)
     for token in tokens:
-      all_tokens.setdefault(token, set()).add(species.genome)
+      all_tokens.setdefault(token, []).append(species.genome)
 #    print(all_tokens)  
     with open(directory+"/"+species.genome+".json", "w") as write_file:
      json.dump(species, write_file, default=convert_to_dict)
@@ -131,10 +136,11 @@ while 'next' in response_data and response_data['next'] is not None:
     response_data = do_rest_request(full_url=response_data['next'])
     prepare_dump_files(response_data, data_files_path)
 
-print(all_tokens)
+#print(all_tokens)
 
 
-
+with open(data_files_path+'/tokens.json', 'w') as token_file:
+  json.dump(all_tokens, token_file)
 
 
 
@@ -143,9 +149,6 @@ print(all_tokens)
 # End of species dump
 
 ################################################
-
-
-
 
 
 
