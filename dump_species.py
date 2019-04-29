@@ -115,7 +115,9 @@ params = {
           "expand" : 'data_release,assembly,organism,division',
           "format" : "json",
         }
-        
+
+
+# Change this. Dont use global variables        
 all_tokens = {}
 
 # Create data direcrtory where all the json files are stored
