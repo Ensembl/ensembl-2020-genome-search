@@ -1,5 +1,5 @@
 class Genome(object):
-    def __init__(self, **species_info):
+    def __init__(self, species_info):
 
         self.species_info = species_info
 

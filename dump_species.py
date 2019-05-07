@@ -2,6 +2,7 @@ import requests
 import json, os
 import urllib.parse as urlparse
 from resources.genome import Genome
+from resources.genome_store import GenomeStore
 
 
 ############################
@@ -28,19 +29,23 @@ def do_rest_request(rest_endpoint='http://test-metadata.ensembl.org/genome', que
     return rest_response
 
 
-def create_species_data_files(data, directory):
+def add_to_genome_store(data, genome_store):
     """Parse the response data and create json data files"""
 
     if 'results' not in data:
         raise Exception('Cannot parse data. Invalid format')
 
-    for genome_info in data['results']:
-        genome = Genome(**genome_info)
+    genome_key = genome_store.get_max_key()
 
+    for genome_info in data['results']:
+
+        genome = Genome(genome_info)
         genome.sanitize()
-        print(genome.common_name, genome.genome_id)
-        with open(directory + "/" + genome.genome_id + ".json", "w") as write_file:
-            json.dump(genome, write_file, default=convert_to_dict)
+
+        #print(genome.common_name, genome.genome_id)
+
+        genome_key += 1
+        genome_store.add_to_store(genome_key, convert_to_dict(genome))
 
 
 def convert_to_dict(obj):
@@ -62,6 +67,10 @@ params = {
     "format": "json",
 }
 
+
+genome_store = GenomeStore()
+
+
 # Create data directory where all the json files are stored
 try:
     data_files_path = os.getcwd() + '/data_files'
@@ -73,13 +82,15 @@ else:
 
 response_data = do_rest_request(query_params=params)
 
-create_species_data_files(response_data, data_files_path)
+add_to_genome_store(response_data, genome_store)
 
 while 'next' in response_data and response_data['next'] is not None:
     response_data = do_rest_request(full_url=response_data['next'])
-    create_species_data_files(response_data, data_files_path)
+    add_to_genome_store(response_data, genome_store)
 
 
+with open(data_files_path + "/genome_store.json", "w") as write_file:
+    json.dump(genome_store.get_genome_store(), write_file, default=convert_to_dict)
 
 ################################################
 
