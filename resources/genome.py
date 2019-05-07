@@ -1,4 +1,10 @@
+import re
+
 class Genome(object):
+
+    # Allow only alpha numeric in genome_id
+    genome_id_regex = re.compile('[^A-Za-z0-9]')
+
     def __init__(self, genome_info):
 
         self.genome_info = genome_info
@@ -31,7 +37,7 @@ class Genome(object):
         if 'assembly_name' not in self.genome_info['assembly']:
             raise Exception('No assembly name for species {}'.format(self.genome_info['organism']['display_name']))
         else:
-            return self.genome_info['assembly']['assembly_name']
+            return Genome.genome_id_regex.sub('', self.genome_info['assembly']['assembly_name'])
 
     def sanitize(self):
         """Removes unnecessary genome object data before creating json file for the genome"""
