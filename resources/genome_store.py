@@ -9,7 +9,7 @@ class GenomeStore(object):
         self.genome_store[key] = value
 
     def get_max_key(self):
-        return max(self.genome_store, default=0)
+        return int(max(self.genome_store.keys(), default=0,  key=(lambda k: int(k))))
 
     def check_if_genome_exists(self, genome_sub_key, genome_sub_value):
         pass
