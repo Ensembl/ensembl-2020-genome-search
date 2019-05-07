@@ -60,6 +60,23 @@ def convert_to_dict(obj):
 ##########################################
 
 
+data_files_path = os.getcwd() + '/data_files'
+genome_store_file_path = data_files_path + '/genome_store.json'
+
+if os.path.exists(genome_store_file_path):
+    print('Appending to existing Genome store')
+    with open(genome_store_file_path, "r") as genome_store_file:
+        genome_store_data = json.load(genome_store_file)
+        genome_store = GenomeStore(genome_store_data)
+else:
+    os.makedirs(data_files_path, exist_ok=False)
+    genome_store = GenomeStore()
+
+
+
+
+
+
 params = {
     "division_name": "EnsemblFungi",
     "ensembl_genomes_version": 43,
@@ -68,28 +85,15 @@ params = {
 }
 
 
-genome_store = GenomeStore()
-
-
-# Create data directory where all the json files are stored
-try:
-    data_files_path = os.getcwd() + '/data_files'
-    os.makedirs(data_files_path, exist_ok=True)
-except OSError:
-    print("Creation of the directory {} failed".format(data_files_path))
-else:
-    print("Successfully created the directory {}".format(data_files_path))
 
 response_data = do_rest_request(query_params=params)
-
 add_to_genome_store(response_data, genome_store)
 
 while 'next' in response_data and response_data['next'] is not None:
     response_data = do_rest_request(full_url=response_data['next'])
     add_to_genome_store(response_data, genome_store)
 
-
-with open(data_files_path + "/genome_store.json", "w") as write_file:
+with open(genome_store_file_path, "w") as write_file:
     json.dump(genome_store.get_genome_store(), write_file, default=convert_to_dict)
 
 ################################################
