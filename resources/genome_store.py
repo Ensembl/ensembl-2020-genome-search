@@ -11,11 +11,11 @@ class GenomeStore(object):
     def get_max_key(self):
         return max(self.genome_store, default=0)
 
-    def check_if_genome_exists(self, value):
+    def check_if_genome_exists(self, genome_sub_key, genome_sub_value):
         pass
 
-    def get_key_of_genome(self, genomes):
+    def get_key_of_genome(self, genome_sub_key, genome_sub_value):
         pass
 
-    def udpate_a_genome(self, key, value):
+    def udpate_a_genome(self, genome_sub_key, genome_sub_value):
         pass
