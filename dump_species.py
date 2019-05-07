@@ -1,5 +1,4 @@
-import requests
-import json, os
+import requests, json, os, sys
 import urllib.parse as urlparse
 from resources.genome import Genome
 from resources.genome_store import GenomeStore
@@ -64,10 +63,13 @@ data_files_path = os.getcwd() + '/data_files'
 genome_store_file_path = data_files_path + '/genome_store.json'
 
 if os.path.exists(genome_store_file_path):
-    print('Appending to existing Genome store')
-    with open(genome_store_file_path, "r") as genome_store_file:
-        genome_store_data = json.load(genome_store_file)
-        genome_store = GenomeStore(genome_store_data)
+    user_response = input('Appending to existing Genome store at {}. Continue? Y/N:'.format(genome_store_file_path))
+    if user_response.lower().startswith("y"):
+        with open(genome_store_file_path, "r") as genome_store_file:
+            genome_store_data = json.load(genome_store_file)
+            genome_store = GenomeStore(genome_store_data)
+    else:
+        sys.exit('OK, exiting script!')
 else:
     os.makedirs(data_files_path, exist_ok=False)
     genome_store = GenomeStore()
