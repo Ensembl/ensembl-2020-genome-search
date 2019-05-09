@@ -4,7 +4,7 @@ class Indexer(object):
 
     def add_to_index(self, token, genome_key):
         self.indexes.setdefault(token.lower(), []).append(genome_key)
-        self.indexes.update({token.lower(): list(set(self.indexes[token]))})
+        self.indexes.update({token.lower(): list(set(self.indexes[token.lower()]))})
 
     def search(self, user_input):
         return self.indexes.get(user_input.lower())
