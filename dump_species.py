@@ -76,9 +76,6 @@ else:
 
 
 
-
-
-
 params = {
     "division_name": "EnsemblFungi",
     "ensembl_genomes_version": 43,

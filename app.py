@@ -1,45 +1,46 @@
 from flask import Flask, jsonify, make_response
-import json
-import re
 from flask_restful import Resource, Api
-import os
+import os, json
+from resources.genome_store import GenomeStore
+from resources.ensembl_indexer import Indexer
 
 application = Flask(__name__)
 api = Api(application)
 
 
 class Default(Resource):
-   def get(self, path=''):
-       # Return 404 response status code with error message if user queries any endpoint other than species
-       return make_response(jsonify({'error': 'No such endpoint'}), 404)
+    def get(self, path=''):
+        # Return 404 response status code with error message if user queries any endpoint other than species
+        return make_response(jsonify({'error': 'No such endpoint'}), 404)
+
 
 class Species(Resource):
-   def get(self, species_query, division):
-     
-      tokens_file_path = "{}/Ensembl{}/tokens.json".format(os.getcwd(), division.capitalize())
-      all_species_json = []
-      print(tokens_file_path)
-      if os.path.isfile(tokens_file_path):
-         print(tokens_file_path) 
-         with open(tokens_file_path, 'r') as tokens_file:
-            tokens = json.load(tokens_file)
-        
-         species_list = tokens.get(species_query.lower())
+    def get(self, species_query, division):
+        response_payload = {}
 
-         if species_list is not None:
-            for species in species_list:
-                with open("{}/Ensembl{}/{}.json".format(os.getcwd(),division.capitalize(), species.lower()), 'r') as species_file:
-                  species_data = json.load(species_file)
-                  all_species_json.append(species_data) 
-            return make_response(jsonify({'match': all_species_json}), 200) 
-         else: 
-            return make_response(jsonify({'info': 'No species starting with {}'.format(species_query)}), 400)
-      else: 
-         return make_response(jsonify({'info': 'Invalid division'}), 400)
+        genome_keys = indexer.search(species_query.lower())
+
+        if genome_keys is not None:
+            response_payload = {genome_key: genome_store.get_genome(genome_key) for genome_key in genome_keys}
+
+        return make_response(jsonify({'match': response_payload}), 200)
+
 
 api.add_resource(Default, '/', '/<path:path>')
 api.add_resource(Species, '/species/<string:species_query>/<string:division>')
 
+data_files_path = os.getcwd() + '/data_files'
+index_file_path = data_files_path + '/index.json'
+genome_store_file_path = data_files_path + '/genome_store.json'
 
-if __name__ == "__main__":
-	application.run(debug=True, host="0.0.0.0", port="8011")
+if os.path.isfile(index_file_path):
+    print(index_file_path)
+    with open(index_file_path, 'r') as index_file:
+        indexes = json.load(index_file)
+        indexer = Indexer(indexes)
+
+if os.path.isfile(genome_store_file_path):
+    print(genome_store_file_path)
+    with open(genome_store_file_path, "r") as genome_store_file:
+        genome_store_data = json.load(genome_store_file)
+        genome_store = GenomeStore(genome_store_data)
