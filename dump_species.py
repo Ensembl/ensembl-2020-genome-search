@@ -71,7 +71,7 @@ if os.path.exists(genome_store_file_path):
     else:
         sys.exit('OK, exiting script!')
 else:
-    os.makedirs(data_files_path, exist_ok=False)
+    os.makedirs(data_files_path, exist_ok=True)
     genome_store = GenomeStore()
 
 
@@ -96,7 +96,7 @@ while 'next' in response_data and response_data['next'] is not None:
     add_to_genome_store(response_data, genome_store)
 
 with open(genome_store_file_path, "w") as write_file:
-    json.dump(genome_store.get_genome_store(), write_file, default=convert_to_dict)
+    json.dump(genome_store.get_genome_store(), write_file)
 
 ################################################
 

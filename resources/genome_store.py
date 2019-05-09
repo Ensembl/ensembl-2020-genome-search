@@ -5,6 +5,10 @@ class GenomeStore(object):
     def get_genome_store(self):
         return self.genome_store
 
+    def get_next_genome(self):
+        for genome_key, genome in self.genome_store.items():
+            yield genome_key, genome
+
     def add_to_store(self, key, value):
         self.genome_store[key] = value
 

@@ -1,6 +1,20 @@
-class Tokenization(object):
-    def __init__(self, **kwargs):
+class Indexer(object):
+    def __init__(self, indexes={}):
+        self.indexes = indexes
 
+    def add_to_index(self, token, genome_key):
+        self.indexes.setdefault(token, []).append(genome_key)
+        self.indexes.update({token:list(set(self.indexes[token]))})
+
+    def search(self, user_input):
+        return self.indexes.get(user_input.lower())
+
+    def get_indexes(self):
+        return self.indexes
+
+
+class Tokenize(object):
+    def __init__(self, **kwargs):
         self.char_translate = {'_': ' ', '-': '', '(': ' ', ')': ' ', '[': ' ', ']': ' '}
         self.min_token_length = 3
 
@@ -15,5 +29,5 @@ class Tokenization(object):
         for token in leading_0s_removed:
             for i in range(self.min_token_length, len(token) + 1):
                 #           print(token[:i])
-                edge_ngram_tokens.append(token[:i])
+                edge_ngram_tokens.append(token[:i].lower())
         return edge_ngram_tokens
