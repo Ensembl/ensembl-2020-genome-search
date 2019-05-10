@@ -2,6 +2,8 @@ import requests, json, os, sys
 import urllib.parse as urlparse
 from resources.genome import Genome
 from resources.genome_store import GenomeStore
+from configs.app_config import get_config
+
 
 
 ############################
@@ -59,19 +61,18 @@ def convert_to_dict(obj):
 ##########################################
 
 
-data_files_path = os.getcwd() + '/data_files'
-genome_store_file_path = data_files_path + '/genome_store.json'
+config = get_config()
 
-if os.path.exists(genome_store_file_path):
-    user_response = input('Appending to existing Genome store at {}. Continue? Y/N:'.format(genome_store_file_path))
+if os.path.exists(config['GENOME_STORE_FILE_PATH']):
+    user_response = input('Appending to existing Genome store at {}. Continue? Y/N:'.format(config['GENOME_STORE_FILE_PATH']))
     if user_response.lower().startswith("y"):
-        with open(genome_store_file_path, "r") as genome_store_file:
+        with open(config['GENOME_STORE_FILE_PATH'], "r") as genome_store_file:
             genome_store_data = json.load(genome_store_file)
             genome_store = GenomeStore(genome_store_data)
     else:
         sys.exit('OK, exiting script!')
 else:
-    os.makedirs(data_files_path, exist_ok=True)
+    os.makedirs(config['DATA_FILE_PATH'], exist_ok=True)
     genome_store = GenomeStore()
 
 
@@ -92,7 +93,7 @@ while 'next' in response_data and response_data['next'] is not None:
     response_data = do_rest_request(full_url=response_data['next'])
     add_to_genome_store(response_data, genome_store)
 
-with open(genome_store_file_path, "w") as write_file:
+with open(config['GENOME_STORE_FILE_PATH'], "w") as write_file:
     json.dump(genome_store.get_genome_store(), write_file)
 
 ################################################

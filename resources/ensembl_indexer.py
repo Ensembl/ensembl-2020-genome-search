@@ -1,3 +1,6 @@
+from configs.app_config import get_config
+
+
 class Indexer(object):
     def __init__(self, indexes={}):
         self.indexes = indexes
@@ -15,8 +18,11 @@ class Indexer(object):
 
 class Tokenize(object):
     def __init__(self, **kwargs):
-        self.char_translate = {'_': ' ', '-': '', '(': ' ', ')': ' ', '[': ' ', ']': ' '}
-        self.min_token_length = 3
+
+        config = get_config()
+
+        self.char_translate = config['STOP_CHARS_MAPPING']
+        self.min_token_length = config['MINIMUM_TOKEN_LENGTH']
 
     def create_tokens(self, string):
         #       print(string)

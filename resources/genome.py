@@ -1,9 +1,14 @@
 import re
+from configs.app_config import get_config
+
 
 class Genome(object):
 
+
+    config = get_config()
+
     # Allow only alpha numeric in genome_id
-    genome_id_regex = re.compile('[^A-Za-z0-9]')
+    genome_id_regex = re.compile('[^{}]'.format(config['GENOME_ID_VALID_CHARS']))
 
     def __init__(self, genome_info):
 
