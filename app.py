@@ -7,10 +7,10 @@ from configs.app_config import get_config
 
 
 
-
 application = Flask(__name__)
-application.config = get_config()
+application.config.update(get_config())
 api = Api(application)
+
 
 class Default(Resource):
     def get(self, path=''):
