@@ -3,10 +3,14 @@ from flask_restful import Resource, Api
 import os, json
 from resources.genome_store import GenomeStore
 from resources.ensembl_indexer import Indexer
+from configs.app_config import get_config
+
+
+
 
 application = Flask(__name__)
+application.config = get_config()
 api = Api(application)
-
 
 class Default(Resource):
     def get(self, path=''):
@@ -29,18 +33,16 @@ class Species(Resource):
 api.add_resource(Default, '/', '/<path:path>')
 api.add_resource(Species, '/species/<string:species_query>/<string:division>')
 
-data_files_path = os.getcwd() + '/data_files'
-index_file_path = data_files_path + '/index.json'
-genome_store_file_path = data_files_path + '/genome_store.json'
 
-if os.path.isfile(index_file_path):
-    print(index_file_path)
-    with open(index_file_path, 'r') as index_file:
+
+if os.path.isfile(application.config['INDEX_FILE_PATH']):
+    print(application.config['INDEX_FILE_PATH'])
+    with open(application.config['INDEX_FILE_PATH'], 'r') as index_file:
         indexes = json.load(index_file)
         indexer = Indexer(indexes)
 
-if os.path.isfile(genome_store_file_path):
-    print(genome_store_file_path)
-    with open(genome_store_file_path, "r") as genome_store_file:
+if os.path.isfile(application.config['GENOME_STORE_FILE_PATH']):
+    print(application.config['GENOME_STORE_FILE_PATH'])
+    with open(application.config['GENOME_STORE_FILE_PATH'], "r") as genome_store_file:
         genome_store_data = json.load(genome_store_file)
         genome_store = GenomeStore(genome_store_data)

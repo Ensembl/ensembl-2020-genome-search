@@ -18,9 +18,10 @@ class GenomeStore(object):
     def get_genome(self, genome_key):
         return self.genome_store.get(genome_key)
 
-
     def check_if_genome_exists(self, genome_sub_key, genome_sub_value):
-        pass
+        for genome_key, genome in self.genome_store.items():
+            if genome_sub_key in genome and genome[genome_sub_key] == genome_sub_value:
+                yield genome_key
 
     def get_key_of_genome(self, genome_sub_key, genome_sub_value):
         pass
