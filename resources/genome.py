@@ -1,10 +1,8 @@
 import re
-from configs.app_config import get_config
+from configs.config import get_config
 
 
 class Genome(object):
-
-
     config = get_config()
 
     # Allow only alpha numeric in genome_id
@@ -12,13 +10,20 @@ class Genome(object):
 
     def __init__(self, genome_info):
 
+        print(genome_info)
+
         self.genome_info = genome_info
 
         # Use dict get method so that we get None value instead of KeyError when a key is not found
         self.common_name = self.genome_info.get('organism', {}).get('display_name')
         self.scientific_name = self.genome_info.get('organism', {}).get('scientific_name')
+        self.production_name = self.genome_info.get('organism', {}).get('name')
         self.url_name = self.genome_info.get('organism', {}).get('url_name')
+
         self.subtype = self.genome_info.get('assembly', {}).get('assembly_name')
+        self.assembly_name = self.genome_info.get('assembly', {}).get('assembly_name')
+        self.assembly_accession = self.genome_info.get('assembly', {}).get('assembly_accession')
+
         self.division = [self.genome_info.get('division', {}).get('name')]
 
         self.genome_id = self.__assign_genome_id()
@@ -35,14 +40,28 @@ class Genome(object):
             self.is_strain = False
             self.reference_genome_id = None
 
+
+
     def __assign_genome_id(self):
 
-        # TODO: For all genomes except that belong to bacteria, genome_id is sanitised (production_name(undescore)assembly_name). For Bacterial genomes, if assembly_name exists, it would be sanitised (production_name(undescore)assembly_name) else it would be sanitised (production_name(undescore)GCA_accession number)
-
-        if 'assembly_name' not in self.genome_info['assembly']:
-            raise Exception('No assembly name for species {}'.format(self.genome_info['organism']['display_name']))
+        if self.assembly_name is None or \
+                self.production_name is None:
+            raise Exception(
+                'Problem with species {}. Either Assembly name or Production does\'t exist. \n'
+                'Assembly name: {}, \n'
+                'Production name: {}'.format(self.common_name, self.assembly_name, self.production_name))
         else:
-            return Genome.genome_id_regex.sub('', self.genome_info['assembly']['assembly_name'])
+            if 'EnsemblBacteria' in self.division:
+                genome_id = '{}_{}'.format(
+                    Genome.genome_id_regex.sub('', self.production_name),
+                    Genome.genome_id_regex.sub('', self.assembly_accession)
+                )
+            else:
+                genome_id = '{}_{}'.format(
+                    Genome.genome_id_regex.sub('', self.production_name),
+                    Genome.genome_id_regex.sub('', self.assembly_name)
+                )
+            return genome_id
 
     def sanitize(self):
         """Removes unnecessary genome object data before creating json file for the genome"""

@@ -1,4 +1,4 @@
-from configs.app_config import get_config
+from configs.config import get_config
 
 
 class Indexer(object):

@@ -2,8 +2,7 @@ import requests, json, os, sys
 import urllib.parse as urlparse
 from resources.genome import Genome
 from resources.genome_store import GenomeStore
-from configs.app_config import get_config
-
+from configs.config import get_config
 
 
 ############################
@@ -39,19 +38,33 @@ def add_to_genome_store(data, genome_store):
     genome_key = genome_store.get_max_key()
 
     for genome_info in data['results']:
-
         genome = Genome(genome_info)
         genome.sanitize()
 
-        #print(genome.common_name, genome.genome_id)
+        # print(genome.common_name, genome.genome_id)
 
         genome_key += 1
         genome_store.add_to_store(genome_key, convert_to_dict(genome))
+
+    return genome_store
 
 
 def convert_to_dict(obj):
     """ A function takes in a custom object and returns a dictionary representation of the object."""
     return obj.__dict__
+
+
+
+def fetch_and_prepare_data(params, genome_store):
+    response_data = do_rest_request(query_params=params)
+    genome_store = add_to_genome_store(response_data, genome_store)
+
+    while 'next' in response_data and response_data['next'] is not None:
+        response_data = do_rest_request(full_url=response_data['next'])
+        genome_store = add_to_genome_store(response_data, genome_store)
+
+    return genome_store
+
 
 
 ###########################################
@@ -63,10 +76,13 @@ def convert_to_dict(obj):
 
 config = get_config()
 
-if os.path.exists(config['GENOME_STORE_FILE_PATH']):
-    user_response = input('Appending to existing Genome store at {}. Continue? Y/N:'.format(config['GENOME_STORE_FILE_PATH']))
+# print(config)
+
+if os.path.exists(config['GENOME_STORE_FILE']):
+    user_response = input(
+        'Appending to existing Genome store at {}. Continue? Y/N:'.format(config['GENOME_STORE_FILE']))
     if user_response.lower().startswith("y"):
-        with open(config['GENOME_STORE_FILE_PATH'], "r") as genome_store_file:
+        with open(config['GENOME_STORE_FILE'], "r") as genome_store_file:
             genome_store_data = json.load(genome_store_file)
             genome_store = GenomeStore(genome_store_data)
     else:
@@ -75,25 +91,30 @@ else:
     os.makedirs(config['DATA_FILE_PATH'], exist_ok=True)
     genome_store = GenomeStore()
 
-
-
-params = {
-    "division_name": "EnsemblFungi",
-    "ensembl_genomes_version": 43,
+req_params = {
     "expand": 'data_release,assembly,organism,division',
     "format": "json",
 }
 
+# Prepare query params to get data
+req_params.update({"ensembl_version": config['V_VERSION']})
+
+if 'FETCH_BY_DIVISIONS' in config:
+    for division in config['FETCH_BY_DIVISIONS']:
+        if division in config['VALID_DIVISIONS'].keys() or division in config['VALID_DIVISIONS'].values():
+            req_params.update({'division_name': division})
+            print('Fetching data for division {} and release {}'.format(division, req_params['ensembl_version']))
+            fetch_and_prepare_data(req_params, genome_store)
+        else:
+            sys.exit('Invalid division {}'.format(division))
+elif 'FETCH_BY_GENOME' in config:
+    for genome in config['FETCH_BY_GENOME']:
+        req_params.update({'organism_name': genome})
+        fetch_and_prepare_data(req_params, genome_store)
 
 
-response_data = do_rest_request(query_params=params)
-add_to_genome_store(response_data, genome_store)
 
-while 'next' in response_data and response_data['next'] is not None:
-    response_data = do_rest_request(full_url=response_data['next'])
-    add_to_genome_store(response_data, genome_store)
-
-with open(config['GENOME_STORE_FILE_PATH'], "w") as write_file:
+with open(config['GENOME_STORE_FILE'], "w") as write_file:
     json.dump(genome_store.get_genome_store(), write_file)
 
 ################################################

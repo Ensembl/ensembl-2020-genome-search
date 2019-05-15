@@ -1,0 +1,68 @@
+###################################################################################################################
+# Common configuration
+###################################################################################################################
+
+VALID_DIVISIONS:
+  'EB': 'EnsemblBacteria'
+  'EF': 'EnsemblFungi'
+  'EM': 'EnsemblMetazoa'
+  'EPl': 'EnsemblPlants'
+  'EPr': 'EnsemblProtists'
+  'EV': 'EnsemblVertebrates'
+
+GENOME_STORE_FILE : 'genome_store.json'
+INDEX_FILE : 'index.json'
+
+DEBUG : True
+
+###################################################################################################################
+# Indexer specific configuration
+###################################################################################################################
+
+STOP_CHARS_MAPPING :
+   '_': ' '
+   '-': ''
+   '(': ' '
+   ')': ' '
+   '[': ' '
+   ']': ' '
+
+KEYS_TO_INDEX:
+  - 'common_name'
+  - 'scientific_name'
+  - 'subtype'
+
+MINIMUM_TOKEN_LENGTH : 3
+
+###################################################################################################################
+# Genome Fetch configuration
+###################################################################################################################
+GENOME_ID_VALID_CHARS : 'A-Za-z0-9'
+
+V_VERSION : 96
+
+###################################################################################################################
+# Use any one of the following. Values in FETCH_BY_DIVISIONS section should map to values in VALID_DIVISIONS
+###################################################################################################################
+
+#FETCH_BY_DIVISIONS:
+#  - 'EnsemblFungi'
+#  - 'EnsemblMetazoa'
+#  - 'EnsemblVertebrates'
+
+
+FETCH_BY_GENOME:
+   - 'Homo_sapiens'
+   - 'Caenorhabditis_elegans'
+   - 'Schizosaccharomyces_pombe'
+   - 'Arabidopsis_thaliana'
+   - 'Dictyostelium_discoideum'
+   - 'Acetivibrio_ethanolgignens'
+
+###################################################################################################################
+# Update the following path accordingly
+###################################################################################################################
+
+DATA_FILE_PATH : '/Users/sboddu/PycharmProjects/species-search/data_files'
+
+

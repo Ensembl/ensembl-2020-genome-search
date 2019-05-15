@@ -35,14 +35,14 @@ api.add_resource(Species, '/species/<string:species_query>/<string:division>')
 
 
 
-if os.path.isfile(application.config['INDEX_FILE_PATH']):
-    print(application.config['INDEX_FILE_PATH'])
-    with open(application.config['INDEX_FILE_PATH'], 'r') as index_file:
+if os.path.isfile(application.config['INDEX_FILE']):
+    print(application.config['INDEX_FILE'])
+    with open(application.config['INDEX_FILE'], 'r') as index_file:
         indexes = json.load(index_file)
         indexer = Indexer(indexes)
 
-if os.path.isfile(application.config['GENOME_STORE_FILE_PATH']):
-    print(application.config['GENOME_STORE_FILE_PATH'])
-    with open(application.config['GENOME_STORE_FILE_PATH'], "r") as genome_store_file:
+if os.path.isfile(application.config['GENOME_STORE_FILE']):
+    print(application.config['GENOME_STORE_FILE'])
+    with open(application.config['GENOME_STORE_FILE'], "r") as genome_store_file:
         genome_store_data = json.load(genome_store_file)
         genome_store = GenomeStore(genome_store_data)
