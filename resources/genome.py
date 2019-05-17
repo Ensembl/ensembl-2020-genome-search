@@ -40,7 +40,7 @@ class Genome(object):
         self.assembly_name = self.genome_info.get('assembly_name')
         self.assembly_accession = self.genome_info.get('assembly_accession')
 
-        self.division = [self.genome_info.get('division')]
+        self.division = self.genome_info.get('division')
 
         self.genome_id = self.__assign_genome_id()
         self.__process_strains_info()
@@ -92,4 +92,6 @@ class Genome(object):
 
 
     def convert_to_dict(self):
+        if 'genome_info' in self.__dict__:
+            self.__dict__.pop('genome_info')
         return self.__dict__

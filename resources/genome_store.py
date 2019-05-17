@@ -1,3 +1,5 @@
+from resources.genome import Genome
+
 class GenomeStore(object):
     def __init__(self, genome_store = {}):
         self.genome_store = genome_store
@@ -23,17 +25,18 @@ class GenomeStore(object):
 
     def add_to_genome_store(self, genome):
 
-        genome_key = self.check_if_genome_exists('genome_id', genome.genome_id)
+        existing_genome_key = self.check_if_genome_exists('genome_id', genome.genome_id)
 
-        if genome_key is not None:
+        if existing_genome_key is not None:
             # TODO: Logic for updating existing genome
-            #existing_genome = genome_store.get_genome(genome_key)
-            #update_division = list(set(existing_genome['division'].update(genome.division)))
-            #genome_store.udpate_a_genome(genome_key, '')
-            #old_genome.division.append()
-            pass
+
+            existing_genome = Genome(self.get_genome(existing_genome_key))
+            existing_genome.create_genome_from_genome_store()
+            existing_genome.division.extend(genome.division)
+
+            self.genome_store[existing_genome_key] = existing_genome.convert_to_dict()
+
         else:
             genome_key = self.get_max_key() + 1
             self.genome_store[genome_key] = genome.convert_to_dict()
 
-        return genome_key
