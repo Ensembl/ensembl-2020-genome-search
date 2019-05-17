@@ -44,10 +44,10 @@ V_VERSION : 96
 METADATA_REGISTRY_URL : 'http://test-metadata.ensembl.org/genome'
 
 ###################################################################################################################
-# Use any one of the following. Values in FETCH_BY_DIVISIONS section should map to values in VALID_DIVISIONS
+# Use any one of the following. Values in FETCH_BY_DIVISION section should map to values in VALID_DIVISIONS
 ###################################################################################################################
 
-FETCH_BY_DIVISIONS:
+FETCH_BY_DIVISION:
   - 'EnsemblFungi'
   - 'EnsemblMetazoa'
   - 'EnsemblVertebrates'
