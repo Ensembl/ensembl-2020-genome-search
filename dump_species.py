@@ -10,13 +10,15 @@ from configs.config import get_config
 ###########################
 
 
-def do_rest_request(rest_endpoint='http://test-metadata.ensembl.org/genome', query_params={"format": "json"}, **kwargs):
-    """This function expects a full_url to query or in absence of which construct a full URL from domain and endpoints"""
+def do_rest_request(**kwargs):
+    """This function expects full_url or in absence of which, expects a combination of "url" and "query_params"""
 
     if 'full_url' in kwargs:
         query_url = kwargs['full_url']
+    elif 'rest_url' in kwargs and 'query_params' in kwargs:
+        query_url = kwargs['url'] + '?' + urlparse.urlencode(kwargs['query_params'])
     else:
-        query_url = rest_endpoint + '?' + urlparse.urlencode(query_params)
+        raise Exception('Provide either "full_url" or a combination of "url" and "query_params"')
 
     print("Querying {}".format(query_url))
     rest_response = requests.get(query_url, headers={'content-type': 'application/json'})
@@ -29,42 +31,39 @@ def do_rest_request(rest_endpoint='http://test-metadata.ensembl.org/genome', que
     return rest_response
 
 
-def add_to_genome_store(data, genome_store):
-    """Parse the response data and create json data files"""
+def prepare_genome_store(params, source='metadata_registry'):
+    if source == 'metadata_registry':
+        full_url = config['METADATA_REGISTRY_URL'] + '?' + urlparse.urlencode(params)
+        prepare_gs_from_metadata_registry(full_url)
+    elif source == 'custom_genome_files':
+        genome_file_dir = params['<path>']
+        prepare_gs_from_raw_files(genome_file_dir)
+    elif source == 'something_else':
+        pass
+    else:
+        pass
 
-    if 'results' not in data:
+
+def prepare_gs_from_metadata_registry(url):
+    response_from_metadata = do_rest_request(full_url=url)
+
+    if 'results' not in response_from_metadata:
         raise Exception('Cannot parse data. Invalid format')
 
-    genome_key = genome_store.get_max_key()
+    for metadata_genome in response_from_metadata['results']:
 
-    for genome_info in data['results']:
-        genome = Genome(genome_info)
+        genome = Genome(metadata_genome)
+        genome.create_genome_from_metadata()
         genome.sanitize()
 
-        # print(genome.common_name, genome.genome_id)
+        genome_store.add_to_genome_store(genome)
 
-        genome_key += 1
-        genome_store.add_to_store(genome_key, convert_to_dict(genome))
-
-    return genome_store
+    if 'next' in response_from_metadata and response_from_metadata['next'] is not None:
+        prepare_gs_from_metadata_registry(response_from_metadata['next'])
 
 
-def convert_to_dict(obj):
-    """ A function takes in a custom object and returns a dictionary representation of the object."""
-    return obj.__dict__
-
-
-
-def fetch_and_prepare_data(params, genome_store):
-    response_data = do_rest_request(query_params=params)
-    genome_store = add_to_genome_store(response_data, genome_store)
-
-    while 'next' in response_data and response_data['next'] is not None:
-        response_data = do_rest_request(full_url=response_data['next'])
-        genome_store = add_to_genome_store(response_data, genome_store)
-
-    return genome_store
-
+def prepare_gs_from_raw_files(dir):
+    pass
 
 
 ###########################################
@@ -75,8 +74,6 @@ def fetch_and_prepare_data(params, genome_store):
 
 
 config = get_config()
-
-# print(config)
 
 if os.path.exists(config['GENOME_STORE_FILE']):
     user_response = input(
@@ -104,13 +101,15 @@ if 'FETCH_BY_DIVISIONS' in config:
         if division in config['VALID_DIVISIONS'].keys() or division in config['VALID_DIVISIONS'].values():
             req_params.update({'division_name': division})
             print('Fetching data for division {} and release {}'.format(division, req_params['ensembl_version']))
-            fetch_and_prepare_data(req_params, genome_store)
+            prepare_genome_store(req_params, 'metadata_registry')
         else:
             sys.exit('Invalid division {}'.format(division))
 elif 'FETCH_BY_GENOME' in config:
     for genome in config['FETCH_BY_GENOME']:
         req_params.update({'organism_name': genome})
-        fetch_and_prepare_data(req_params, genome_store)
+        print('Fetching data for species {} and release {}'.format(genome, req_params['ensembl_version']))
+        prepare_genome_store(req_params, 'metadata_registry')
+
 
 
 
