@@ -33,24 +33,29 @@ def do_rest_request(**kwargs):
 
 def prepare_genome_store(params, source='metadata_registry'):
     if source == 'metadata_registry':
-        full_url = config['METADATA_REGISTRY_URL'] + '?' + urlparse.urlencode(params)
-        prepare_gs_from_metadata_registry(full_url)
-    elif source == 'custom_genome_files':
-        genome_file_dir = params['<path>']
-        prepare_gs_from_raw_files(genome_file_dir)
+        url = config['METADATA_REGISTRY_URL'] + '?' + urlparse.urlencode(params)
+        response_from_metadata = do_rest_request(full_url=url)
+        prepare_gs_from_mr_format(response_from_metadata)
+    elif source == 'custom_genome_file':
+        genome_file_path = params['file']
+        if os.path.exists(genome_file_path):
+            with open(genome_file_path, "r") as genome_file_fn:
+                custom_genome_data = json.load(genome_file_fn)
+            prepare_gs_from_mr_format(custom_genome_data)
+        else:
+            sys.exit('Problem opening custom genome file:{}'.format(genome_file_path))
     elif source == 'something_else':
         pass
     else:
         pass
 
 
-def prepare_gs_from_metadata_registry(url):
-    response_from_metadata = do_rest_request(full_url=url)
+def prepare_gs_from_mr_format(metadata_registry_data):
 
-    if 'results' not in response_from_metadata:
+    if 'results' not in metadata_registry_data:
         raise Exception('Cannot parse data. Invalid format')
 
-    for metadata_genome in response_from_metadata['results']:
+    for metadata_genome in metadata_registry_data['results']:
 
         genome = Genome(metadata_genome)
         genome.create_genome_from_metadata()
@@ -58,12 +63,10 @@ def prepare_gs_from_metadata_registry(url):
 
         genome_store.add_to_genome_store(genome)
 
-    if 'next' in response_from_metadata and response_from_metadata['next'] is not None:
-        prepare_gs_from_metadata_registry(response_from_metadata['next'])
+    if 'next' in metadata_registry_data and metadata_registry_data['next'] is not None:
+        response_from_metadata = do_rest_request(full_url=metadata_registry_data['next'])
+        prepare_gs_from_mr_format(response_from_metadata)
 
-
-def prepare_gs_from_raw_files(dir):
-    pass
 
 
 ###########################################
@@ -90,8 +93,6 @@ if any(vars(args).values()):
     for arg_key, arg_value in vars(args).items():
             config[arg_key.upper()] = arg_value
 
-
-print(config)
 
 if os.path.exists(config['GENOME_STORE_FILE']):
     user_response = input(
@@ -127,8 +128,12 @@ elif 'FETCH_BY_GENOME' in config and config['FETCH_BY_GENOME'] is not None:
         req_params.update({'organism_name': genome})
         print('Fetching data for species {} and release {}'.format(genome, req_params['ensembl_version']))
         prepare_genome_store(req_params, 'metadata_registry')
+elif 'CREATE_FROM_FILE' in config and config['CREATE_FROM_FILE'] is not None:
+    req_params.update({'file': config['CREATE_FROM_FILE']})
+    prepare_genome_store(req_params, 'custom_genome_file')
 else:
     sys.exit('Division/Genome/File not provided. Exiting!')
+
 
 
 
