@@ -15,23 +15,24 @@ def tokenize_genome(args):
         tokens.extend(tokenize.create_tokens(genome[key]))
     return tokens
 
+
 def index_tokens(genome_key, tokens):
     for token in tokens:
         indexer.add_to_index(token, genome_key)
+
 
 #############################
 # End of functions
 #############################
 
 
-
 config = get_config()
 
-parser = argparse.ArgumentParser(description='Index the whole genome store or only the genomes from genome store whose ids are passed as argument')
+parser = argparse.ArgumentParser(
+    description='Index the whole genome store or only the genomes from genome store whose ids are passed as argument')
 parser.add_argument('--index_genome_store_ids', help='List of genome store ids of genomes to index', nargs='+')
 
 args = parser.parse_args()
-
 
 if os.path.exists(config['GENOME_STORE_FILE']):
     user_response = input('Indexing Genome store: {}. Continue? Y/N:'.format(config['GENOME_STORE_FILE']))
@@ -43,8 +44,6 @@ if os.path.exists(config['GENOME_STORE_FILE']):
         sys.exit('OK, exiting script!')
 else:
     raise Exception('No Genome store present: {}'.format(config['GENOME_STORE_FILE']))
-
-
 
 if os.path.exists(config['INDEX_FILE']):
     user_response = input('Adding indexes to existing index file: {}. Continue? Y/N:'.format(config['INDEX_FILE']))
@@ -58,10 +57,6 @@ else:
     os.makedirs(config['DATA_FILE_PATH'], exist_ok=True)
     indexer = Indexer()
 
-
-
-
-
 if args.index_genome_store_ids:
     for genome_key in args.index_genome_store_ids:
         genome = genome_store.get_genome(genome_key)
@@ -72,7 +67,6 @@ else:
     for genome_key, genome in genome_store.get_next_genome():
         tokens = tokenize_genome(genome)
         index_tokens(genome_key, tokens)
-
 
 with open(config['INDEX_FILE'], 'w') as write_file:
     json.dump(indexer.get_indexes(), write_file)

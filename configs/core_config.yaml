@@ -10,43 +10,43 @@ VALID_DIVISIONS:
   'EPr': 'EnsemblProtists'
   'EV': 'EnsemblVertebrates'
 
-GENOME_STORE_FILE : 'genome_store.json'
-INDEX_FILE : 'index.json'
+GENOME_STORE_FILE: 'genome_store.json'
+INDEX_FILE: 'index.json'
 
-DEBUG : True
+DEBUG: True
 
 ###################################################################################################################
 # Indexer specific configuration
 ###################################################################################################################
 
-STOP_CHARS_MAPPING :
-   '_': ' '
-   '-': ''
-   '(': ' '
-   ')': ' '
-   '[': ' '
-   ']': ' '
+STOP_CHARS_MAPPING:
+  '_': ' '
+  '-': ''
+  '(': ' '
+  ')': ' '
+  '[': ' '
+  ']': ' '
 
 KEYS_TO_INDEX:
   - 'common_name'
   - 'scientific_name'
   - 'subtype'
 
-MINIMUM_TOKEN_LENGTH : 3
+MINIMUM_TOKEN_LENGTH: 3
 
 ###################################################################################################################
 # Genome Fetch configuration
 ###################################################################################################################
-GENOME_ID_VALID_CHARS : 'A-Za-z0-9'
+GENOME_ID_VALID_CHARS: 'A-Za-z0-9'
 
-V_VERSION : 96
+V_VERSION: 96
 
-METADATA_REGISTRY_URL : 'http://test-metadata.ensembl.org/genome'
+METADATA_REGISTRY_URL: 'http://test-metadata.ensembl.org/genome'
 
 ###################################################################################################################
 # Update the following path accordingly
 ###################################################################################################################
 
-DATA_FILE_PATH : '/Users/sboddu/PycharmProjects/species-search/data_files'
+DATA_FILE_PATH: '/Users/sboddu/PycharmProjects/species-search/data_files4'
 
 

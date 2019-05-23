@@ -11,7 +11,6 @@ class Genome(object):
     def __init__(self, genome_info):
         self.genome_info = genome_info
 
-
     def create_genome_from_metadata(self):
 
         # Use dict get method so that we get None value instead of KeyError when a key is not found
@@ -27,7 +26,6 @@ class Genome(object):
 
         self.genome_id = self.__assign_genome_id()
         self.__process_strains_info()
-
 
     def create_genome_from_genome_store(self):
 
@@ -45,13 +43,8 @@ class Genome(object):
         self.genome_id = self.__assign_genome_id()
         self.__process_strains_info()
 
-
-
-
     def create_genome_from_somethinf_else(self):
         pass
-
-
 
     def __process_strains_info(self):
 
@@ -63,7 +56,6 @@ class Genome(object):
         else:
             self.is_strain = False
             self.reference_genome_id = None
-
 
     def __assign_genome_id(self):
 
@@ -89,7 +81,6 @@ class Genome(object):
     def sanitize(self):
         """Removes unnecessary genome object data before creating json file for the genome"""
         self.__dict__.pop('genome_info')
-
 
     def convert_to_dict(self):
         if 'genome_info' in self.__dict__:

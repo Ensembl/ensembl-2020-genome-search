@@ -1,7 +1,8 @@
 from resources.genome import Genome
 
+
 class GenomeStore(object):
-    def __init__(self, genome_store = {}):
+    def __init__(self, genome_store={}):
         self.genome_store = genome_store
         self.processed_genomes_list = []
 
@@ -12,9 +13,8 @@ class GenomeStore(object):
         for genome_key, genome in self.genome_store.items():
             yield genome_key, genome
 
-
     def get_max_key(self):
-        return int(max(self.genome_store.keys(), default=0,  key=(lambda k: int(k))))
+        return int(max(self.genome_store.keys(), default=0, key=(lambda k: int(k))))
 
     def get_genome(self, genome_key):
         return self.genome_store.get(genome_key)
@@ -24,8 +24,8 @@ class GenomeStore(object):
             if genome_sub_key in genome and genome[genome_sub_key] == genome_sub_value:
                 return genome_key
 
-#    def update_genome_store(self, genome_key, genome_value):
-#        self.genome_store[genome_key] = genome_value
+    #    def update_genome_store(self, genome_key, genome_value):
+    #        self.genome_store[genome_key] = genome_value
 
     def add_to_genome_store(self, genome):
 
@@ -48,5 +48,3 @@ class GenomeStore(object):
             genome_key = self.get_max_key() + 1
             self.genome_store[genome_key] = genome.convert_to_dict()
             self.processed_genomes_list.append(str(genome_key))
-
-

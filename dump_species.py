@@ -51,12 +51,10 @@ def prepare_genome_store(params, source='metadata_registry'):
 
 
 def prepare_gs_from_mr_format(metadata_registry_data):
-
     if 'results' not in metadata_registry_data:
         raise Exception('Cannot parse data. Invalid format')
 
     for metadata_genome in metadata_registry_data['results']:
-
         genome = Genome(metadata_genome)
         genome.create_genome_from_metadata()
         genome.sanitize()
@@ -68,7 +66,6 @@ def prepare_gs_from_mr_format(metadata_registry_data):
         prepare_gs_from_mr_format(response_from_metadata)
 
 
-
 ###########################################
 
 # End of functions
@@ -76,20 +73,19 @@ def prepare_gs_from_mr_format(metadata_registry_data):
 ##########################################
 
 
-
-
 config = get_config()
 
 parser = argparse.ArgumentParser(description='Create Genome Store to use with Species selector')
 parser.add_argument('--fetch_by_genome', help='Create/Update Genome store with genomes. Use Scientific name', nargs='+')
-parser.add_argument('--fetch_by_division', help='Create/Update Genome store with genomes from Ensembl divisions', nargs='+')
+parser.add_argument('--fetch_by_division', help='Create/Update Genome store with genomes from Ensembl divisions',
+                    nargs='+')
 parser.add_argument('--create_from_file', help='Create/Update Genome store with genomes from a custom file')
-parser.add_argument('--return_genome_store_ids', help='Return added/updated Genome store ids to use with indexer', nargs='?', const=True, default=False)
+parser.add_argument('--return_genome_store_ids', help='Return added/updated Genome store ids to use with indexer',
+                    nargs='?', const=True, default=False)
 
 args = parser.parse_args()
 
 sys.setrecursionlimit(10000)
-
 
 if os.path.exists(config['GENOME_STORE_FILE']):
     user_response = input(
@@ -124,7 +120,8 @@ elif args.fetch_by_division is not None:
             print('Fetching data for division {} and release {}'.format(division, req_params['ensembl_version']))
             prepare_genome_store(req_params, 'metadata_registry')
         else:
-            sys.exit('Invalid division {}.\nUse divisions from list: {}'.format(division, list(config['VALID_DIVISIONS'].values())))
+            sys.exit('Invalid division {}.\nUse divisions from list: {}'.format(division, list(
+                config['VALID_DIVISIONS'].values())))
 elif args.create_from_file is not None:
     req_params.update({'file': args.create_from_file})
     prepare_genome_store(req_params, 'custom_genome_file')
@@ -132,13 +129,12 @@ else:
     parser.print_help()
     sys.exit()
 
-
 with open(config['GENOME_STORE_FILE'], "w") as write_file:
     json.dump(genome_store.get_genome_store(), write_file)
 
-
 if args.return_genome_store_ids and genome_store.processed_genomes_list:
-    print("Run the indexing as follows:\n python index_species.py --index_genome_store_ids {}".format(' '.join(genome_store.processed_genomes_list)))
+    print("Run the indexing as follows:\n python index_species.py --index_genome_store_ids {}".format(
+        ' '.join(genome_store.processed_genomes_list)))
 
 ################################################
 
