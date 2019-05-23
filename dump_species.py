@@ -84,6 +84,7 @@ parser = argparse.ArgumentParser(description='Create Genome Store to use with Sp
 parser.add_argument('--fetch_by_genome', help='Create/Update Genome store with genomes. Use Scientific name', nargs='+')
 parser.add_argument('--fetch_by_division', help='Create/Update Genome store with genomes from Ensembl divisions', nargs='+')
 parser.add_argument('--create_from_file', help='Create/Update Genome store with genomes from a custom file')
+parser.add_argument('--return_genome_store_ids', help='Return added/updated Genome store ids to use with indexer', nargs='?', const=True, default=False)
 
 args = parser.parse_args()
 
@@ -132,10 +133,12 @@ else:
     sys.exit()
 
 
-
-
 with open(config['GENOME_STORE_FILE'], "w") as write_file:
     json.dump(genome_store.get_genome_store(), write_file)
+
+
+if args.return_genome_store_ids and genome_store.processed_genomes_list:
+    print("Run the indexing as follows:\n python index_species.py --index_genome_store_ids {}".format(' '.join(genome_store.processed_genomes_list)))
 
 ################################################
 
