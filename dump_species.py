@@ -87,6 +87,7 @@ parser.add_argument('--create_from_file', help='Create/Update Genome store with 
 
 args = parser.parse_args()
 
+sys.setrecursionlimit(10000)
 
 
 if os.path.exists(config['GENOME_STORE_FILE']):
