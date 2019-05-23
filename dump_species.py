@@ -56,7 +56,7 @@ def prepare_gs_from_mr_format(metadata_registry_data):
 
     for metadata_genome in metadata_registry_data['results']:
         genome = Genome(metadata_genome)
-        genome.create_genome_from_metadata()
+        genome.create_genome_from_mr_format()
         genome.sanitize()
 
         genome_store.add_to_genome_store(genome)

@@ -11,7 +11,7 @@ class Genome(object):
     def __init__(self, genome_info):
         self.genome_info = genome_info
 
-    def create_genome_from_metadata(self):
+    def create_genome_from_mr_format(self):
 
         # Use dict get method so that we get None value instead of KeyError when a key is not found
         self.common_name = self.genome_info.get('organism', {}).get('display_name')
@@ -27,7 +27,7 @@ class Genome(object):
         self.genome_id = self.__assign_genome_id()
         self.__process_strains_info()
 
-    def create_genome_from_genome_store(self):
+    def create_genome_from_gs_format(self):
 
         # Use dict get method so that we get None value instead of KeyError when a key is not found
         self.common_name = self.genome_info.get('common_name')
