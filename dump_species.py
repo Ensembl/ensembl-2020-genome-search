@@ -81,17 +81,12 @@ def prepare_gs_from_mr_format(metadata_registry_data):
 config = get_config()
 
 parser = argparse.ArgumentParser(description='Create Genome Store to use with Species selector')
-parser.add_argument('--fetch_by_genome', help='Create/Update Genome store with genomes', nargs='+')
+parser.add_argument('--fetch_by_genome', help='Create/Update Genome store with genomes. Use Scientific name', nargs='+')
 parser.add_argument('--fetch_by_division', help='Create/Update Genome store with genomes from Ensembl divisions', nargs='+')
-parser.add_argument('--create_from_file', help='Create/Update Genome store with genomes from a file')
+parser.add_argument('--create_from_file', help='Create/Update Genome store with genomes from a custom file')
 
 args = parser.parse_args()
 
-
-# Override default value in config if there is at least one relevant cli argument provided while running the script
-if any(vars(args).values()):
-    for arg_key, arg_value in vars(args).items():
-            config[arg_key.upper()] = arg_value
 
 
 if os.path.exists(config['GENOME_STORE_FILE']):
@@ -115,24 +110,25 @@ req_params = {
 # Prepare query params to get data
 req_params.update({"ensembl_version": config['V_VERSION']})
 
-if 'FETCH_BY_DIVISION' in config and config['FETCH_BY_DIVISION'] is not None:
-    for division in config['FETCH_BY_DIVISION']:
+if args.fetch_by_genome is not None:
+    for genome in args.fetch_by_genome:
+        req_params.update({'organism_name': genome})
+        print('Fetching data for species {} and release {}'.format(genome, req_params['ensembl_version']))
+        prepare_genome_store(req_params, 'metadata_registry')
+elif args.fetch_by_division is not None:
+    for division in args.fetch_by_division:
         if division in config['VALID_DIVISIONS'].keys() or division in config['VALID_DIVISIONS'].values():
             req_params.update({'division_name': division})
             print('Fetching data for division {} and release {}'.format(division, req_params['ensembl_version']))
             prepare_genome_store(req_params, 'metadata_registry')
         else:
             sys.exit('Invalid division {}.\nUse divisions from list: {}'.format(division, list(config['VALID_DIVISIONS'].values())))
-elif 'FETCH_BY_GENOME' in config and config['FETCH_BY_GENOME'] is not None:
-    for genome in config['FETCH_BY_GENOME']:
-        req_params.update({'organism_name': genome})
-        print('Fetching data for species {} and release {}'.format(genome, req_params['ensembl_version']))
-        prepare_genome_store(req_params, 'metadata_registry')
-elif 'CREATE_FROM_FILE' in config and config['CREATE_FROM_FILE'] is not None:
-    req_params.update({'file': config['CREATE_FROM_FILE']})
+elif args.create_from_file is not None:
+    req_params.update({'file': args.create_from_file})
     prepare_genome_store(req_params, 'custom_genome_file')
 else:
-    sys.exit('Division/Genome/File not provided. Exiting!')
+    parser.print_help()
+    sys.exit()
 
 
 

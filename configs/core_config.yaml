@@ -44,24 +44,6 @@ V_VERSION : 96
 METADATA_REGISTRY_URL : 'http://test-metadata.ensembl.org/genome'
 
 ###################################################################################################################
-# Use any one of the following. Values in FETCH_BY_DIVISION section should map to values in VALID_DIVISIONS
-###################################################################################################################
-
-#FETCH_BY_DIVISION:
-#  - 'EnsemblFungi'
-#  - 'EnsemblMetazoa'
-#  - 'EnsemblVertebrates'
-
-
-FETCH_BY_GENOME:
-   - 'Homo_sapiens'
-   - 'Caenorhabditis_elegans'
-   - 'Schizosaccharomyces_pombe'
-   - 'Arabidopsis_thaliana'
-   - 'Dictyostelium_discoideum'
-   - 'Acetivibrio_ethanolgignens'
-
-###################################################################################################################
 # Update the following path accordingly
 ###################################################################################################################
 
