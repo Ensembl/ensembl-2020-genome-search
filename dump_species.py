@@ -76,7 +76,7 @@ def prepare_gs_from_mr_format(metadata_registry_data):
 config = get_config()
 
 parser = argparse.ArgumentParser(description='Create Genome Store to use with Species selector')
-parser.add_argument('--fetch_by_genome', help='Create/Update Genome store with genomes. Use Scientific name', nargs='+')
+parser.add_argument('--fetch_by_genome', help='Create/Update Genome store with genomes', nargs='+')
 parser.add_argument('--fetch_by_division', help='Create/Update Genome store with genomes from Ensembl divisions',
                     nargs='+')
 parser.add_argument('--create_from_file', help='Create/Update Genome store with genomes from a custom file')
