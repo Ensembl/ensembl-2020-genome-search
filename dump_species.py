@@ -133,7 +133,7 @@ with open(config['GENOME_STORE_FILE'], "w") as write_file:
     json.dump(genome_store.get_genome_store(), write_file)
 
 if args.return_genome_store_ids and genome_store.processed_genomes_list:
-    print("Run the indexing as follows:\n python index_species.py --index_genome_store_ids {}".format(
+    print("\n\n***Run the indexing script as below:***\n\n python index_species.py --index_genome_store_ids {}".format(
         ' '.join(genome_store.processed_genomes_list)))
 
 ################################################

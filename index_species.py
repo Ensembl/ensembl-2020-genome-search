@@ -17,6 +17,7 @@ def tokenize_genome(args):
 
 
 def index_tokens(genome_key, tokens):
+    print("Indexing genome with genome store key: {}".format(genome_key))
     for token in tokens:
         indexer.add_to_index(token, genome_key)
 
