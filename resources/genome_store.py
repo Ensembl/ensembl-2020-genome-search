@@ -47,4 +47,4 @@ class GenomeStore(object):
         else:
             genome_key = self.get_max_key() + 1
             self.genome_store[genome_key] = genome.convert_to_dict()
-            self.processed_genomes_list.add(str(genome_key))
+            self.processed_genomes_list.add(genome_key)

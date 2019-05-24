@@ -134,7 +134,7 @@ with open(config['GENOME_STORE_FILE'], "w") as write_file:
 
 if args.return_genome_store_ids and genome_store.processed_genomes_list:
     print("\n\n***Run the indexing script as below:***\n\n python index_species.py --index_genome_store_ids {}".format(
-        ' '.join(genome_store.processed_genomes_list)))
+        ' '.join(str(genome_key) for genome_key in genome_store.processed_genomes_list)))
 
 ################################################
 
