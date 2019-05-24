@@ -4,7 +4,7 @@ from resources.genome import Genome
 class GenomeStore(object):
     def __init__(self, genome_store={}):
         self.genome_store = genome_store
-        self.processed_genomes_list = []
+        self.processed_genomes_list = set()
 
     def get_genome_store(self):
         return self.genome_store
@@ -42,9 +42,9 @@ class GenomeStore(object):
 
             self.genome_store[existing_genome_key] = existing_genome.convert_to_dict()
 
-            self.processed_genomes_list.append(existing_genome_key)
+            self.processed_genomes_list.add(existing_genome_key)
 
         else:
             genome_key = self.get_max_key() + 1
             self.genome_store[genome_key] = genome.convert_to_dict()
-            self.processed_genomes_list.append(str(genome_key))
+            self.processed_genomes_list.add(str(genome_key))
