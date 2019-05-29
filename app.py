@@ -5,8 +5,20 @@ from resources.ensembl_indexer import Indexer
 from configs.config import get_config
 
 
-app = Flask(__name__)
-app.config.update(get_config())
+def create_app():
+    application = Flask(__name__)
+    application.config.update(get_config())
+
+    application.indexes = Indexer(open_data_file(application.config['INDEX_FILE']))
+    print("Loaded indexes")
+    application.genome_store = GenomeStore(open_data_file(application.config['GENOME_STORE_FILE']))
+    print("Loaded Genome store")
+
+    with application.app_context():
+        from blueprints import genome_search
+        application.register_blueprint(genome_search.search_bp, url_prefix='/genome_search')
+
+    return application
 
 
 def open_data_file(file):
@@ -24,16 +36,15 @@ def open_data_file(file):
         return contents
 
 
-app.indexes = Indexer(open_data_file(app.config['INDEX_FILE']))
-app.genome_store = GenomeStore(open_data_file(app.config['GENOME_STORE_FILE']))
 
 
-with app.app_context():
-    from blueprints import genome_search
-    app.register_blueprint(genome_search.search_bp, url_prefix='/genome_search')
+
+
+
 
 
 print("Starting the server...")
 
 if __name__ == "__main__":
+    app = create_app()
     app.run(host="0.0.0.0", port=8011)
