@@ -8,21 +8,24 @@ from configs.config import get_config
 app = Flask(__name__)
 app.config.update(get_config())
 
-if os.path.isfile(app.config['INDEX_FILE']):
-    print(app.config['INDEX_FILE'])
-    with open(app.config['INDEX_FILE'], 'r') as index_file:
-        indexes = json.load(index_file)
-        app.indexer = Indexer(indexes)
-else:
-    sys.exit('Problem opening Index file:{}'.format(app.config['INDEX_FILE']))
 
-if os.path.isfile(app.config['GENOME_STORE_FILE']):
-    print(app.config['GENOME_STORE_FILE'])
-    with open(app.config['GENOME_STORE_FILE'], "r") as genome_store_file:
-        genome_store_data = json.load(genome_store_file)
-        app.genome_store = GenomeStore(genome_store_data)
-else:
-    sys.exit('Problem opening Genome store file:{}'.format(app.config['GENOME_STORE_FILE']))
+def open_data_file(file):
+    try:
+        with open(file, 'r') as fh:
+            contents = json.load(fh)
+    except FileNotFoundError as fnf_error:
+        sys.exit("Could not find the file {}\nExiting".format(file))
+    except IOError as ioe_error:
+        sys.exit("Problem reading file {}\nExiting!".format(file))
+    except Exception as e:
+        print("Unexpected error occurred while handling data files.\nExiting!")
+        raise
+    else:
+        return contents
+
+
+app.indexes = Indexer(open_data_file(app.config['INDEX_FILE']))
+app.genome_store = GenomeStore(open_data_file(app.config['GENOME_STORE_FILE']))
 
 
 with app.app_context():

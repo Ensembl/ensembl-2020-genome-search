@@ -7,7 +7,7 @@ search_bp = Blueprint('genome_search', __name__)
 api = Api(search_bp)
 
 
-print(app.indexer)
+print(app.indexes)
 
 class Default(Resource):
     def get(self, path=''):
@@ -19,7 +19,7 @@ class Species(Resource):
     def get(self, species_query, division):
         response_payload = {}
 
-        genome_keys = app.indexer.search(species_query.lower())
+        genome_keys = app.indexes.search(species_query.lower())
 
         if genome_keys is not None:
             response_payload = {genome_key: app.genome_store.get_genome(genome_key) for genome_key in genome_keys}
