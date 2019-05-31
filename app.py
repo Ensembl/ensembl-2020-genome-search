@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, make_response, jsonify
 import os, json, sys
 from resources.genome_store import GenomeStore
 from resources.ensembl_indexer import Indexer
@@ -18,7 +18,28 @@ def create_app():
         from blueprints import genome_search
         application.register_blueprint(genome_search.search_bp, url_prefix='/genome_search')
 
+    # TODO: errorhandlers listening to only 404 errors at the moment. Needs investigating.
+    register_generic_error_handlers(application)
+
     return application
+
+
+
+def register_generic_error_handlers(application):
+
+    @application.errorhandler(404)
+    def not_found(error):
+        #print('4040404040404')
+        return make_response(jsonify({'error': 'Not found'}), 404)
+
+    @application.errorhandler(405)
+    def not_found(error):
+        return make_response(jsonify({'error': 'Method Not Allowed'}), 405)
+
+    @application.errorhandler(500)
+    def internal_error(error):
+        #print('500500500500')
+        return make_response(jsonify({'message': 'Internal Server Errorsss'}), 500)
 
 
 def open_data_file(file):
@@ -37,14 +58,13 @@ def open_data_file(file):
 
 
 
-
-
-
-
-
-
 print("Starting the server...")
+
+#### use gunicorn app:app --workers 2 --preload
+# app = create_app()
+# print(app.error_handler_spec)
 
 if __name__ == "__main__":
     app = create_app()
+    #print(app.error_handler_spec)
     app.run(host="0.0.0.0", port=8011)
