@@ -26,8 +26,15 @@ class Search(Resource):
 
         for genome_key in genome_keys:
             genome = self._get_genome(genome_key)
+
+            if self.args.filter is not None:
+                if not self._check_if_belongs_to_division(genome):
+                    continue
+
             matched_positions = self._locate_match_positions(genome)
-            grouped_by_match_position = self._group_by_match_position(grouped_by_match_position, matched_positions)
+
+            if any(matched_positions):
+                grouped_by_match_position = self._group_by_match_position(grouped_by_match_position, matched_positions)
 
             # Todo: sort within groups
             # sorted_results = self.sort_results_by(grouped_by_match_position, 'common_name')
@@ -63,6 +70,16 @@ class Search(Resource):
         # genome = Genome(genome_store_genome)
         # genome.create_genome_from_gs_format()
         # genome.sanitize()
+
+
+    def _check_if_belongs_to_division(self, genome):
+        if self.args.filter in [*app.config['VALID_DIVISIONS'].keys(), *app.config['VALID_DIVISIONS'].values()]:
+            if self.args.filter in genome['division']:
+                return True
+            else:
+                return False
+        else:
+            return abort(400, {'error': 'Invalid division filter. Use values from {}'.format(', '.join([*app.config['VALID_DIVISIONS'].values()]))})
 
     def _locate_match_positions(self, genome):
 
