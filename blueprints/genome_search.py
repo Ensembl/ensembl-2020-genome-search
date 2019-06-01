@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, make_response, abort, request
 from flask import current_app as app
 from flask_restful import Resource, Api, reqparse
+import re
+from resources.ensembl_indexer import Tokenize
 from resources.genome import Genome
 
 
@@ -13,9 +15,13 @@ class Search(Resource):
 
         parser = reqparse.RequestParser(bundle_errors=True)
         parser.add_argument('query',  type=str, required=True, help="Missing 'query' param in the request.")
-        parser.add_argument('filter', type=str, default='all_divisions')
+        parser.add_argument('filter', type=str)
 
         self.args = parser.parse_args()
+        # print(self.args)
+
+        tokenize = Tokenize()
+        self.tokens  = tokenize.create_tokens(self.args.query)
 
         # Split user query to work on each word
         self.query_words = self.args.query.split()
@@ -39,7 +45,7 @@ class Search(Resource):
             # Todo: sort within groups
             # sorted_results = self.sort_results_by(grouped_by_match_position, 'common_name')
 
-        print(grouped_by_match_position)
+        # print(grouped_by_match_position)
 
         response = self._prepare_response(grouped_by_match_position)
 
@@ -49,12 +55,12 @@ class Search(Resource):
 
         # Get Genome keys for every word of use query
         genome_keys = []
-        for query_word in self.query_words:
-            genome_keys_of_query_word = app.indexes.search(query_word)
-            if genome_keys_of_query_word is None:
+        for token in self.tokens:
+            genome_keys_of_token = app.indexes.search(token)
+            if genome_keys_of_token is None:
                 genome_keys.append(set())
             else:
-                genome_keys.append(set(genome_keys_of_query_word))
+                genome_keys.append(set(genome_keys_of_token))
 
         # Create a set of Genome keys which are common to all the words in a user query
         valid_genome_keys = set.intersection(*genome_keys)
@@ -89,12 +95,15 @@ class Search(Resource):
             genome_name_words = genome[genome_key_to_index].lower().split()
             match_positions = {}
             for query_word in self.query_words:
+                pattern = re.compile(query_word.lower())
                 current_location = 0
                 for nth_word in range(len(genome_name_words)):
-                    if genome_name_words[nth_word][:len(query_word)] == query_word:
+                    # print(query_word, genome_name_words[nth_word])
+                    search = pattern.search(genome_name_words[nth_word].lower())
+                    if search:
                         # print('******Match*******')
                         match_positions.setdefault('match_in_nth_word', set()).add(nth_word + 1)
-                        match_positions.setdefault('offsets', {}).setdefault(query_word, []).append(current_location)
+                        match_positions.setdefault('offsets', {}).setdefault(query_word, []).append(current_location + search.start())
 
                     # +1 for white space
                     current_location = current_location + len(genome_name_words[nth_word]) + 1
