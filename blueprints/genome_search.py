@@ -49,7 +49,7 @@ class Search(Resource):
 
         response = self._prepare_response(grouped_by_match_position)
 
-        return make_response(jsonify({'match': response}), 200)
+        return make_response(jsonify(response), 200)
 
     def _get_genome_keys(self):
 
@@ -125,8 +125,9 @@ class Search(Resource):
 
     def _prepare_response(self, grouped_genomes):
 
-        response = {}
-        for group_number, genomes in grouped_genomes.items():
+        response = []
+        for group_number, genomes in sorted(grouped_genomes.items()):
+            group = []
             for genome in genomes:
 
                 genome_hit = dict(
@@ -147,7 +148,8 @@ class Search(Resource):
                             )
                             genome_hit.setdefault('matched_substrings', {}).setdefault(query_word, []).append(matched_substring)
 
-                response.setdefault(group_number, []).append(genome_hit)
+                group.append(genome_hit)
+            response.append(group)
 
         return response
 
