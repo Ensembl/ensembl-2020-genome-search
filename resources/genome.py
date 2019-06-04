@@ -6,7 +6,7 @@ class Genome(object):
     config = get_config()
 
     # Allow only alpha numeric in genome_id
-    genome_id_regex = re.compile('[^{}]'.format(config['GENOME_ID_VALID_CHARS']))
+    genome_id_regex = re.compile('[^{}+]'.format(config['GENOME_ID_VALID_CHARS']))
 
     def __init__(self, genome_info):
         self.genome_info = genome_info
@@ -18,7 +18,6 @@ class Genome(object):
         self.scientific_name = self.genome_info.get('organism', {}).get('scientific_name')
         self.production_name = self.genome_info.get('organism', {}).get('name')
 
-        self.subtype = self.genome_info.get('assembly', {}).get('assembly_name')
         self.assembly_name = self.genome_info.get('assembly', {}).get('assembly_name')
         self.assembly_accession = self.genome_info.get('assembly', {}).get('assembly_accession')
 
@@ -34,7 +33,6 @@ class Genome(object):
         self.scientific_name = self.genome_info.get('scientific_name')
         self.production_name = self.genome_info.get('production_name')
 
-        self.subtype = self.genome_info.get('assembly_name')
         self.assembly_name = self.genome_info.get('assembly_name')
         self.assembly_accession = self.genome_info.get('assembly_accession')
 
@@ -59,24 +57,19 @@ class Genome(object):
 
     def __assign_genome_id(self):
 
-        if self.assembly_name is None or \
+        if self.assembly_accession is None or \
                 self.production_name is None:
             raise Exception(
                 'Problem with species {}. Either Assembly name or Production does\'t exist. \n'
                 'Assembly name: {}, \n'
                 'Production name: {}'.format(self.common_name, self.assembly_name, self.production_name))
         else:
-            if 'EnsemblBacteria' in self.division:
                 genome_id = '{}_{}'.format(
-                    Genome.genome_id_regex.sub('', self.production_name),
-                    Genome.genome_id_regex.sub('', self.assembly_accession)
-                )
-            else:
-                genome_id = '{}_{}'.format(
-                    Genome.genome_id_regex.sub('', self.production_name),
-                    Genome.genome_id_regex.sub('', self.assembly_name)
-                )
-            return genome_id.lower()
+                    Genome.genome_id_regex.sub('_', self.production_name),
+                    Genome.genome_id_regex.sub('_', self.assembly_accession))
+
+                return genome_id
+
 
     def sanitize(self):
         """Removes unnecessary genome object data before creating json file for the genome"""

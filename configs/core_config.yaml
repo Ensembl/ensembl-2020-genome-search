@@ -30,7 +30,7 @@ STOP_CHARS_MAPPING:
 KEYS_TO_INDEX:
   - 'common_name'
   - 'scientific_name'
-  - 'subtype'
+  - 'assembly_name'
 
 MINIMUM_TOKEN_LENGTH: 3
 
@@ -38,6 +38,8 @@ MINIMUM_TOKEN_LENGTH: 3
 # Genome Fetch configuration
 ###################################################################################################################
 GENOME_ID_VALID_CHARS: 'A-Za-z0-9'
+
+
 
 V_VERSION: 96
 

@@ -135,7 +135,7 @@ class Search(Resource):
                     reference_genome_id=genome['genome_info']['reference_genome_id'],
                     common_name=genome['genome_info']['common_name'],
                     scientific_name=genome['genome_info']['scientific_name'],
-                    subtype=genome['genome_info']['subtype'],
+                    assembly_name=genome['genome_info']['assembly_name'],
                 )
 
                 for match_in_genome_name_type, match_info in genome['matches_info'].items():
