@@ -16,7 +16,7 @@ def create_app():
 
     with application.app_context():
         from blueprints import genome_search
-        application.register_blueprint(genome_search.search_bp, url_prefix='/genome_search')
+        application.register_blueprint(genome_search.search_bp, url_prefix='/api/genome_search')
 
     # TODO: errorhandlers listening to only 404 errors at the moment. Needs investigating.
     register_generic_error_handlers(application)

@@ -157,4 +157,4 @@ class Search(Resource):
 
 
 
-api.add_resource(Search, '/genome')
+api.add_resource(Search, '/')
