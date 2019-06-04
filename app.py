@@ -61,10 +61,10 @@ def open_data_file(file):
 print("Starting the server...")
 
 #### use gunicorn app:app --workers 2 --preload
-# app = create_app()
+ app = create_app()
 # print(app.error_handler_spec)
 
-if __name__ == "__main__":
-    app = create_app()
-    #print(app.error_handler_spec)
-    app.run(host="0.0.0.0", port=8011)
+#if __name__ == "__main__":
+#    app = create_app()
+#    #print(app.error_handler_spec)
+#    app.run(host="0.0.0.0", port=8011)
