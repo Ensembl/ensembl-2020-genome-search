@@ -49,6 +49,6 @@ METADATA_REGISTRY_URL: 'http://test-metadata.ensembl.org/genome'
 # Update the following path accordingly
 ###################################################################################################################
 
-DATA_FILE_PATH: '/Users/sboddu/PycharmProjects/species-search/data_files4'
+DATA_FILE_PATH: '/usr/src/genome-search'
 
 
