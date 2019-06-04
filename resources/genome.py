@@ -57,16 +57,16 @@ class Genome(object):
 
     def __assign_genome_id(self):
 
-        if self.assembly_accession is None or \
-                self.production_name is None:
+        if self.assembly_accession is None and \
+                self.assembly_name is None:
             raise Exception(
-                'Problem with species {}. Either Assembly name or Production does\'t exist. \n'
+                'Problem with species {}. Either Assembly name or Assembly accession does\'t exist. \n'
                 'Assembly name: {}, \n'
-                'Production name: {}'.format(self.common_name, self.assembly_name, self.production_name))
+                'Assembly accession: {}'.format(self.common_name, self.assembly_name, self.assembly_accession))
         else:
                 genome_id = '{}_{}'.format(
                     Genome.genome_id_regex.sub('_', self.production_name),
-                    Genome.genome_id_regex.sub('_', self.assembly_accession))
+                    Genome.genome_id_regex.sub('_', self.assembly_accession if self.assembly_accession else self.assembly_name))
 
                 return genome_id
 
