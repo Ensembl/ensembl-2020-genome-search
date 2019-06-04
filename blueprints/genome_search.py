@@ -15,7 +15,7 @@ class Search(Resource):
 
         parser = reqparse.RequestParser(bundle_errors=True)
         parser.add_argument('query',  type=str, required=True, help="Missing 'query' param in the request.")
-        parser.add_argument('filter', type=str)
+        parser.add_argument('division', type=str)
 
         self.args = parser.parse_args()
         # print(self.args)
@@ -33,7 +33,7 @@ class Search(Resource):
         for genome_key in genome_keys:
             genome = self._get_genome(genome_key)
 
-            if self.args.filter is not None:
+            if self.args.division is not None:
                 if not self._check_if_belongs_to_division(genome):
                     continue
 
@@ -79,8 +79,8 @@ class Search(Resource):
 
 
     def _check_if_belongs_to_division(self, genome):
-        if self.args.filter in [*app.config['VALID_DIVISIONS'].keys(), *app.config['VALID_DIVISIONS'].values()]:
-            if self.args.filter in genome['division']:
+        if self.args.division in [*app.config['VALID_DIVISIONS'].values()]:
+            if self.args.division in genome['division']:
                 return True
             else:
                 return False
