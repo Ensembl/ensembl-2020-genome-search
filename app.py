@@ -61,7 +61,7 @@ def open_data_file(file):
 print("Starting the server...")
 
 #### use gunicorn app:app --workers 2 --preload
- app = create_app()
+app = create_app()
 # print(app.error_handler_spec)
 
 #if __name__ == "__main__":
