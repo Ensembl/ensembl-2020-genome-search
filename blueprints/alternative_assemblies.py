@@ -1,0 +1,49 @@
+from flask import Blueprint, jsonify, make_response, abort
+from flask import current_app as app
+from flask_restful import Resource, Api, reqparse
+
+alt_assemblies = Blueprint('alternative_Assemblies', __name__)
+api = Api(alt_assemblies)
+
+
+class AltAssemblies(Resource):
+    def get(self, **kwargs):
+
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('genome_id',  type=str, required=True, help="Missing genome_id param in the request.")
+        self.args = parser.parse_args()
+
+        genome_key = app.genome_store.check_if_genome_exists('genome_id', self.args.genome_id)
+
+        if genome_key is None:
+            return abort(400, {'error': 'Invalid Genome ID'})
+
+        genome = app.genome_store.get_genome(genome_key)
+
+        if genome['alternative_assemblies'] is None:
+            return make_response(jsonify([]), 200)
+
+        alt_assemblies_response = {}
+        for alt_assembly_genome_id in genome['alternative_assemblies']:
+            alt_genome_key = app.genome_store.check_if_genome_exists('genome_id', alt_assembly_genome_id)
+            alt_genome = app.genome_store.get_genome(alt_genome_key)
+            alt_assemblies_response = self._prepare_response(alt_assemblies_response, alt_genome)
+
+
+        return make_response(jsonify(alt_assemblies_response), 200)
+
+
+
+    def _prepare_response(self, alt_assemblies_response, alt_genome):
+
+        alt_assemblies_info = dict(
+            assembly_name=alt_genome['assembly_name'],
+            genome_id=alt_genome['genome_id']
+        )
+
+        alt_assemblies_response.setdefault('alternative_assemblies', []).append(alt_assemblies_info)
+
+        return alt_assemblies_response
+
+
+api.add_resource(AltAssemblies, '/')

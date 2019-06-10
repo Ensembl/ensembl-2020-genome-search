@@ -24,22 +24,16 @@ class Genome(object):
         self.division = [self.genome_info.get('division', {}).get('name')]
 
         self.genome_id = self.__assign_genome_id()
+        self.alternative_assemblies = self.__find_alternative_assemblies()
+        self.is_popular = self.__check_if_popular_species()
+
         self.__process_strains_info()
 
     def create_genome_from_gs_format(self):
 
-        # Use dict get method so that we get None value instead of KeyError when a key is not found
-        self.common_name = self.genome_info.get('common_name')
-        self.scientific_name = self.genome_info.get('scientific_name')
-        self.production_name = self.genome_info.get('production_name')
+        self.__dict__.update(self.genome_info)
+        self.sanitize()
 
-        self.assembly_name = self.genome_info.get('assembly_name')
-        self.assembly_accession = self.genome_info.get('assembly_accession')
-
-        self.division = self.genome_info.get('division')
-
-        self.genome_id = self.__assign_genome_id()
-        self.__process_strains_info()
 
     def create_genome_from_somethinf_else(self):
         pass
@@ -69,6 +63,22 @@ class Genome(object):
                     Genome.genome_id_regex.sub('_', self.assembly_accession if self.assembly_accession else self.assembly_name))
 
                 return genome_id
+
+    def __find_alternative_assemblies(self):
+
+        if 'ASSOCIATED_ASSEMBLIES' in self.config:
+            for associated_assemblies in self.config['ASSOCIATED_ASSEMBLIES'].values():
+                if self.genome_id in associated_assemblies:
+                    associated_assemblies.remove(self.genome_id)
+                    return associated_assemblies
+        return None
+
+    def __check_if_popular_species(self):
+
+        if 'POPULAR_SPECIES' in self.config and self.genome_id in self.config['POPULAR_SPECIES']:
+            return True
+        else:
+            return False
 
 
     def sanitize(self):

@@ -1,0 +1,14 @@
+ASSOCIATED_ASSEMBLIES:
+      test:
+          - 'homo_sapiens_GCA_000001405_27'
+          - 'homo_sapiens_GRCh37'
+          - 'homo_sapiens_GRCh36'
+      test2:
+          - 'wheat-test1'
+          - 'wheat-test2'
+          - 'wheat-test3'
+          - 'wheat-test4'
+          - 'wheat-test5'
+          - 'wheat-test6'
+POPULAR_SPECIES:
+      - 'homo_sapiens_GCA_000001405_27'

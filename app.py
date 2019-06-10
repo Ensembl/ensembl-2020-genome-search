@@ -16,7 +16,9 @@ def create_app():
 
     with application.app_context():
         from blueprints import genome_search
+        from blueprints import alternative_assemblies
         application.register_blueprint(genome_search.search_bp, url_prefix='/api/genome_search')
+        application.register_blueprint(alternative_assemblies.alt_assemblies, url_prefix='/api/alternative_assemblies')
 
     # TODO: errorhandlers listening to only 404 errors at the moment. Needs investigating.
     register_generic_error_handlers(application)
@@ -61,10 +63,9 @@ def open_data_file(file):
 print("Starting the server...")
 
 #### use gunicorn app:app --workers 2 --preload
-app = create_app()
-# print(app.error_handler_spec)
 
-#if __name__ == "__main__":
-#    app = create_app()
-#    #print(app.error_handler_spec)
-#    app.run(host="0.0.0.0", port=8011)
+app = create_app()
+
+if __name__ == "__main__":
+   #print(app.error_handler_spec)
+   app.run(host="0.0.0.0", port=8011)
