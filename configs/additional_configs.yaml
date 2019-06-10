@@ -10,5 +10,12 @@ ASSOCIATED_ASSEMBLIES:
           - 'wheat-test4'
           - 'wheat-test5'
           - 'wheat-test6'
-POPULAR_SPECIES:
+POPULAR_GENOMES:
       - 'homo_sapiens_GCA_000001405_27'
+      - 'mus_musculus_pwkphj_GCA_001624775_1'
+      - 'mus_musculus_c57bl6nj_GCA_001632555_1'
+      - 'mus_musculus_cbaj_GCA_001624475_1'
+      - 'mus_musculus_129s1svimj_GCA_001624185_1'
+AVAILABLE_GENOMES:
+      - 'homo_sapiens_GCA_000001405_27'
+      - 'mus_musculus_129s1svimj_GCA_001624185_1'

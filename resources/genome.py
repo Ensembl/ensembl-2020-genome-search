@@ -25,7 +25,8 @@ class Genome(object):
 
         self.genome_id = self.__assign_genome_id()
         self.alternative_assemblies = self.__find_alternative_assemblies()
-        self.is_popular = self.__check_if_popular_species()
+        self.is_popular = self.__check_if_is_popular()
+        self.is_available = self.__check_if_available()
 
         self.__process_strains_info()
 
@@ -34,8 +35,7 @@ class Genome(object):
         self.__dict__.update(self.genome_info)
         self.sanitize()
 
-
-    def create_genome_from_somethinf_else(self):
+    def create_genome_from_something_else(self):
         pass
 
     def __process_strains_info(self):
@@ -73,13 +73,19 @@ class Genome(object):
                     return associated_assemblies
         return None
 
-    def __check_if_popular_species(self):
+    def __check_if_is_popular(self):
 
-        if 'POPULAR_SPECIES' in self.config and self.genome_id in self.config['POPULAR_SPECIES']:
+        if 'POPULAR_GENOMES' in self.config and self.genome_id in self.config['POPULAR_GENOMES']:
             return True
         else:
             return False
 
+    def __check_if_available(self):
+
+        if 'AVAILABLE_GENOMES' in self.config and self.genome_id in self.config['AVAILABLE_GENOMES']:
+            return True
+        else:
+            return False
 
     def sanitize(self):
         """Removes unnecessary genome object data before creating json file for the genome"""

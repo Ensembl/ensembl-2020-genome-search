@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, make_response, abort
 from flask import current_app as app
 from flask_restful import Resource, Api, reqparse
 
-alt_assemblies = Blueprint('alternative_Assemblies', __name__)
+alt_assemblies = Blueprint('alternative_assemblies', __name__)
 api = Api(alt_assemblies)
 
 
@@ -26,8 +26,11 @@ class AltAssemblies(Resource):
         alt_assemblies_response = {}
         for alt_assembly_genome_id in genome['alternative_assemblies']:
             alt_genome_key = app.genome_store.check_if_genome_exists('genome_id', alt_assembly_genome_id)
-            alt_genome = app.genome_store.get_genome(alt_genome_key)
-            alt_assemblies_response = self._prepare_response(alt_assemblies_response, alt_genome)
+
+            # Check in case there is a corrupt alternative genome id loaded into genome store from configs
+            if alt_genome_key is not None:
+                alt_genome = app.genome_store.get_genome(alt_genome_key)
+                alt_assemblies_response = self._prepare_response(alt_assemblies_response, alt_genome)
 
 
         return make_response(jsonify(alt_assemblies_response), 200)

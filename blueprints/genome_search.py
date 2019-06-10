@@ -172,7 +172,4 @@ class Search(Resource):
         return response
 
 
-
-
-
 api.add_resource(Search, '/')
