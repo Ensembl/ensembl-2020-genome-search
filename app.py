@@ -25,6 +25,8 @@ def create_app():
         from blueprints import popular_genomes
         application.register_blueprint(popular_genomes.popular_genomes, url_prefix='/api/popular_genomes')
 
+        # print(application.url_map.iter_rules)
+
     # TODO: errorhandlers listening to only 404 errors at the moment. Needs investigating.
     register_generic_error_handlers(application)
 

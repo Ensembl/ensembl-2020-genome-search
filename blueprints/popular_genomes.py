@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, make_response, abort
+from flask import Blueprint, jsonify, make_response, abort, url_for
 from flask import current_app as app
 from flask_restful import Resource, Api, reqparse
 
@@ -28,14 +28,14 @@ class PopularGenomes(Resource):
     def _prepare_response(self, popular_genomes_response, popular_genome):
 
         popular_genome_info = dict(
-            genome_id= popular_genome['genome_id'],
-            reference_genome_id= popular_genome['reference_genome_id'],
-            common_name= popular_genome['common_name'],
-            scientific_name= popular_genome['scientific_name'],
-            assembly_name= popular_genome['assembly_name'],
-            image='https://some-host-name/static-assets/some-path-to-imageshuman38.svg',
-            division_ids= popular_genome['division'],
-            is_available= popular_genome.get('is_available')
+            genome_id=popular_genome['genome_id'],
+            reference_genome_id=popular_genome['reference_genome_id'],
+            common_name=popular_genome['common_name'],
+            scientific_name=popular_genome['scientific_name'],
+            assembly_name=popular_genome['assembly_name'],
+            image=url_for('static', filename="{}.svg".format(popular_genome['genome_id']), _external=True),
+            division_ids=popular_genome['division'],
+            is_available=popular_genome.get('is_available')
         )
 
         popular_genomes_response.setdefault('popular_species', []).append(popular_genome_info)
