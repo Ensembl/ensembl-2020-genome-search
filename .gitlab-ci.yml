@@ -1,5 +1,6 @@
 stages:
   - build_flask
+  - deploy
 
 variables:
   CONTAINER_IMAGE: $GITLAB_REGISTRY_URL/$GITLAB_REGISTRY_NAMESPACE/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
@@ -29,11 +30,14 @@ Build e!-genome-search:
 Staging:
   stage: deploy
   image: alpine
+
   only:
   - cicd-test
+  
   before_script:
   - mkdir -p /etc/deploy
   - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
+  
   script:
   - apk update && apk add --no-cache curl git
   - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
