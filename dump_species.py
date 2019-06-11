@@ -101,7 +101,7 @@ else:
     genome_store = GenomeStore()
 
 req_params = {
-    "expand": 'data_release,assembly,organism,division',
+    "expand": 'assembly, organism, division',
     "format": "json",
 }
 

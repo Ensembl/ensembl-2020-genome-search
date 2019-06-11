@@ -33,7 +33,7 @@ class PopularGenomes(Resource):
             common_name= popular_genome['common_name'],
             scientific_name= popular_genome['scientific_name'],
             assembly_name= popular_genome['assembly_name'],
-            image='https://some-host-name/some-path-to-imageshuman38.svg',
+            image='https://some-host-name/static-assets/some-path-to-imageshuman38.svg',
             division_ids= popular_genome['division'],
             is_available= popular_genome.get('is_available')
         )

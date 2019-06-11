@@ -42,7 +42,7 @@ class Genome(object):
 
         # TODO: How do I get reference species genome_id?
 
-        if self.genome_info.get('organism', {}).get('strain') is None:
+        if self.genome_info.get('organism', {}).get('strain') is not None:
             self.is_strain = True
             self.reference_genome_id = self.genome_info.get('organism', {}).get('name')
         else:

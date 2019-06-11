@@ -1,15 +1,14 @@
 ASSOCIATED_ASSEMBLIES:
       test:
           - 'homo_sapiens_GCA_000001405_27'
-          - 'homo_sapiens_GRCh37'
-          - 'homo_sapiens_GRCh36'
+          - 'homo_sapiens_GCA_000001405_14'
       test2:
-          - 'wheat-test1'
-          - 'wheat-test2'
-          - 'wheat-test3'
-          - 'wheat-test4'
-          - 'wheat-test5'
-          - 'wheat-test6'
+          - 'wheat_test1'
+          - 'wheat_test2'
+          - 'wheat_test3'
+          - 'wheat_test4'
+          - 'wheat_test5'
+          - 'wheat_test6'
 POPULAR_GENOMES:
       - 'homo_sapiens_GCA_000001405_27'
       - 'mus_musculus_pwkphj_GCA_001624775_1'
@@ -18,4 +17,5 @@ POPULAR_GENOMES:
       - 'mus_musculus_129s1svimj_GCA_001624185_1'
 AVAILABLE_GENOMES:
       - 'homo_sapiens_GCA_000001405_27'
+      - 'homo_sapiens_GCA_000001405_14'
       - 'mus_musculus_129s1svimj_GCA_001624185_1'
