@@ -14,7 +14,7 @@ Build e!-genome-search:
     - docker:dind
 
   script:
-  - docker build -t ${CONTAINER_IMAGE} --no-cache -f docker/ .
+  - docker build -t ${CONTAINER_IMAGE} --no-cache -f docker/Dockerfile .
   - docker images
   - echo "$GITLAB_REGISTRY_TOKEN" | docker login -u "$GITLAB_REGISTRY_USER" --password-stdin https://"$GITLAB_REGISTRY_URL"
   - cat ~/.docker/config.json
