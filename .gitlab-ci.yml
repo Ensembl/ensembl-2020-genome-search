@@ -5,7 +5,7 @@ variables:
   CONTAINER_IMAGE: $GITLAB_REGISTRY_URL/$GITLAB_REGISTRY_NAMESPACE/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
   KUBECONFIG: /etc/deploy/config
 
-Build e!-Server:
+Build e!-genome-search:
   stage: build_flask
 
   image: docker
@@ -14,7 +14,7 @@ Build e!-Server:
     - docker:dind
 
   script:
-  - docker build -t ${CONTAINER_IMAGE} --no-cache .
+  - docker build -t ${CONTAINER_IMAGE} --no-cache -f docker/ .
   - docker images
   - echo "$GITLAB_REGISTRY_TOKEN" | docker login -u "$GITLAB_REGISTRY_USER" --password-stdin https://"$GITLAB_REGISTRY_URL"
   - cat ~/.docker/config.json
