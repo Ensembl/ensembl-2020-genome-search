@@ -25,8 +25,16 @@ class Genome(object):
 
         self.genome_id = self.__assign_genome_id()
         self.alternative_assemblies = self.__find_alternative_assemblies()
+
         self.is_popular = self.__check_if_is_popular()
-        self.is_available = self.__check_if_available()
+
+        if self.is_popular:
+            self.popular_order = self.__get_popular_order()
+
+        self.is_available = self.__check_if_is_available()
+
+        if self.is_available:
+            self.example_objects = self.__get_example_objects()
 
         self.__process_strains_info()
 
@@ -80,12 +88,20 @@ class Genome(object):
         else:
             return False
 
-    def __check_if_available(self):
+    def __get_popular_order(self):
+
+        return self.config['POPULAR_GENOMES'].index(self.genome_id)
+
+    def __check_if_is_available(self):
 
         if 'AVAILABLE_GENOMES' in self.config and self.genome_id in self.config['AVAILABLE_GENOMES']:
             return True
         else:
             return False
+
+    def __get_example_objects(self):
+
+        return self.config['AVAILABLE_GENOMES'].get(self.genome_id)
 
     def sanitize(self):
         """Removes unnecessary genome object data before creating json file for the genome"""

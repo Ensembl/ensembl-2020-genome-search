@@ -53,10 +53,24 @@ POPULAR_GENOMES:
       - 'zootermopsis_nevadensis_GCA_000696155_1'
       - 'zymoseptoria_tritici_GCA_000219625_1'
 AVAILABLE_GENOMES:
-      - 'homo_sapiens_GCA_000001405_27'
-      - 'homo_sapiens_GCA_000001405_14'
-      - 'triticum_aestivum_GCA_900519105_1'
-      - 'saccharomyces_cerevisiae_GCA_000146045_2'
-      - 'escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2'
-      - 'caenorhabditis_elegans_GCA_000002985_3'
-      - 'plasmodium_falciparum_EPr_1'
+      'homo_sapiens_GCA_000001405_27':
+              Gene: 'ENSG00000139618'
+              Region: '17: 63992802-64038237'
+      'homo_sapiens_GCA_000001405_14':
+              Gene: 'ENSG00000139618'
+              Region: '17: 64155265-64255266'
+      'triticum_aestivum_GCA_900519105_1':
+              Gene: 'TraesCS3D02G273600'
+              Region: '3D: 2585940-2634711'
+      'saccharomyces_cerevisiae_GCA_000146045_2':
+              Gene: 'WN66_00869'
+              Region: 'VII: 786054-786920'
+      'escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2':
+              Gene: 'BN2127_JRS8_00196'
+              Region: '2750115-2750708'
+      'caenorhabditis_elegans_GCA_000002985_3':
+              Gene: 'WBGene00004893'
+              Region: 'X: 937766-957832'
+      'plasmodium_falciparum_EPr_1':
+              Gene: 'PF3D7_1143500'
+              Region: '11: 1737256-1740029'
