@@ -51,6 +51,7 @@ POPULAR_GENOMES:
       - 'triticum_aestivum_GCA_900519105_1'
       - 'zea_mays_GCA_000005005_6'
       - 'zootermopsis_nevadensis_GCA_000696155_1'
+      - 'zymoseptoria_tritici_GCA_000219625_1'
 AVAILABLE_GENOMES:
       - 'homo_sapiens_GCA_000001405_27'
       - 'homo_sapiens_GCA_000001405_14'
