@@ -10,7 +10,7 @@ class AltAssemblies(Resource):
     def get(self, **kwargs):
 
         parser = reqparse.RequestParser(bundle_errors=True)
-        parser.add_argument('genome_id',  type=str, required=True, help="Missing genome_id param in the request.")
+        parser.add_argument('genome_id',  type=str, required=True, help="Missing genome_id param in the request.", location='args')
         self.args = parser.parse_args()
 
         genome_key = app.genome_store.check_if_genome_exists('genome_id', self.args.genome_id)

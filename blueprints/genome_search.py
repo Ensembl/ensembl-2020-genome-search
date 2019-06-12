@@ -14,8 +14,8 @@ class Search(Resource):
     def get(self, **kwargs):
 
         parser = reqparse.RequestParser(bundle_errors=True)
-        parser.add_argument('query',  type=str, required=True, help="Missing 'query' param in the request.")
-        parser.add_argument('division', type=str)
+        parser.add_argument('query',  type=str, required=True, help="Missing 'query' param in the request.", location='args')
+        parser.add_argument('division', type=str, location='args')
 
         self.args = parser.parse_args()
         # print(self.args)
