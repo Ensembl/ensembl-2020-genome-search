@@ -20,6 +20,7 @@ class PopularGenomes(Resource):
             popular_genome = app.genome_store.get_genome(genome_key)
             popular_genomes_response = self._prepare_response(popular_genomes_response, popular_genome)
 
+        popular_genomes_response['popular_species'].sort(key=lambda genome: genome['popular_order'])
 
         return make_response(jsonify(popular_genomes_response), 200)
 
@@ -35,7 +36,8 @@ class PopularGenomes(Resource):
             assembly_name=popular_genome['assembly_name'],
             image=url_for('temp_blueprint.static', filename="{}.svg".format(popular_genome['genome_id']), _external=True),
             division_ids=popular_genome['division'],
-            is_available=popular_genome.get('is_available')
+            is_available=popular_genome.get('is_available'),
+            popular_order=popular_genome.get('popular_order')
         )
 
         popular_genomes_response.setdefault('popular_species', []).append(popular_genome_info)

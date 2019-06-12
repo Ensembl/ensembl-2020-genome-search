@@ -144,7 +144,7 @@ class Search(Resource):
 
     def _prepare_response(self, grouped_genomes):
 
-        response = []
+        response = {}
         for group_number, genomes in sorted(grouped_genomes.items()):
             group = []
             for genome in genomes:
@@ -167,7 +167,7 @@ class Search(Resource):
                             genome_hit.setdefault('matched_substrings', []).append(matched_substring)
 
                 group.append(genome_hit)
-            response.append(group)
+            response.setdefault('genome_matches', []).append(group)
 
         return response
 
