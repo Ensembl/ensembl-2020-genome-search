@@ -1,4 +1,4 @@
-from flask import Flask, make_response, jsonify
+from flask import Flask, make_response, jsonify, Blueprint
 import os, json, sys
 from resources.genome_store import GenomeStore
 from resources.ensembl_indexer import Indexer
@@ -24,6 +24,8 @@ def create_app():
 
         from blueprints import popular_genomes
         application.register_blueprint(popular_genomes.popular_genomes, url_prefix='/api/popular_genomes')
+
+        application.register_blueprint(Blueprint('temp_blueprint', __name__, static_folder='static', static_url_path='/static/genome_images'))
 
         # print(application.url_map.iter_rules)
 

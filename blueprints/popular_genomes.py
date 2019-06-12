@@ -33,7 +33,7 @@ class PopularGenomes(Resource):
             common_name=popular_genome['common_name'],
             scientific_name=popular_genome['scientific_name'],
             assembly_name=popular_genome['assembly_name'],
-            image=url_for('static', filename="{}.svg".format(popular_genome['genome_id']), _external=True),
+            image=url_for('temp_blueprint.static', filename="{}.svg".format(popular_genome['genome_id']), _external=True),
             division_ids=popular_genome['division'],
             is_available=popular_genome.get('is_available')
         )
