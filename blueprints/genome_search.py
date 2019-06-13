@@ -14,8 +14,8 @@ class Search(Resource):
     def get(self, **kwargs):
 
         parser = reqparse.RequestParser(bundle_errors=True)
-        parser.add_argument('query',  type=str, required=True, help="Missing 'query' param in the request.")
-        parser.add_argument('division', type=str)
+        parser.add_argument('query',  type=str, required=True, help="Missing 'query' param in the request.", location='args')
+        parser.add_argument('division', type=str, location='args')
 
         self.args = parser.parse_args()
         # print(self.args)
@@ -144,7 +144,7 @@ class Search(Resource):
 
     def _prepare_response(self, grouped_genomes):
 
-        response = []
+        response = {}
         for group_number, genomes in sorted(grouped_genomes.items()):
             group = []
             for genome in genomes:
@@ -167,12 +167,9 @@ class Search(Resource):
                             genome_hit.setdefault('matched_substrings', []).append(matched_substring)
 
                 group.append(genome_hit)
-            response.append(group)
+            response.setdefault('genome_matches', []).append(group)
 
         return response
-
-
-
 
 
 api.add_resource(Search, '/')

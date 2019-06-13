@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "assembly": {
+        "assembly_accession": "GCA_000001405.14",
+        "assembly_name": "GRCh37.p13"
+      },
+      "organism": {
+        "is_reference": 0,
+        "name": "homo_sapiens",
+        "display_name": "Human",
+        "strain": null,
+        "scientific_name": "Homo sapiens"
+      },
+      "division": {
+        "name": "EnsemblVertebrates",
+        "short_name": "EV"
+      }
+    }
+  ]
+}

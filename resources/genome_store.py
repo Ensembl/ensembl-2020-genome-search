@@ -17,12 +17,25 @@ class GenomeStore(object):
         return int(max(self.genome_store.keys(), default=0, key=(lambda k: int(k))))
 
     def get_genome(self, genome_key):
-        return self.genome_store.get(genome_key)
+        # Make sure you return copy of the genome as any changes to
+        # original genome would effect genome_store calls in subsequent
+        # requests as we are using in memory genome store.
+        return self.genome_store.get(genome_key).copy()
+
+    # Todo: Merge check_if_genome_exists and get_all_matched_genome_keys based on calling context?
 
     def check_if_genome_exists(self, genome_sub_key, genome_sub_value):
         for genome_key, genome in self.genome_store.items():
             if genome_sub_key in genome and genome[genome_sub_key] == genome_sub_value:
                 return genome_key
+
+
+    def get_all_matched_genome_keys(self, genome_sub_key, genome_sub_value):
+        matched = []
+        for genome_key, genome in self.genome_store.items():
+            if genome_sub_key in genome and genome[genome_sub_key] == genome_sub_value:
+                matched.append(genome_key)
+        return matched
 
     #    def update_genome_store(self, genome_key, genome_value):
     #        self.genome_store[genome_key] = genome_value

@@ -25,7 +25,16 @@ class Genome(object):
 
         self.genome_id = self.__assign_genome_id()
         self.alternative_assemblies = self.__find_alternative_assemblies()
-        self.is_popular = self.__check_if_popular_species()
+
+        self.is_popular = self.__check_if_is_popular()
+
+        if self.is_popular:
+            self.popular_order = self.__get_popular_order()
+
+        self.is_available = self.__check_if_is_available()
+
+        if self.is_available:
+            self.example_objects = self.__get_example_objects()
 
         self.__process_strains_info()
 
@@ -34,15 +43,14 @@ class Genome(object):
         self.__dict__.update(self.genome_info)
         self.sanitize()
 
-
-    def create_genome_from_somethinf_else(self):
+    def create_genome_from_something_else(self):
         pass
 
     def __process_strains_info(self):
 
         # TODO: How do I get reference species genome_id?
 
-        if self.genome_info.get('organism', {}).get('strain') is None:
+        if self.genome_info.get('organism', {}).get('strain') is not None:
             self.is_strain = True
             self.reference_genome_id = self.genome_info.get('organism', {}).get('name')
         else:
@@ -73,13 +81,27 @@ class Genome(object):
                     return associated_assemblies
         return None
 
-    def __check_if_popular_species(self):
+    def __check_if_is_popular(self):
 
-        if 'POPULAR_SPECIES' in self.config and self.genome_id in self.config['POPULAR_SPECIES']:
+        if 'POPULAR_GENOMES' in self.config and self.genome_id in self.config['POPULAR_GENOMES']:
             return True
         else:
             return False
 
+    def __get_popular_order(self):
+
+        return self.config['POPULAR_GENOMES'].index(self.genome_id)
+
+    def __check_if_is_available(self):
+
+        if 'AVAILABLE_GENOMES' in self.config and self.genome_id in self.config['AVAILABLE_GENOMES']:
+            return True
+        else:
+            return False
+
+    def __get_example_objects(self):
+
+        return self.config['AVAILABLE_GENOMES'].get(self.genome_id)
 
     def sanitize(self):
         """Removes unnecessary genome object data before creating json file for the genome"""

@@ -1,4 +1,4 @@
-from flask import Flask, make_response, jsonify
+from flask import Flask, make_response, jsonify, Blueprint
 import os, json, sys
 from resources.genome_store import GenomeStore
 from resources.ensembl_indexer import Indexer
@@ -16,9 +16,21 @@ def create_app():
 
     with application.app_context():
         from blueprints import genome_search
-        from blueprints import alternative_assemblies
+
         application.register_blueprint(genome_search.search_bp, url_prefix='/api/genome_search')
+
+        from blueprints import alternative_assemblies
         application.register_blueprint(alternative_assemblies.alt_assemblies, url_prefix='/api/alternative_assemblies')
+
+        from blueprints import popular_genomes
+        application.register_blueprint(popular_genomes.popular_genomes, url_prefix='/api/popular_genomes')
+
+        from blueprints import genomes
+        application.register_blueprint(genomes.genomes, url_prefix='/api/genome/')
+
+        application.register_blueprint(Blueprint('temp_blueprint', __name__, static_folder='static', static_url_path='/static/genome_images'))
+
+        # print(application.url_map.iter_rules)
 
     # TODO: errorhandlers listening to only 404 errors at the moment. Needs investigating.
     register_generic_error_handlers(application)

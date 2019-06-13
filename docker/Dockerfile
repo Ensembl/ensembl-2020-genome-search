@@ -10,7 +10,8 @@ RUN git clone --depth 1 https://github.com/Ensembl/ensembl-2020-genome-search.gi
 WORKDIR /usr/src/genome-search
 
 RUN pip3 install --no-cache-dir -r requirements.txt \
-    && python dump_species.py --fetch_by_division EnsemblVertebrates EnsemblMetazoa EnsemblPlants EnsemblFungi EnsemblProtists \
+    && python dump_species.py --fetch_by_division EnsemblVertebrates EnsemblMetazoa EnsemblPlants EnsemblFungi EnsemblProtists EnsemblBacteria \
+    && echo 'y' | python dump_species.py --create_from_file /usr/src/genome-search/configs/grch37.json \
     && echo 'y' | python index_species.py 
 
 EXPOSE 8011
