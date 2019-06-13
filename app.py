@@ -25,6 +25,9 @@ def create_app():
         from blueprints import popular_genomes
         application.register_blueprint(popular_genomes.popular_genomes, url_prefix='/api/popular_genomes')
 
+        from blueprints import genomes
+        application.register_blueprint(genomes.genomes, url_prefix='/api/genome/')
+
         application.register_blueprint(Blueprint('temp_blueprint', __name__, static_folder='static', static_url_path='/static/genome_images'))
 
         # print(application.url_map.iter_rules)
