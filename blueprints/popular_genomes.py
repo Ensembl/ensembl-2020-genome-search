@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, make_response, abort, url_for
 from flask import current_app as app
 from flask_restful import Resource, Api, reqparse
+import os
 
 popular_genomes = Blueprint('popular_genomes', __name__)
 api = Api(popular_genomes)
@@ -34,7 +35,7 @@ class PopularGenomes(Resource):
             common_name=popular_genome['common_name'],
             scientific_name=popular_genome['scientific_name'],
             assembly_name=popular_genome['assembly_name'],
-            image=url_for('temp_blueprint.static', filename="{}.svg".format(popular_genome['genome_id']), _external=True),
+            image=url_for('temp_blueprint.static', filename="{}.svg".format(popular_genome['genome_id']), _external=True, _scheme=os.environ.get('DEPLOYMENT_SCHEME') if 'DEPLOYMENT_SCHEME' in os.environ else 'http'),
             division_ids=popular_genome['division'],
             is_available=popular_genome.get('is_available'),
             popular_order=popular_genome.get('popular_order')
