@@ -26,7 +26,6 @@ class PopularGenomes(Resource):
         return make_response(jsonify(popular_genomes_response), 200)
 
 
-
     def _prepare_response(self, popular_genomes_response, popular_genome):
 
         popular_genome_info = dict(
@@ -35,7 +34,7 @@ class PopularGenomes(Resource):
             common_name=popular_genome['common_name'],
             scientific_name=popular_genome['scientific_name'],
             assembly_name=popular_genome['assembly_name'],
-            image=url_for('temp_blueprint.static', filename="{}.svg".format(popular_genome['genome_id']), _external=True, _scheme=os.environ.get('DEPLOYMENT_SCHEME') if 'DEPLOYMENT_SCHEME' in os.environ else 'http'),
+            image=url_for('temp_static_blueprint.static', filename="{}.svg".format(popular_genome['genome_id']), _external=True, _scheme=os.environ.get('DEPLOYMENT_SCHEME') if 'DEPLOYMENT_SCHEME' in os.environ else 'http'),
             division_ids=popular_genome['division'],
             is_available=popular_genome.get('is_available'),
             popular_order=popular_genome.get('popular_order')

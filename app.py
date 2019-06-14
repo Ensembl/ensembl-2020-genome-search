@@ -9,6 +9,9 @@ def create_app():
     application = Flask(__name__)
     application.config.update(get_config())
 
+    # Do not redirect branch URLs without / to URL with the one with /
+    application.url_map.strict_slashes = False
+
     application.indexes = Indexer(open_data_file(application.config['INDEX_FILE']))
     print("Loaded indexes")
     application.genome_store = GenomeStore(open_data_file(application.config['GENOME_STORE_FILE']))
@@ -28,7 +31,10 @@ def create_app():
         from blueprints import genomes
         application.register_blueprint(genomes.genomes, url_prefix='/api/genome/')
 
-        application.register_blueprint(Blueprint('temp_blueprint', __name__, static_folder='static', static_url_path='/static/genome_images'))
+        from blueprints import object_related_tmp
+        application.register_blueprint(object_related_tmp.object_related_tmp_bp, url_prefix='/api/ensembl_object/')
+
+        application.register_blueprint(Blueprint('temp_static_blueprint', __name__, static_folder='static', static_url_path='/static/genome_images'))
 
         # print(application.url_map.iter_rules)
 
