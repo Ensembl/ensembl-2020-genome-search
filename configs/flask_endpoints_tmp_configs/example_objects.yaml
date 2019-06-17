@@ -1,0 +1,134 @@
+homo_sapiens_GCA_000001405_27:
+  Gene:
+    ENSG00000139618:
+      label: 'BRCA2'
+      spliced_length: 84793
+      strand: 'forward'
+      bio_type: 'Protein coding'
+      location:
+        chromosome: '13'
+        end: 32315474
+        start: 32400266
+      child_objects:
+        - ENST00000380152.7:
+            additional_info: 'Protein coding'
+            colour: 'BLUE'
+            support_level: 'MANE Select'
+            track_id: 'gene-feat-1'
+        - ENST00000470094.1:
+            additional_info: 'Nonsense mediated decay'
+            colour: 'GREY'
+            support_level: 'TSL:5'
+            track_id: 'gene-feat-2'
+homo_sapiens_GCA_000001405_14:
+  Gene:
+    ENSG00000139618:
+      label: 'BRCA2'
+      spliced_length: 84793
+      strand: 'forward'
+      bio_type: 'Protein coding'
+      location:
+        chromosome: '13'
+        end: 32889611
+        start: 32973805
+      child_objects:
+        - ENST00000544455.7:
+            additional_info: 'Protein coding'
+            colour: 'BLUE'
+            support_level: 'MANE Select'
+            track_id: 'gene-feat-1'
+        - ENST00000470094.1:
+            additional_info: 'Nonsense mediated decay'
+            colour: 'GREY'
+            support_level: 'TSL:5'
+            track_id: 'gene-feat-2'
+triticum_aestivum_GCA_900519105_1:
+  Gene:
+    TraesCS3D02G273600:
+      label: 'TraesCS3D02G273600'
+      spliced_length: 84793
+      strand: 'reverse'
+      bio_type: 'Protein coding'
+      location:
+        chromosome: '3D'
+        end: 379535906
+        start: 379539827
+      child_objects:
+        - TraesCS3D02G273600.1:
+            additional_info: 'Protein coding'
+            colour: 'BLUE'
+            support_level: 'MANE Select'
+            track_id: 'gene-feat-1'
+        - TraesCS3D02G273600.2:
+            additional_info: 'Protein coding'
+            colour: 'GREY'
+            support_level:
+            track_id: 'gene-feat-2'
+saccharomyces_cerevisiae_GCA_000146045_2:
+  Gene:
+    WN66_00869:
+      label: 'SFA1'
+      spliced_length: 84793
+      strand: 'forward'
+      bio_type: 'Protein coding'
+      location:
+        chromosome: 'IV'
+        end: 178232
+        start: 179392
+      child_objects:
+        - KZV12055:
+            additional_info: 'Protein coding'
+            colour: 'BLUE'
+            support_level: 'MANE Select'
+            track_id: 'gene-feat-1'
+escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2:
+  Gene:
+    BN2127_JRS8_00196:
+      label: 'grpE'
+      spliced_length: 84793
+      strand: 'reverse'
+      bio_type: 'Protein coding'
+      location:
+        chromosome: 'contig000006'
+        end: 70550
+        start: 71125
+      child_objects:
+        - CUB36901:
+            additional_info: 'Protein coding'
+            colour: 'BLUE'
+            support_level: 'MANE Select'
+            track_id: 'gene-feat-1'
+caenorhabditis_elegans_GCA_000002985_3:
+  Gene:
+    WBGene00004893:
+      label: 'sms-2'
+      spliced_length: 84793
+      strand: 'reverse'
+      bio_type: 'Protein coding'
+      location:
+        chromosome: 'X'
+        end: 944826
+        start: 948883
+      child_objects:
+        - F53H8.4:
+            additional_info: 'Protein coding'
+            colour: 'BLUE'
+            support_level: 'MANE Select'
+            track_id: 'gene-feat-1'
+plasmodium_falciparum_EPr_1:
+  Gene:
+    PF3D7_1143500:
+      label: 'PF3D7_1143500'
+      spliced_length: 84793
+      strand: 'reverse'
+      bio_type: 'Protein coding'
+      location:
+        chromosome: '11'
+        end: 1737256
+        start: 1740029
+      child_objects:
+        - CZT99098:
+            additional_info: 'Protein coding'
+            colour: 'BLUE'
+            support_level: 'MANE Select'
+            track_id: 'gene-feat-1'
