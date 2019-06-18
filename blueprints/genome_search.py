@@ -169,6 +169,10 @@ class Search(Resource):
                 group.append(genome_hit)
             response.setdefault('genome_matches', []).append(group)
 
+        # If there are no matches, just respond with an empty list
+        if 'genome_matches' not in response:
+            response.setdefault('genome_matches', [])
+
         return response
 
 
