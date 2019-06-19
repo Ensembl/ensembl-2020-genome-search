@@ -16,5 +16,5 @@ RUN pip3 install --no-cache-dir -r requirements.txt \
 
 EXPOSE 8011
 
-CMD ["gunicorn","--bind=0.0.0.0:8011","--access-logfile=/usr/src/gunicorn.access.log","--error-logfile=/usr/src/gunicorn.error.log","--workers=10","--preload","app:app"]
+CMD ["gunicorn","--bind=0.0.0.0:8011","--workers=10","--preload","app:app"]
 
