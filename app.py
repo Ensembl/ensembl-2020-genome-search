@@ -1,4 +1,5 @@
 from flask import Flask, make_response, jsonify, Blueprint
+from flask_cors import CORS
 import os, json, sys
 from resources.genome_store import GenomeStore
 from resources.ensembl_indexer import Indexer
@@ -7,6 +8,7 @@ from configs.config import get_config
 
 def create_app():
     application = Flask(__name__)
+    CORS(application)
     application.config.update(get_config())
 
     # Do not redirect branch URLs without / to URL with the one with /
