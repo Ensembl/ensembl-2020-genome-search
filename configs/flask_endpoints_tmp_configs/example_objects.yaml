@@ -7,8 +7,8 @@ homo_sapiens_GCA_000001405_27:
       bio_type: 'Protein coding'
       location:
         chromosome: '13'
-        end: 32315474
-        start: 32400266
+        start: 32315474
+        end: 32400266
       child_objects:
         Transcript:
             ENST00000380152.7:
@@ -25,8 +25,8 @@ triticum_aestivum_GCA_900519105_1:
       bio_type: 'Protein coding'
       location:
         chromosome: '3D'
-        end: 379535906
-        start: 379539827
+        start: 379535906
+        end: 379539827
       child_objects:
         Transcript:
             TraesCS3D02G273600.1:
@@ -43,8 +43,8 @@ homo_sapiens_GCA_000001405_14:
       bio_type: 'Protein coding'
       location:
         chromosome: '13'
-        end: 32889611
-        start: 32973805
+        start: 32889611
+        end: 32973805
       child_objects:
         Transcript:
             ENST00000544455.1:
@@ -61,8 +61,8 @@ escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2:
       bio_type: 'Protein coding'
       location:
         chromosome: 'Chromosome'
-        end: 2750115
-        start: 2750708
+        start: 2750115
+        end: 2750708
       child_objects:
         Transcript:
             AAC75663:
@@ -79,8 +79,8 @@ saccharomyces_cerevisiae_GCA_000146045_2:
       bio_type: 'Protein coding'
       location:
         chromosome: 'IV'
-        end: 159604
-        start: 160764
+        start: 159604
+        end: 160764
       child_objects:
         Transcript:
             YDL168W_mRNA:
@@ -97,8 +97,8 @@ caenorhabditis_elegans_GCA_000002985_3:
       bio_type: 'Protein coding'
       location:
         chromosome: 'X'
-        end: 944826
-        start: 948883
+        start: 944826
+        end: 948883
       child_objects:
         Transcript:
             F53H8.4:
@@ -115,8 +115,8 @@ plasmodium_falciparum_EPr_1:
       bio_type: 'Protein coding'
       location:
         chromosome: '11'
-        end: 1737256
-        start: 1740029
+        start: 1737256
+        end: 1740029
       child_objects:
         Transcript:
             CZT99098:
