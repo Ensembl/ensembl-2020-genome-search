@@ -59,6 +59,10 @@ class Genome(object):
 
     def __assign_genome_id(self):
 
+        # Tmp hack until GCA value is loaded into Metadata registry
+        if self.production_name == 'plasmodium_falciparum':
+            return 'plasmodium_falciparum_GCA_000002765.2'
+
         if self.assembly_accession is None and \
                 self.assembly_name is None:
             raise Exception(
