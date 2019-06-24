@@ -51,7 +51,7 @@ POPULAR_GENOMES:
       - 'fusarium_oxysporum_GCA_000222805_1'
       - 'oreochromis_niloticus_GCA_000188235_1'
       - 'salpingoeca_rosetta_GCA_000188695_1'
-      - 'plasmodium_falciparum_GCA_000002765.2'
+      - 'plasmodium_falciparum_GCA_000002765_2'
 AVAILABLE_GENOMES:
       'homo_sapiens_GCA_000001405_27':
               Gene: 'ENSG00000139618'
@@ -71,6 +71,6 @@ AVAILABLE_GENOMES:
       'caenorhabditis_elegans_GCA_000002985_3':
               Gene: 'WBGene00004893'
               Region: 'X:937766-957832'
-      'plasmodium_falciparum_GCA_000002765.2':
+      'plasmodium_falciparum_GCA_000002765_2':
               Gene: 'PF3D7_1143500'
               Region: '11:1737256-1740029'

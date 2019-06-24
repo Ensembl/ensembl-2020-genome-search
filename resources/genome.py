@@ -61,7 +61,7 @@ class Genome(object):
 
         # Tmp hack until GCA value is loaded into Metadata registry
         if self.production_name == 'plasmodium_falciparum':
-            return 'plasmodium_falciparum_GCA_000002765.2'
+            return 'plasmodium_falciparum_GCA_000002765_2'
 
         if self.assembly_accession is None and \
                 self.assembly_name is None:
