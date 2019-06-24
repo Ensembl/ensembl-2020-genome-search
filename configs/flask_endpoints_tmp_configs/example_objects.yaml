@@ -106,7 +106,7 @@ caenorhabditis_elegans_GCA_000002985_3:
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'
-plasmodium_falciparum_EPr_1:
+plasmodium_falciparum_GCA_000002765.2:
   Gene:
     PF3D7_1143500:
       label: 'PF3D7_1143500'
