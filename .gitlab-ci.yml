@@ -4,9 +4,11 @@ stages:
 
 variables:
   CONTAINER_IMAGE: $GITLAB_REGISTRY_URL/$GITLAB_REGISTRY_NAMESPACE/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
+  CONTAINER_INTERNAL_IMAGE: $GITLAB_REGISTRY_URL/$GITLAB_REGISTRY_NAMESPACE/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}-internal
   KUBECONFIG: /etc/deploy/config
 
-Build e!-genome-search:
+# Build Prod/Stage
+Build:
   stage: build_flask
 
   image: docker
@@ -18,21 +20,38 @@ Build e!-genome-search:
   - docker build -t ${CONTAINER_IMAGE} --no-cache -f docker/Dockerfile.prod .
   - docker images
   - echo "$GITLAB_REGISTRY_TOKEN" | docker login -u "$GITLAB_REGISTRY_USER" --password-stdin https://"$GITLAB_REGISTRY_URL"
-  - cat ~/.docker/config.json
   - docker push ${CONTAINER_IMAGE}
   - docker rmi ${CONTAINER_IMAGE}
   - docker logout $GITLAB_REGISTRY_URL
 
   only:
-  - cicd-test
+  - dev
+  - master
+
+# Build internal
+Build:internal:
+  stage: build_flask
+
+  image: docker
+
+  services:
+    - docker:dind
+
+  script:
+  - docker build -t ${CONTAINER_INTERNAL_IMAGE} --no-cache -f docker/Dockerfile.stage .
+  - docker images
+  - echo "$GITLAB_REGISTRY_TOKEN" | docker login -u "$GITLAB_REGISTRY_USER" --password-stdin https://"$GITLAB_REGISTRY_URL"
+  - docker push ${CONTAINER_INTERNAL_IMAGE}
+  - docker rmi ${CONTAINER_INTERNAL_IMAGE}
+  - docker logout $GITLAB_REGISTRY_URL
+
+  only:
+  - master
 
 # Deploy Stage 
 Staging:
   stage: deploy
   image: alpine
-
-  only:
-  - cicd-test
   
   before_script:
   - mkdir -p /etc/deploy
@@ -56,11 +75,14 @@ Staging:
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
 
+  only:
+  - dev
+
+# Deploy Live
 Live:
   stage: deploy
   image: alpine
-  only:
-  - cicd-test
+
   before_script:
   - mkdir -p /etc/deploy
   - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
@@ -81,4 +103,32 @@ Live:
   - kubectl config use-context ens-prod-ctx
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  when: manual
+
+  only:
+  - master
+
+# Deploy internal
+Internal:
+  stage: deploy
+  image: alpine
+
+  before_script:
+  - mkdir -p /etc/deploy
+  - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
+  script:
+  - apk update && apk add --no-cache curl git
+  - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  - chmod +x ./kubectl
+  - mv ./kubectl /usr/local/bin/kubectl
+  - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
+  - cd ensembl-client-caas-deploy
+  - git checkout refactor-manifest
+  - cd ..
+  - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}-internal/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - sed -i "s/<DEPLOYMNET_ENV>/internal/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - kubectl config view
+  - kubectl config use-context ens-dev-ctx
+  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+
+  only:
+  - master
