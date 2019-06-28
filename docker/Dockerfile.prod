@@ -5,7 +5,7 @@ LABEL maintainer="sboddu@ebi.ac.uk"
 # Environment variable
 ENV PYTHONUNBUFFERED TRUE
 
-RUN git clone --depth 1 https://github.com/Ensembl/ensembl-2020-genome-search.git /usr/src/genome-search
+COPY . /usr/src/genome-search
 
 WORKDIR /usr/src/genome-search
 
