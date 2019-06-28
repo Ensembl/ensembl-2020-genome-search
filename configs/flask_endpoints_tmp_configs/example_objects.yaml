@@ -2,6 +2,7 @@ homo_sapiens_GCA_000001405_27:
   Gene:
     ENSG00000139618:
       label: 'BRCA2'
+      description: 'BRCA2, DNA repair associated'
       spliced_length: 84793
       strand: 'forward'
       bio_type: 'Protein coding'
@@ -13,6 +14,7 @@ homo_sapiens_GCA_000001405_27:
         Transcript:
             ENST00000380152.7:
               additional_info: 'Protein coding'
+              description: 'BRCA2, DNA repair associated'
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'
@@ -20,6 +22,7 @@ triticum_aestivum_GCA_900519105_1:
   Gene:
     TraesCS3D02G273600:
       label: 'TraesCS3D02G273600'
+      description: 'Heat shock protein 101 '
       spliced_length: 84793
       strand: 'reverse'
       bio_type: 'Protein coding'
@@ -31,6 +34,7 @@ triticum_aestivum_GCA_900519105_1:
         Transcript:
             TraesCS3D02G273600.1:
               additional_info: 'Protein coding'
+              description: 'Heat shock protein 101 '
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'
@@ -38,6 +42,7 @@ homo_sapiens_GCA_000001405_14:
   Gene:
     ENSG00000139618:
       label: 'BRCA2'
+      description: 'breast cancer 2, early onset'
       spliced_length: 84793
       strand: 'forward'
       bio_type: 'Protein coding'
@@ -49,6 +54,7 @@ homo_sapiens_GCA_000001405_14:
         Transcript:
             ENST00000544455.1:
               additional_info: 'Canonical'
+              description: 'breast cancer 2, early onset'
               colour: 'BLUE'
               support_level: 'MANE Select'
               track_id: 'gene-feat-1'
@@ -56,6 +62,7 @@ escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2:
   Gene:
     b2614:
       label: 'grpE'
+      description: 'heat shock protein'
       spliced_length: 84793
       strand: 'reverse'
       bio_type: 'Protein coding'
@@ -67,6 +74,7 @@ escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2:
         Transcript:
             AAC75663:
               additional_info: 'Protein coding'
+              description: 'heat shock protein'
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'
@@ -74,6 +82,7 @@ saccharomyces_cerevisiae_GCA_000146045_2:
   Gene:
     YDL168W:
       label: 'SFA1'
+      description: 'Bifunctional alcohol dehydrogenase and formaldehyde dehydrogenase; formaldehyde dehydrogenase activity is glutathione-dependent; functions in formaldehyde detoxification and formation of long chain and complex alcohols, regulated by Hog1p-Sko1p; protein abundance increases in response to DNA replication stress'
       spliced_length: 84793
       strand: 'forward'
       bio_type: 'Protein coding'
@@ -85,6 +94,7 @@ saccharomyces_cerevisiae_GCA_000146045_2:
         Transcript:
             YDL168W_mRNA:
               additional_info: 'Protein coding'
+              description: 'Bifunctional alcohol dehydrogenase and formaldehyde dehydrogenase; formaldehyde dehydrogenase activity is glutathione-dependent; functions in formaldehyde detoxification and formation of long chain and complex alcohols, regulated by Hog1p-Sko1p; protein abundance increases in response to DNA replication stress'
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'
@@ -92,6 +102,7 @@ caenorhabditis_elegans_GCA_000002985_3:
   Gene:
     WBGene00004893:
       label: 'sms-2'
+      description: 'Phosphatidylcholine:ceramide cholinephosphotransferase 2'
       spliced_length: 84793
       strand: 'reverse'
       bio_type: 'Protein coding'
@@ -103,6 +114,7 @@ caenorhabditis_elegans_GCA_000002985_3:
         Transcript:
             F53H8.4:
               additional_info: 'Protein coding'
+              description: 'Phosphatidylcholine:ceramide cholinephosphotransferase 2'
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'
@@ -110,6 +122,7 @@ plasmodium_falciparum_GCA_000002765_2:
   Gene:
     PF3D7_1143500:
       label: 'PF3D7_1143500'
+      description: 'conserved Plasmodium protein, unknown function'
       spliced_length: 84793
       strand: 'reverse'
       bio_type: 'Protein coding'
@@ -121,6 +134,7 @@ plasmodium_falciparum_GCA_000002765_2:
         Transcript:
             CZT99098:
               additional_info: 'Protein coding'
+              description: 'conserved Plasmodium protein, unknown function'
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'

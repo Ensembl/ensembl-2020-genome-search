@@ -46,7 +46,8 @@ class ObjectInfo(Resource):
             object_type=object_type,
             spliced_length=full_data.get('spliced_length'),
             stable_id=object_value,
-            strand=full_data.get('strand')
+            strand=full_data.get('strand'),
+            description=full_data.get('description')
         )
 
         return make_response(jsonify(response_data), 200)
@@ -87,7 +88,9 @@ class ObjectTrack(Resource):
             additional_info=full_data.get('bio_type'),
             label=full_data.get('label'),
             ensembl_object_id=self.args.object_id,
-            track_id='gene-feat')
+            track_id='gene-feat',
+            description=full_data.get('description')
+        )
 
         for child_object_type, child_objects in full_data.get('child_objects').items():
             for child_object_id, child_object in child_objects.items():
@@ -98,7 +101,8 @@ class ObjectTrack(Resource):
                         label=child_object_id,
                         ensembl_object_id='{}:{}:{}'.format(genome_id, child_object_type, child_object_id),
                         support_level=child_object.get('support_level'),
-                        track_id=child_object.get('track_id')
+                        track_id=child_object.get('track_id'),
+                        description=child_object.get('description')
                     )
                 )
 
