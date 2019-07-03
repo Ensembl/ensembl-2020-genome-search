@@ -41,7 +41,7 @@ track_categories:
        track_category_id: 'short-variants'
        track_list:
         - label: '1000 Genomes all SNPs & indels'
-          track_id: 'snps-and-indels'
+          track_id: 'variant'
        types:
          - 'Variation'
 
