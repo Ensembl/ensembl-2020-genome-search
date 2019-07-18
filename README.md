@@ -10,6 +10,27 @@ This repo manages following endpoints:
 6. /api/ensembl_object/
 7. /api/ensembl_object/track_list/
 
+## Requirements
+
+```
+Python 3.7
+Flask==1.0.2
+Flask-Cors==3.0.7
+Flask-RESTful==0.3.7
+gunicorn==19.9.0
+Jinja2==2.10
+json-tools==0.4.1
+jsonify==0.5
+PyYAML==3.13
+requests==2.21.0
+urllib3==1.24.1
+```
+See requirements.txt for full list.
+Run following command to install all the requirements:
+```
+pip3 install --no-cache-dir -r requirements.txt
+```
+
 ## Data generation
 Data generation has two steps:
 1. Create Genome store file
@@ -60,6 +81,19 @@ python index_species.py
 To index only a few genome store entries:
 ```
 python index_species.py --index_genome_store_ids <ID_LIST>
+```
+
+## Running the application
+
+Genome store file and Index file must be generated before starting the server as they serve as primary data source for the application.
+
+### Running directly
+```
+python app.py
+```
+### Running using gunicorn
+```
+gunicorn app:app --workers 5 --preload
 ```
 
 ## Testing
