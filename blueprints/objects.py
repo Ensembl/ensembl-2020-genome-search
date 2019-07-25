@@ -71,7 +71,8 @@ class ObjectInfo(Resource):
     def __prepare_region_response(self, genome_id, object_type, object_value):
 
         try:
-             chromosome, start, end = self.args.object_id.split(':', 2)
+            chromosome, coordinates = object_value.split(':')
+            start, end = coordinates.split('-')
         except:
             return abort(400, {'error': 'Problem parsing region id'})
 
