@@ -59,11 +59,11 @@ Build:feature:
     - docker:dind
 
   script:
-  - docker build -t ${CONTAINER_INTERNAL_IMAGE} --no-cache -f docker/Dockerfile.stage .
+  - docker build -t ${CONTAINER_IMAGE}-${CI_COMMIT_REF_NAME} --no-cache -f docker/Dockerfile.prod .
   - docker images
   - echo "$GITLAB_REGISTRY_TOKEN" | docker login -u "$GITLAB_REGISTRY_USER" --password-stdin https://"$GITLAB_REGISTRY_URL"
-  - docker push ${CONTAINER_INTERNAL_IMAGE}
-  - docker rmi ${CONTAINER_INTERNAL_IMAGE}
+  - docker push ${CONTAINER_IMAGE}-${CI_COMMIT_REF_NAME}
+  - docker rmi ${CONTAINER_IMAGE}-${CI_COMMIT_REF_NAME}
   - docker logout $GITLAB_REGISTRY_URL
 
   only:
@@ -171,8 +171,8 @@ Deploy:feature:
   - cd ensembl-client-caas-deploy
   - git checkout refactor-manifest
   - cd ..
-  - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}-internal/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s/<DEPLOYMNET_ENV>/internal/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - sed -i "s/<VERSION>/${CONTAINER_IMAGE}-${CI_COMMIT_REF_NAME}/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - sed -i "s/<DEPLOYMNET_ENV>/${CI_COMMIT_REF_NAME}/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
   - kubectl config view
   - kubectl config use-context ens-dev-ctx
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
