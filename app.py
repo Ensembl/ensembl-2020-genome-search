@@ -25,16 +25,16 @@ def create_app():
         application.register_blueprint(genome_search.search_bp, url_prefix='/api/genome_search')
 
         from blueprints import alternative_assemblies
-        application.register_blueprint(alternative_assemblies.alt_assemblies, url_prefix='/api/alternative_assemblies')
+        application.register_blueprint(alternative_assemblies.alt_assemblies_bp, url_prefix='/api/alternative_assemblies')
 
         from blueprints import popular_genomes
-        application.register_blueprint(popular_genomes.popular_genomes, url_prefix='/api/popular_genomes')
+        application.register_blueprint(popular_genomes.popular_genomes_bp, url_prefix='/api/popular_genomes')
 
         from blueprints import genomes
-        application.register_blueprint(genomes.genomes, url_prefix='/api/genome/')
+        application.register_blueprint(genomes.genomes_bp, url_prefix='/api/genome/')
 
-        from blueprints import object_related_tmp
-        application.register_blueprint(object_related_tmp.object_related_tmp_bp, url_prefix='/api/ensembl_object/')
+        from blueprints import objects
+        application.register_blueprint(objects.objects_bp, url_prefix='/api/object/')
 
         application.register_blueprint(Blueprint('temp_static_blueprint', __name__, static_folder='static', static_url_path='/static/genome_images'))
 

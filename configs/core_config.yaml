@@ -15,6 +15,9 @@ INDEX_FILE: 'index.json'
 
 DEBUG: True
 
+BACKEND_GENERIC_REST_URL: 'https://rest.ensembl.org'
+BACKEND_GRCH37_REST_URL: 'https://grch37.rest.ensembl.org'
+
 ###################################################################################################################
 # Indexer specific configuration
 ###################################################################################################################
@@ -50,5 +53,4 @@ METADATA_REGISTRY_URL: 'http://test-metadata.ensembl.org/genome'
 ###################################################################################################################
 
 DATA_FILE_PATH: '/usr/src/genome-search'
-
 

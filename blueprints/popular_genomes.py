@@ -3,8 +3,8 @@ from flask import current_app as app
 from flask_restful import Resource, Api, reqparse
 import os, yaml
 
-popular_genomes = Blueprint('popular_genomes', __name__)
-api = Api(popular_genomes)
+popular_genomes_bp = Blueprint('popular_genomes', __name__)
+api = Api(popular_genomes_bp)
 
 
 class PopularGenomes(Resource):

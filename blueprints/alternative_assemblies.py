@@ -2,8 +2,8 @@ from flask import Blueprint, jsonify, make_response, abort
 from flask import current_app as app
 from flask_restful import Resource, Api, reqparse
 
-alt_assemblies = Blueprint('alternative_assemblies', __name__)
-api = Api(alt_assemblies)
+alt_assemblies_bp = Blueprint('alternative_assemblies', __name__)
+api = Api(alt_assemblies_bp)
 
 
 class AltAssemblies(Resource):

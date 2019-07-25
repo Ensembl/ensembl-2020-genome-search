@@ -1,9 +1,7 @@
 from flask import Blueprint, jsonify, make_response, abort, request
 from flask import current_app as app
 from flask_restful import Resource, Api, reqparse
-import re
 from resources.ensembl_indexer import Tokenize
-from resources.genome import Genome
 
 
 search_bp = Blueprint('genome_search', __name__)

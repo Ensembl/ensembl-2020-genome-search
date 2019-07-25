@@ -3,8 +3,8 @@ from flask import current_app as app
 from flask_restful import Resource, Api, reqparse
 import yaml
 
-genomes = Blueprint('genomes', __name__)
-api = Api(genomes)
+genomes_bp = Blueprint('genomes', __name__)
+api = Api(genomes_bp)
 
 
 class GenomeInfo(Resource):
