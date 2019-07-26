@@ -18,8 +18,8 @@ Test:feature:
   script:
     - pip3 install --no-cache-dir -r requirements.txt
     - python dump_species.py --fetch_by_genome Homo_sapiens Triticum_aestivum Caenorhabditis_elegans
-    - echo 'y' | python dump_species.py --create_from_file /usr/src/genome-search/configs/grch37.json
-    - echo 'y' | python dump_species.py --create_from_file /usr/src/genome-search/configs/limitations-on-metadata-registry.json
+    - echo 'y' | python dump_species.py --create_from_file configs/grch37.json
+    - echo 'y' | python dump_species.py --create_from_file configs/limitations-on-metadata-registry.json
     - echo 'y' | python index_species.py
     - python -m unittest discover -s tests
 
