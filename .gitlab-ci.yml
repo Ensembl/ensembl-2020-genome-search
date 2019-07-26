@@ -1,4 +1,5 @@
 stages:
+  - test
   - build_flask
   - deploy
 
@@ -7,6 +8,20 @@ variables:
   CONTAINER_INTERNAL_IMAGE: $GITLAB_REGISTRY_URL/$GITLAB_REGISTRY_NAMESPACE/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}-internal
   KUBECONFIG: /etc/deploy/config
   DOCKER_TLS_CERTDIR: ""
+
+# Run Tests
+Test:feature:
+  stage: test
+
+  image: python:3.7.2
+
+  script:
+    - pip3 install --no-cache-dir -r requirements.txt
+    - python dump_species.py --fetch_by_genome Homo_sapiens Triticum_aestivum Caenorhabditis_elegans
+    - echo 'y' | python dump_species.py --create_from_file configs/grch37.json
+    - echo 'y' | python dump_species.py --create_from_file configs/limitations-on-metadata-registry.json
+    - echo 'y' | python index_species.py
+    - python -m unittest discover -s tests
 
 # Build Prod/Stage
 Build:
@@ -49,7 +64,7 @@ Build:internal:
   only:
   - master
 
-# Build feature
+# Build Prod/Stage
 Build:feature:
   stage: build_flask
 
@@ -59,18 +74,22 @@ Build:feature:
     - docker:dind
 
   script:
-  - docker build -t ${CONTAINER_IMAGE}-${CI_COMMIT_REF_NAME} --no-cache -f docker/Dockerfile.prod .
+  - feature_branch=${CI_COMMIT_REF_NAME}
+  - feature_tag=${feature_branch#"feature/"}
+  - docker build -t ${CONTAINER_IMAGE}-$feature_tag --no-cache -f docker/Dockerfile.prod .
   - docker images
   - echo "$GITLAB_REGISTRY_TOKEN" | docker login -u "$GITLAB_REGISTRY_USER" --password-stdin https://"$GITLAB_REGISTRY_URL"
-  - docker push ${CONTAINER_IMAGE}-${CI_COMMIT_REF_NAME}
-  - docker rmi ${CONTAINER_IMAGE}-${CI_COMMIT_REF_NAME}
+  - docker push ${CONTAINER_IMAGE}-$feature_tag
+  - docker rmi ${CONTAINER_IMAGE}-$feature_tag
   - docker logout $GITLAB_REGISTRY_URL
 
   only:
-  - july-2019
+  - /^feature\/.*$/
+
+  when: manual
 
 # Deploy Stage 
-Staging:
+Deploy:staging:
   stage: deploy
   image: alpine
   
@@ -88,8 +107,8 @@ Staging:
   - git checkout refactor-manifest
   - cd ..
   - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s/<DEPLOYMNET_ENV>/staging/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s/<DEPLOYMNET_ENV>/staging/g" ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
+  - sed -i "s/<DEPLOYMENT_ENV>/staging/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - sed -i "s/<DEPLOYMENT_ENV>/staging/g" ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
   - cat ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
   - kubectl config view
   - kubectl config use-context ens-stage-ctx
@@ -100,7 +119,7 @@ Staging:
   - dev
 
 # Deploy Live
-Live:
+Deploy:live:
   stage: deploy
   image: alpine
 
@@ -117,8 +136,8 @@ Live:
   - git checkout refactor-manifest
   - cd ..
   - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s/<DEPLOYMNET_ENV>/prod/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s/<DEPLOYMNET_ENV>/prod/g" ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
+  - sed -i "s/<DEPLOYMENT_ENV>/prod/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - sed -i "s/<DEPLOYMENT_ENV>/prod/g" ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
   - cat ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
   - kubectl config view
   - kubectl config use-context ens-prod-ctx
@@ -129,7 +148,7 @@ Live:
   - master
 
 # Deploy internal
-Internal:
+Deploy:internal:
   stage: deploy
   image: alpine
 
@@ -146,7 +165,7 @@ Internal:
   - git checkout refactor-manifest
   - cd ..
   - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}-internal/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s/<DEPLOYMNET_ENV>/internal/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - sed -i "s/<DEPLOYMENT_ENV>/internal/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
   - kubectl config view
   - kubectl config use-context ens-dev-ctx
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
@@ -154,7 +173,7 @@ Internal:
   only:
   - master
 
-# Deploy feature
+# Deploy Feature
 Deploy:feature:
   stage: deploy
   image: alpine
@@ -163,6 +182,8 @@ Deploy:feature:
   - mkdir -p /etc/deploy
   - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
   script:
+  - feature_branch=${CI_COMMIT_REF_NAME}
+  - feature_tag=${feature_branch#"feature/"}
   - apk update && apk add --no-cache curl git
   - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
   - chmod +x ./kubectl
@@ -171,11 +192,18 @@ Deploy:feature:
   - cd ensembl-client-caas-deploy
   - git checkout refactor-manifest
   - cd ..
-  - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_NAME}/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s/<DEPLOYMNET_ENV>/${CI_COMMIT_REF_NAME}/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}-$feature_tag/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - sed -i "s/<DEPLOYMENT_ENV>/$feature_tag/g" ensembl-client-caas-deploy/ensembl_genome_search_cm.yaml
+  - sed -i "s/<DEPLOYMENT_ENV>/$feature_tag/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - sed -i "s/<DEPLOYMENT_ENV>/$feature_tag/g" ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
+  - cat ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
   - kubectl config view
   - kubectl config use-context ens-dev-ctx
+  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_cm.yaml
+  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
 
   only:
-  - july-2019
+  - /^feature\/.*$/
+
+  when: manual
