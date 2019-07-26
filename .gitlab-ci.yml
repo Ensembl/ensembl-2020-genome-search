@@ -199,6 +199,7 @@ Deploy:feature:
   - cat ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
   - kubectl config view
   - kubectl config use-context ens-dev-ctx
+  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_cm.yaml
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
 
