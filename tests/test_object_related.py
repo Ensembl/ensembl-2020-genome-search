@@ -7,14 +7,14 @@ class MyTestCase(unittest.TestCase):
     def setUp(self):
         app.app.testing = True
         self.app = app.app.test_client()
-        self.base_url = '/api/ensembl_object/'
+        self.base_url = '/api/object/'
 
 
-    def test_if_ensembl_object_info_works(self):
+    def test_if_object_info_works(self):
 
         self.base_url += 'info/'
 
-        print("\n\t*** Testing if ensembl_object/info endpoint works ***")
+        print("\n\t*** Testing if object/info endpoint works ***")
 
         query = '?object_id=homo_sapiens_GCA_000001405_27:gene:ENSG00000139618'
         response = self.app.get(self.base_url + query)
@@ -30,7 +30,7 @@ class MyTestCase(unittest.TestCase):
 
         self.base_url += 'track_list/'
 
-        print("\n\t*** Testing if ensembl_object/track_list endpoint works ***")
+        print("\n\t*** Testing if object/track_list endpoint works ***")
 
         query = '?object_id=homo_sapiens_GCA_000001405_27:gene:ENSG00000139618'
 
