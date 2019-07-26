@@ -59,7 +59,7 @@ class MyTestCase(unittest.TestCase):
 
         print("\n\t*** Testing if search hits grouping is working ***")
 
-        query = '?query=mouse'
+        query = '?query=human'
         response = self.app.get(self.base_url + query)
 
         print('\t*** Request: {} ***'.format(self.base_url + query))
