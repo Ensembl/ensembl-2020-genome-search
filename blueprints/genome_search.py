@@ -134,7 +134,7 @@ class Search(Resource):
             for genome in genomes:
 
                 genome_hit_count += 1
-                if genome_hit_count > self.args.limit:
+                if self.args.limit is not None and genome_hit_count > self.args.limit:
                     continue
 
                 genome_hit = dict(
