@@ -54,23 +54,27 @@ class MyTestCase(unittest.TestCase):
 
         self.assertEqual(len(response_data['genome_matches'][0]), 2)
 
+    # Current 7 species does not have grouping but 45k species has it
+    # Generating genome_store and indexing it for 45k species takes 1 hour
+    # Once we have faster process for genome_store generation enable this test
 
-    def test_search_grouping(self):
+    # def test_search_grouping(self):
 
-        print("\n\t*** Testing if search hits grouping is working ***")
+    #     print("\n\t*** Testing if search hits grouping is working ***")
 
-        query = '?query=human'
-        response = self.app.get(self.base_url + query)
+    #     query = '?query=human'
+    #     response = self.app.get(self.base_url + query)
+    #     print(response_data)
 
-        print('\t*** Request: {} ***'.format(self.base_url + query))
+    #     print('\t*** Request: {} ***'.format(self.base_url + query))
 
-        self.assertEqual(response.status_code, 200)
-        response_data = json.loads(response.data)
+    #     self.assertEqual(response.status_code, 200)
+    #     response_data = json.loads(response.data)
 
-        print("\t*** Response code: {} ***".format(response.status_code))
-        #print("\t*** Response data: {} ***".format(response_data))
+    #     print("\t*** Response code: {} ***".format(response.status_code))
+    #     #print("\t*** Response data: {} ***".format(response_data))
 
-        self.assertGreater(len(response_data['genome_matches']), 1)
+    #     self.assertGreater(len(response_data['genome_matches']), 1)
 
 
 if __name__ == '__main__':
