@@ -86,8 +86,7 @@ Build:feature:
   only:
   - /^feature\/.*$/
 
-  when:
-  - manual
+  when: manual
 
 # Deploy Stage 
 Deploy:staging:
@@ -206,5 +205,4 @@ Deploy:feature:
   only:
   - /^feature\/.*$/
 
-  when:
-  - manual
+  when: manual
