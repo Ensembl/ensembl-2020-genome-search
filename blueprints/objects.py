@@ -103,7 +103,7 @@ class ObjectInfo(Resource):
             spliced_length=response.get('spliced_length'),
             strand='forward' if response.get('strand') == 1 else 'reverse',
             description=response.get('description'),
-            ensembl_object_id=self.args.object_id,
+            object_id=self.args.object_id,
             genome_id=genome_id,
             object_type=object_type,
             stable_id=object_value
