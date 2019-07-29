@@ -110,7 +110,7 @@ req_params.update({"ensembl_version": config['V_VERSION']})
 
 if args.fetch_by_genome is not None:
     for genome in args.fetch_by_genome:
-        req_params.update({'organism_name': genome})
+        req_params.update({'organism_name': genome, 'exact_match': 'true'})
         print('Fetching data for species {} and release {}'.format(genome, req_params['ensembl_version']))
         prepare_genome_store(req_params, 'metadata_registry')
 elif args.fetch_by_division is not None:

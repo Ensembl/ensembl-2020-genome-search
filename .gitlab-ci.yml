@@ -17,9 +17,8 @@ Test:feature:
 
   script:
     - pip3 install --no-cache-dir -r requirements.txt
-    - python dump_species.py --fetch_by_genome Homo_sapiens Triticum_aestivum Caenorhabditis_elegans
+    - python dump_species.py --fetch_by_genome Homo_sapiens Triticum_aestivum Caenorhabditis_elegans Escherichia_coli_str_k_12_substr_mg1655 Saccharomyces_cerevisiae Plasmodium_falciparum
     - echo 'y' | python dump_species.py --create_from_file configs/grch37.json
-    - echo 'y' | python dump_species.py --create_from_file configs/limitations-on-metadata-registry.json
     - echo 'y' | python index_species.py
     - python -m unittest discover -s tests
 
