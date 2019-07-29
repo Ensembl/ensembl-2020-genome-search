@@ -194,12 +194,8 @@ Deploy:feature:
   - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}-$feature_tag/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
   - sed -i "s/<DEPLOYMENT_ENV>/$feature_tag/g" ensembl-client-caas-deploy/ensembl_genome_search_cm.yaml
   - sed -i "s/<DEPLOYMENT_ENV>/$feature_tag/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s/<DEPLOYMENT_ENV>/$feature_tag/g" ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
-  - cat ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - kubectl config view
   - kubectl config use-context ens-dev-ctx
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_cm.yaml
-  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
 
   only:
