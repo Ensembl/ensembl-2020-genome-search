@@ -100,7 +100,6 @@ class ObjectInfo(Resource):
                 start=response.get('start'),
                 end=response.get('end')
             ),
-            spliced_length=response.get('spliced_length'),
             strand='forward' if response.get('strand') == 1 else 'reverse',
             description=response.get('description'),
             object_id=self.args.object_id,
