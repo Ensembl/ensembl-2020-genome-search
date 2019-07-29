@@ -85,6 +85,7 @@ class ObjectInfo(Resource):
             object_id=self.args.object_id,
             genome_id=genome_id,
             object_type=object_type,
+            label=object_value
         )
 
         return response_data
@@ -92,7 +93,7 @@ class ObjectInfo(Resource):
     def __prepare_gene_response(self, genome_id, object_type, object_value, response):
 
         response_data = dict(
-            bio_type=response.get('biotype'),
+            bio_type=response.get('biotype').replace('_', ' ').capitalize() if response.get('biotype') is not None else None,
             # Return object_value if there is no display name in Ensembl REST response
             label=response.get('display_name', object_value),
             location=dict(
