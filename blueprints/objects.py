@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, make_response, abort
 from flask import current_app as app
 from flask_restful import Resource, Api, reqparse
 from resources.ensembl_rest import EnsemblRest
-import yaml, requests, json, urllib.parse as urlparse
+import yaml, requests, json, urllib.parse as urlparse, re
 
 
 objects_bp = Blueprint('objects', __name__)
@@ -102,7 +102,7 @@ class ObjectInfo(Resource):
                 end=response.get('end')
             ),
             strand='forward' if response.get('strand') == 1 else 'reverse',
-            description=response.get('description'),
+            description=re.sub(r'\[.*?\]', '', response.get('description')).rstrip() if response.get('description') is not None else None,
             object_id=self.args.object_id,
             genome_id=genome_id,
             object_type=object_type,
