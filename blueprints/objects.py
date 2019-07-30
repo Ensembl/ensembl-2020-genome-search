@@ -35,7 +35,7 @@ class ObjectInfo(Resource):
             genome_info = app.genome_store.get_genome(genome_key)
             production_name = genome_info.get('production_name')
 
-            query_params = {'species': production_name}
+            query_params = {'species': production_name, 'content-type': 'application/json'}
 
             # Configure to connect to right REST API
             if genome_info.get('assembly_name') == 'GRCh37':
@@ -103,6 +103,7 @@ class ObjectInfo(Resource):
             ),
             strand='forward' if response.get('strand') == 1 else 'reverse',
             description=re.sub(r'\[.*?\]', '', response.get('description')).rstrip() if response.get('description') is not None else None,
+            versioned_stable_id="{}.{}".format(object_value, response.get('version')) if response.get('version') is not None else None,
             object_id=self.args.object_id,
             genome_id=genome_id,
             object_type=object_type,
