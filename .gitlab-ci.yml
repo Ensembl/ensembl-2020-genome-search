@@ -53,7 +53,7 @@ Build:internal:
     - docker:dind
 
   script:
-  - docker build -t ${CONTAINER_INTERNAL_IMAGE} --no-cache -f docker/Dockerfile.stage .
+  - docker build -t ${CONTAINER_INTERNAL_IMAGE} --no-cache -f docker/Dockerfile.internal .
   - docker images
   - echo "$GITLAB_REGISTRY_TOKEN" | docker login -u "$GITLAB_REGISTRY_USER" --password-stdin https://"$GITLAB_REGISTRY_URL"
   - docker push ${CONTAINER_INTERNAL_IMAGE}
@@ -75,7 +75,7 @@ Build:feature:
   script:
   - feature_branch=${CI_COMMIT_REF_NAME}
   - feature_tag=${feature_branch#"feature/"}
-  - docker build -t ${CONTAINER_IMAGE}-$feature_tag --no-cache -f docker/Dockerfile.stage .
+  - docker build -t ${CONTAINER_IMAGE}-$feature_tag --no-cache -f docker/Dockerfile.internal .
   - docker images
   - echo "$GITLAB_REGISTRY_TOKEN" | docker login -u "$GITLAB_REGISTRY_USER" --password-stdin https://"$GITLAB_REGISTRY_URL"
   - docker push ${CONTAINER_IMAGE}-$feature_tag
