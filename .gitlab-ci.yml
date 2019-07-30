@@ -146,6 +146,8 @@ Deploy:live:
   only:
   - master
 
+  when: manual
+
 # Deploy internal
 Deploy:internal:
   stage: deploy
@@ -171,6 +173,8 @@ Deploy:internal:
 
   only:
   - master
+
+  when: manual
 
 # Deploy Feature
 Deploy:feature:
