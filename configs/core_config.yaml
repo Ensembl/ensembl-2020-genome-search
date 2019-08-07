@@ -12,6 +12,7 @@ VALID_DIVISIONS:
 
 GENOME_STORE_FILE: 'genome_store.json'
 INDEX_FILE: 'index.json'
+REGION_INFO_FILE: 'region_info_store.json'
 
 DEBUG: True
 
