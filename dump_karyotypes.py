@@ -8,7 +8,7 @@ if __name__ == "__main__":
     config = get_config()
     rest_client = EnsemblREST()
     grch37_rest_client = EnsemblGRCH37REST()
-    with open('region_info_store.json','w') as kf:
+    with open(config['REGION_INFO_FILE'],'w') as kf:
         regions_info = {}
         if os.path.exists(config['GENOME_STORE_FILE']):
             with open(config['GENOME_STORE_FILE'], "r") as genome_store_file:
