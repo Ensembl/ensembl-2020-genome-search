@@ -42,6 +42,9 @@ def create_app():
         from blueprints import region_info
         application.register_blueprint(region_info.region_info_bp, url_prefix='/api/genome/karyotype/')
 
+        from blueprints import region_validate
+        application.register_blueprint(region_validate.region_validate_bp, url_prefix='/api/genome/region')
+
         application.register_blueprint(Blueprint('temp_static_blueprint', __name__, static_folder='static', static_url_path='/static/genome_images'))
 
         # print(application.url_map.iter_rules)

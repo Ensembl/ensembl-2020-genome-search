@@ -15,7 +15,7 @@ if __name__ == "__main__":
                 genome_store_data = json.load(genome_store_file)
                 for gid, genome in genome_store_data.items():
                     print ("Processing Species {} with assembly {} ".format(genome['production_name'], genome['assembly_name']))
-                    species_karyotypes = []
+                    species_karyotypes = {}
                     species_name = genome['production_name']
                     if genome['assembly_name'] in ['GRCh37.p13']:
                         assembly_info = grch37_rest_client.get_assembly_info(species_name)
@@ -29,7 +29,7 @@ if __name__ == "__main__":
                         del region_info['assembly_exception_type']
                         del region_info['assembly_name']
                         region_info['name'] = karyotype
-                        species_karyotypes.append(region_info)
+                        species_karyotypes[region_info['name'].lower()] = region_info
                     regions_info[genome['genome_id']] = species_karyotypes
             json.dump(regions_info,kf)
 
