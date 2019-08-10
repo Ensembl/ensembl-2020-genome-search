@@ -25,12 +25,13 @@ if __name__ == "__main__":
                     for karyotype in karyotypes:
                         region_info = rest_client.get_region_info(species_name,karyotype)
                         region_info['type'] = region_info['coordinate_system']
+                        region_info['name'] = karyotype
                         del region_info['coordinate_system']
                         del region_info['assembly_exception_type']
                         del region_info['assembly_name']
                         if region_info['type'] not in species_karyotypes.keys():
                             species_karyotypes[region_info['type'].lower()] = {}
-                        species_karyotypes[region_info['type'].lower()][region_info['name']] = karyotype
+                        species_karyotypes[region_info['type'].lower()][karyotype.lower()] = region_info
                     regions_info[genome['genome_id']] = species_karyotypes
             json.dump(regions_info,kf)
 
