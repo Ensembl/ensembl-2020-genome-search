@@ -46,11 +46,11 @@ class EnsemblRegionParser:
 				region_tokens_match = self.region_regex.match(self.region_subject)
 				if region_tokens_match:
 					region_match_groups = region_tokens_match.groups()
-					self.region_code = region_match_groups[0]
-					self.region_id = region_match_groups[1].lower()
+					self.region_code = region_match_groups[0].strip().lower()
+					self.region_id = region_match_groups[1].strip().lower()
 					return True
 				else:
-					self.region_id = self.region_subject.lower()
+					self.region_id = self.region_subject.strip().lower()
 					return True
 			else:
 				return False
@@ -68,8 +68,8 @@ class EnsemblRegionParser:
 					# print (location_match_groups)
 					if (len(location_pair_match_groups)) == 2:
 						try:
-							self.start = int(location_pair_match_groups[0])
-							self.end = int(location_pair_match_groups[1])
+							self.start = int(location_pair_match_groups[0].strip())
+							self.end = int(location_pair_match_groups[1].strip())
 							return True
 						except ValueError as ve:
 							return False

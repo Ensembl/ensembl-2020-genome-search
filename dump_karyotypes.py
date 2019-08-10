@@ -28,8 +28,9 @@ if __name__ == "__main__":
                         del region_info['coordinate_system']
                         del region_info['assembly_exception_type']
                         del region_info['assembly_name']
-                        region_info['name'] = karyotype
-                        species_karyotypes[region_info['name'].lower()] = region_info
+                        if region_info['type'] not in species_karyotypes.keys():
+                            species_karyotypes[region_info['type'].lower()] = {}
+                        species_karyotypes[region_info['type'].lower()][region_info['name']] = karyotype
                     regions_info[genome['genome_id']] = species_karyotypes
             json.dump(regions_info,kf)
 
