@@ -3,7 +3,6 @@ from flask import current_app as app
 from flask_restful import Resource, Api, reqparse
 from resources.region.ensembl_region import EnsemblRegion
 from resources.region.ensembl_region_parser import  EnsemblRegionParser
-import ipdb
 
 region_validate_bp = Blueprint('region', __name__)
 api = Api(region_validate_bp)

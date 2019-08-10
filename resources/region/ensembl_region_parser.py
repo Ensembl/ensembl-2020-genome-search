@@ -1,7 +1,6 @@
 from resources.region.region_parser import RegionParser
 import re
 from resources.region.ensembl_region import EnsemblRegion
-import ipdb
 
 class EnsemblRegionParser:
 	def __init__(self, sname=None):
