@@ -20,7 +20,11 @@ class RegionInfo(Resource):
 
         region_info_response = []
         if self.args.genome_id in ris.keys():
-        	region_info_response = app.region_info_store[self.args.genome_id]
+            genome_ri_data = ris[self.args.genome_id]
+            for region_code in genome_ri_data:
+                region_info_response.extend(list(genome_ri_data[region_code].values()))
+        else:
+            abort("Could not find region_info for region_code", 400)
 
         return make_response(jsonify(region_info_response), 200)
 
