@@ -1,1 +1,807 @@
-{"homo_sapiens_GCA_000001405_27": {"chromosome": {"1": {"is_circular": 0, "is_chromosome": 1, "length": 248956422, "type": "chromosome", "name": "1"}, "2": {"is_circular": 0, "is_chromosome": 1, "length": 242193529, "type": "chromosome", "name": "2"}, "3": {"is_circular": 0, "length": 198295559, "is_chromosome": 1, "type": "chromosome", "name": "3"}, "4": {"is_circular": 0, "length": 190214555, "is_chromosome": 1, "type": "chromosome", "name": "4"}, "5": {"length": 181538259, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "5"}, "6": {"is_circular": 0, "length": 170805979, "is_chromosome": 1, "type": "chromosome", "name": "6"}, "7": {"length": 159345973, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "7"}, "8": {"is_circular": 0, "length": 145138636, "is_chromosome": 1, "type": "chromosome", "name": "8"}, "9": {"length": 138394717, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "9"}, "10": {"is_circular": 0, "is_chromosome": 1, "length": 133797422, "type": "chromosome", "name": "10"}, "11": {"is_chromosome": 1, "length": 135086622, "is_circular": 0, "type": "chromosome", "name": "11"}, "12": {"is_chromosome": 1, "length": 133275309, "is_circular": 0, "type": "chromosome", "name": "12"}, "13": {"is_chromosome": 1, "length": 114364328, "is_circular": 0, "type": "chromosome", "name": "13"}, "14": {"length": 107043718, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "14"}, "15": {"length": 101991189, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "15"}, "16": {"is_chromosome": 1, "length": 90338345, "is_circular": 0, "type": "chromosome", "name": "16"}, "17": {"is_circular": 0, "is_chromosome": 1, "length": 83257441, "type": "chromosome", "name": "17"}, "18": {"is_circular": 0, "is_chromosome": 1, "length": 80373285, "type": "chromosome", "name": "18"}, "19": {"is_circular": 0, "length": 58617616, "is_chromosome": 1, "type": "chromosome", "name": "19"}, "20": {"is_circular": 0, "is_chromosome": 1, "length": 64444167, "type": "chromosome", "name": "20"}, "21": {"is_circular": 0, "length": 46709983, "is_chromosome": 1, "type": "chromosome", "name": "21"}, "22": {"length": 50818468, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "22"}, "x": {"is_chromosome": 1, "length": 156040895, "is_circular": 0, "type": "chromosome", "name": "X"}, "y": {"is_circular": 0, "length": 57227415, "is_chromosome": 1, "type": "chromosome", "name": "Y"}, "mt": {"is_chromosome": 1, "length": 16569, "is_circular": 0, "type": "chromosome", "name": "MT"}}}, "triticum_aestivum_GCA_900519105_1": {"chromosome": {"1a": {"length": 594102056, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "1A"}, "1b": {"length": 689851870, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "1B"}, "1d": {"length": 495453186, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "1D"}, "2a": {"is_circular": 0, "length": 780798557, "is_chromosome": 1, "type": "chromosome", "name": "2A"}, "2b": {"length": 801256715, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "2B"}, "2d": {"is_circular": 0, "is_chromosome": 1, "length": 651852609, "type": "chromosome", "name": "2D"}, "3a": {"is_circular": 0, "length": 750843639, "is_chromosome": 1, "type": "chromosome", "name": "3A"}, "3b": {"is_circular": 0, "length": 830829764, "is_chromosome": 1, "type": "chromosome", "name": "3B"}, "3d": {"is_circular": 0, "length": 615552423, "is_chromosome": 1, "type": "chromosome", "name": "3D"}, "4a": {"is_circular": 0, "is_chromosome": 1, "length": 744588157, "type": "chromosome", "name": "4A"}, "4b": {"is_chromosome": 1, "length": 673617499, "is_circular": 0, "type": "chromosome", "name": "4B"}, "4d": {"is_chromosome": 1, "length": 509857067, "is_circular": 0, "type": "chromosome", "name": "4D"}, "5a": {"length": 709773743, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "5A"}, "5b": {"is_circular": 0, "length": 713149757, "is_chromosome": 1, "type": "chromosome", "name": "5B"}, "5d": {"is_circular": 0, "is_chromosome": 1, "length": 566080677, "type": "chromosome", "name": "5D"}, "6a": {"length": 618079260, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "6A"}, "6b": {"is_chromosome": 1, "length": 720988478, "is_circular": 0, "type": "chromosome", "name": "6B"}, "6d": {"length": 473592718, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "6D"}, "7a": {"length": 736706236, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "7A"}, "7b": {"length": 750620385, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "7B"}, "7d": {"is_circular": 0, "is_chromosome": 1, "length": 638686055, "type": "chromosome", "name": "7D"}, "un": {"is_circular": 0, "length": 480980714, "is_chromosome": 1, "type": "chromosome", "name": "Un"}}}, "caenorhabditis_elegans_GCA_000002985_3": {"chromosome": {"i": {"length": 15072434, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "I"}, "ii": {"length": 15279421, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "II"}, "iii": {"is_circular": 0, "is_chromosome": 1, "length": 13783801, "type": "chromosome", "name": "III"}, "iv": {"is_circular": 0, "length": 17493829, "is_chromosome": 1, "type": "chromosome", "name": "IV"}, "v": {"is_circular": 0, "is_chromosome": 1, "length": 20924180, "type": "chromosome", "name": "V"}, "x": {"is_circular": 0, "is_chromosome": 1, "length": 17718942, "type": "chromosome", "name": "X"}, "mtdna": {"is_circular": 0, "length": 13794, "is_chromosome": 1, "type": "chromosome", "name": "MtDNA"}}}, "escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2": {"chromosome": {"chromosome": {"is_chromosome": 1, "length": 4641652, "is_circular": 1, "type": "chromosome", "name": "Chromosome"}}}, "saccharomyces_cerevisiae_GCA_000146045_2": {"chromosome": {"i": {"length": 230218, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "I"}, "ii": {"is_circular": 0, "is_chromosome": 1, "length": 813184, "type": "chromosome", "name": "II"}, "iii": {"length": 316620, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "III"}, "iv": {"is_circular": 0, "is_chromosome": 1, "length": 1531933, "type": "chromosome", "name": "IV"}, "v": {"length": 576874, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "V"}, "vi": {"is_circular": 0, "length": 270161, "is_chromosome": 1, "type": "chromosome", "name": "VI"}, "vii": {"length": 1090940, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "VII"}, "viii": {"is_circular": 0, "length": 562643, "is_chromosome": 1, "type": "chromosome", "name": "VIII"}, "ix": {"length": 439888, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "IX"}, "x": {"is_circular": 0, "length": 745751, "is_chromosome": 1, "type": "chromosome", "name": "X"}, "xi": {"length": 666816, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "XI"}, "xii": {"is_chromosome": 1, "length": 1078177, "is_circular": 0, "type": "chromosome", "name": "XII"}, "xiii": {"is_chromosome": 1, "length": 924431, "is_circular": 0, "type": "chromosome", "name": "XIII"}, "xiv": {"is_circular": 0, "length": 784333, "is_chromosome": 1, "type": "chromosome", "name": "XIV"}, "xv": {"is_chromosome": 1, "length": 1091291, "is_circular": 0, "type": "chromosome", "name": "XV"}, "xvi": {"is_circular": 0, "length": 948066, "is_chromosome": 1, "type": "chromosome", "name": "XVI"}, "mito": {"is_circular": 1, "is_chromosome": 1, "length": 85779, "type": "chromosome", "name": "Mito"}}}, "plasmodium_falciparum_GCA_000002765_2": {"chromosome": {"1": {"is_circular": 0, "is_chromosome": 1, "length": 640851, "type": "chromosome", "name": "1"}, "2": {"is_chromosome": 1, "length": 947102, "is_circular": 0, "type": "chromosome", "name": "2"}, "3": {"length": 1067971, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "3"}, "4": {"is_chromosome": 1, "length": 1200490, "is_circular": 0, "type": "chromosome", "name": "4"}, "5": {"is_circular": 0, "length": 1343557, "is_chromosome": 1, "type": "chromosome", "name": "5"}, "6": {"is_circular": 0, "is_chromosome": 1, "length": 1418242, "type": "chromosome", "name": "6"}, "7": {"is_circular": 0, "length": 1445207, "is_chromosome": 1, "type": "chromosome", "name": "7"}, "8": {"is_circular": 0, "length": 1472805, "is_chromosome": 1, "type": "chromosome", "name": "8"}, "9": {"is_chromosome": 1, "length": 1541735, "is_circular": 0, "type": "chromosome", "name": "9"}, "10": {"is_circular": 0, "length": 1687656, "is_chromosome": 1, "type": "chromosome", "name": "10"}, "11": {"is_circular": 0, "is_chromosome": 1, "length": 2038340, "type": "chromosome", "name": "11"}, "12": {"is_chromosome": 1, "length": 2271494, "is_circular": 0, "type": "chromosome", "name": "12"}, "13": {"length": 2925236, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "13"}, "14": {"is_circular": 0, "is_chromosome": 1, "length": 3291936, "type": "chromosome", "name": "14"}}}, "homo_sapiens_GCA_000001405_14": {"chromosome": {"1": {"is_circular": 0, "is_chromosome": 1, "length": 248956422, "type": "chromosome", "name": "1"}, "2": {"length": 242193529, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "2"}, "3": {"is_circular": 0, "length": 198295559, "is_chromosome": 1, "type": "chromosome", "name": "3"}, "4": {"length": 190214555, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "4"}, "5": {"is_circular": 0, "length": 181538259, "is_chromosome": 1, "type": "chromosome", "name": "5"}, "6": {"length": 170805979, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "6"}, "7": {"length": 159345973, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "7"}, "8": {"is_circular": 0, "length": 145138636, "is_chromosome": 1, "type": "chromosome", "name": "8"}, "9": {"length": 138394717, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "9"}, "10": {"length": 133797422, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "10"}, "11": {"is_circular": 0, "length": 135086622, "is_chromosome": 1, "type": "chromosome", "name": "11"}, "12": {"is_circular": 0, "length": 133275309, "is_chromosome": 1, "type": "chromosome", "name": "12"}, "13": {"is_chromosome": 1, "length": 114364328, "is_circular": 0, "type": "chromosome", "name": "13"}, "14": {"length": 107043718, "is_chromosome": 1, "is_circular": 0, "type": "chromosome", "name": "14"}, "15": {"is_chromosome": 1, "length": 101991189, "is_circular": 0, "type": "chromosome", "name": "15"}, "16": {"is_circular": 0, "is_chromosome": 1, "length": 90338345, "type": "chromosome", "name": "16"}, "17": {"is_chromosome": 1, "length": 83257441, "is_circular": 0, "type": "chromosome", "name": "17"}, "18": {"is_circular": 0, "length": 80373285, "is_chromosome": 1, "type": "chromosome", "name": "18"}, "19": {"is_chromosome": 1, "length": 58617616, "is_circular": 0, "type": "chromosome", "name": "19"}, "20": {"is_circular": 0, "is_chromosome": 1, "length": 64444167, "type": "chromosome", "name": "20"}, "21": {"is_chromosome": 1, "length": 46709983, "is_circular": 0, "type": "chromosome", "name": "21"}, "22": {"is_chromosome": 1, "length": 50818468, "is_circular": 0, "type": "chromosome", "name": "22"}, "x": {"is_circular": 0, "is_chromosome": 1, "length": 156040895, "type": "chromosome", "name": "X"}, "y": {"is_chromosome": 1, "length": 57227415, "is_circular": 0, "type": "chromosome", "name": "Y"}, "mt": {"is_circular": 0, "length": 16569, "is_chromosome": 1, "type": "chromosome", "name": "MT"}}}}
+{
+    "caenorhabditis_elegans_GCA_000002985_3": {
+        "chromosome": {
+            "i": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 15072434,
+                "name": "I",
+                "type": "chromosome"
+            },
+            "ii": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 15279421,
+                "name": "II",
+                "type": "chromosome"
+            },
+            "iii": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 13783801,
+                "name": "III",
+                "type": "chromosome"
+            },
+            "iv": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 17493829,
+                "name": "IV",
+                "type": "chromosome"
+            },
+            "mtdna": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 13794,
+                "name": "MtDNA",
+                "type": "chromosome"
+            },
+            "v": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 20924180,
+                "name": "V",
+                "type": "chromosome"
+            },
+            "x": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 17718942,
+                "name": "X",
+                "type": "chromosome"
+            }
+        }
+    },
+    "escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2": {
+        "chromosome": {
+            "chromosome": {
+                "is_chromosome": true,
+                "is_circular": true,
+                "length": 4641652,
+                "name": "Chromosome",
+                "type": "chromosome"
+            }
+        }
+    },
+    "homo_sapiens_GCA_000001405_14": {
+        "chromosome": {
+            "1": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 248956422,
+                "name": "1",
+                "type": "chromosome"
+            },
+            "10": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 133797422,
+                "name": "10",
+                "type": "chromosome"
+            },
+            "11": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 135086622,
+                "name": "11",
+                "type": "chromosome"
+            },
+            "12": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 133275309,
+                "name": "12",
+                "type": "chromosome"
+            },
+            "13": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 114364328,
+                "name": "13",
+                "type": "chromosome"
+            },
+            "14": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 107043718,
+                "name": "14",
+                "type": "chromosome"
+            },
+            "15": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 101991189,
+                "name": "15",
+                "type": "chromosome"
+            },
+            "16": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 90338345,
+                "name": "16",
+                "type": "chromosome"
+            },
+            "17": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 83257441,
+                "name": "17",
+                "type": "chromosome"
+            },
+            "18": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 80373285,
+                "name": "18",
+                "type": "chromosome"
+            },
+            "19": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 58617616,
+                "name": "19",
+                "type": "chromosome"
+            },
+            "2": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 242193529,
+                "name": "2",
+                "type": "chromosome"
+            },
+            "20": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 64444167,
+                "name": "20",
+                "type": "chromosome"
+            },
+            "21": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 46709983,
+                "name": "21",
+                "type": "chromosome"
+            },
+            "22": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 50818468,
+                "name": "22",
+                "type": "chromosome"
+            },
+            "3": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 198295559,
+                "name": "3",
+                "type": "chromosome"
+            },
+            "4": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 190214555,
+                "name": "4",
+                "type": "chromosome"
+            },
+            "5": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 181538259,
+                "name": "5",
+                "type": "chromosome"
+            },
+            "6": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 170805979,
+                "name": "6",
+                "type": "chromosome"
+            },
+            "7": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 159345973,
+                "name": "7",
+                "type": "chromosome"
+            },
+            "8": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 145138636,
+                "name": "8",
+                "type": "chromosome"
+            },
+            "9": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 138394717,
+                "name": "9",
+                "type": "chromosome"
+            },
+            "mt": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 16569,
+                "name": "MT",
+                "type": "chromosome"
+            },
+            "x": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 156040895,
+                "name": "X",
+                "type": "chromosome"
+            },
+            "y": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 57227415,
+                "name": "Y",
+                "type": "chromosome"
+            }
+        }
+    },
+    "homo_sapiens_GCA_000001405_27": {
+        "chromosome": {
+            "1": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 248956422,
+                "name": "1",
+                "type": "chromosome"
+            },
+            "10": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 133797422,
+                "name": "10",
+                "type": "chromosome"
+            },
+            "11": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 135086622,
+                "name": "11",
+                "type": "chromosome"
+            },
+            "12": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 133275309,
+                "name": "12",
+                "type": "chromosome"
+            },
+            "13": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 114364328,
+                "name": "13",
+                "type": "chromosome"
+            },
+            "14": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 107043718,
+                "name": "14",
+                "type": "chromosome"
+            },
+            "15": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 101991189,
+                "name": "15",
+                "type": "chromosome"
+            },
+            "16": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 90338345,
+                "name": "16",
+                "type": "chromosome"
+            },
+            "17": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 83257441,
+                "name": "17",
+                "type": "chromosome"
+            },
+            "18": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 80373285,
+                "name": "18",
+                "type": "chromosome"
+            },
+            "19": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 58617616,
+                "name": "19",
+                "type": "chromosome"
+            },
+            "2": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 242193529,
+                "name": "2",
+                "type": "chromosome"
+            },
+            "20": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 64444167,
+                "name": "20",
+                "type": "chromosome"
+            },
+            "21": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 46709983,
+                "name": "21",
+                "type": "chromosome"
+            },
+            "22": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 50818468,
+                "name": "22",
+                "type": "chromosome"
+            },
+            "3": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 198295559,
+                "name": "3",
+                "type": "chromosome"
+            },
+            "4": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 190214555,
+                "name": "4",
+                "type": "chromosome"
+            },
+            "5": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 181538259,
+                "name": "5",
+                "type": "chromosome"
+            },
+            "6": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 170805979,
+                "name": "6",
+                "type": "chromosome"
+            },
+            "7": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 159345973,
+                "name": "7",
+                "type": "chromosome"
+            },
+            "8": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 145138636,
+                "name": "8",
+                "type": "chromosome"
+            },
+            "9": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 138394717,
+                "name": "9",
+                "type": "chromosome"
+            },
+            "mt": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 16569,
+                "name": "MT",
+                "type": "chromosome"
+            },
+            "x": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 156040895,
+                "name": "X",
+                "type": "chromosome"
+            },
+            "y": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 57227415,
+                "name": "Y",
+                "type": "chromosome"
+            }
+        }
+    },
+    "plasmodium_falciparum_GCA_000002765_2": {
+        "chromosome": {
+            "1": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 640851,
+                "name": "1",
+                "type": "chromosome"
+            },
+            "10": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 1687656,
+                "name": "10",
+                "type": "chromosome"
+            },
+            "11": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 2038340,
+                "name": "11",
+                "type": "chromosome"
+            },
+            "12": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 2271494,
+                "name": "12",
+                "type": "chromosome"
+            },
+            "13": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 2925236,
+                "name": "13",
+                "type": "chromosome"
+            },
+            "14": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 3291936,
+                "name": "14",
+                "type": "chromosome"
+            },
+            "2": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 947102,
+                "name": "2",
+                "type": "chromosome"
+            },
+            "3": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 1067971,
+                "name": "3",
+                "type": "chromosome"
+            },
+            "4": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 1200490,
+                "name": "4",
+                "type": "chromosome"
+            },
+            "5": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 1343557,
+                "name": "5",
+                "type": "chromosome"
+            },
+            "6": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 1418242,
+                "name": "6",
+                "type": "chromosome"
+            },
+            "7": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 1445207,
+                "name": "7",
+                "type": "chromosome"
+            },
+            "8": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 1472805,
+                "name": "8",
+                "type": "chromosome"
+            },
+            "9": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 1541735,
+                "name": "9",
+                "type": "chromosome"
+            }
+        }
+    },
+    "saccharomyces_cerevisiae_GCA_000146045_2": {
+        "chromosome": {
+            "i": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 230218,
+                "name": "I",
+                "type": "chromosome"
+            },
+            "ii": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 813184,
+                "name": "II",
+                "type": "chromosome"
+            },
+            "iii": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 316620,
+                "name": "III",
+                "type": "chromosome"
+            },
+            "iv": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 1531933,
+                "name": "IV",
+                "type": "chromosome"
+            },
+            "ix": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 439888,
+                "name": "IX",
+                "type": "chromosome"
+            },
+            "mito": {
+                "is_chromosome": true,
+                "is_circular": true,
+                "length": 85779,
+                "name": "Mito",
+                "type": "chromosome"
+            },
+            "v": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 576874,
+                "name": "V",
+                "type": "chromosome"
+            },
+            "vi": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 270161,
+                "name": "VI",
+                "type": "chromosome"
+            },
+            "vii": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 1090940,
+                "name": "VII",
+                "type": "chromosome"
+            },
+            "viii": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 562643,
+                "name": "VIII",
+                "type": "chromosome"
+            },
+            "x": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 745751,
+                "name": "X",
+                "type": "chromosome"
+            },
+            "xi": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 666816,
+                "name": "XI",
+                "type": "chromosome"
+            },
+            "xii": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 1078177,
+                "name": "XII",
+                "type": "chromosome"
+            },
+            "xiii": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 924431,
+                "name": "XIII",
+                "type": "chromosome"
+            },
+            "xiv": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 784333,
+                "name": "XIV",
+                "type": "chromosome"
+            },
+            "xv": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 1091291,
+                "name": "XV",
+                "type": "chromosome"
+            },
+            "xvi": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 948066,
+                "name": "XVI",
+                "type": "chromosome"
+            }
+        }
+    },
+    "triticum_aestivum_GCA_900519105_1": {
+        "chromosome": {
+            "1a": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 594102056,
+                "name": "1A",
+                "type": "chromosome"
+            },
+            "1b": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 689851870,
+                "name": "1B",
+                "type": "chromosome"
+            },
+            "1d": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 495453186,
+                "name": "1D",
+                "type": "chromosome"
+            },
+            "2a": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 780798557,
+                "name": "2A",
+                "type": "chromosome"
+            },
+            "2b": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 801256715,
+                "name": "2B",
+                "type": "chromosome"
+            },
+            "2d": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 651852609,
+                "name": "2D",
+                "type": "chromosome"
+            },
+            "3a": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 750843639,
+                "name": "3A",
+                "type": "chromosome"
+            },
+            "3b": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 830829764,
+                "name": "3B",
+                "type": "chromosome"
+            },
+            "3d": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 615552423,
+                "name": "3D",
+                "type": "chromosome"
+            },
+            "4a": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 744588157,
+                "name": "4A",
+                "type": "chromosome"
+            },
+            "4b": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 673617499,
+                "name": "4B",
+                "type": "chromosome"
+            },
+            "4d": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 509857067,
+                "name": "4D",
+                "type": "chromosome"
+            },
+            "5a": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 709773743,
+                "name": "5A",
+                "type": "chromosome"
+            },
+            "5b": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 713149757,
+                "name": "5B",
+                "type": "chromosome"
+            },
+            "5d": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 566080677,
+                "name": "5D",
+                "type": "chromosome"
+            },
+            "6a": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 618079260,
+                "name": "6A",
+                "type": "chromosome"
+            },
+            "6b": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 720988478,
+                "name": "6B",
+                "type": "chromosome"
+            },
+            "6d": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 473592718,
+                "name": "6D",
+                "type": "chromosome"
+            },
+            "7a": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 736706236,
+                "name": "7A",
+                "type": "chromosome"
+            },
+            "7b": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 750620385,
+                "name": "7B",
+                "type": "chromosome"
+            },
+            "7d": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 638686055,
+                "name": "7D",
+                "type": "chromosome"
+            },
+            "un": {
+                "is_chromosome": true,
+                "is_circular": false,
+                "length": 480980714,
+                "name": "Un",
+                "type": "chromosome"
+            }
+        }
+    }
+}
