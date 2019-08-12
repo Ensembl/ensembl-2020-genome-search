@@ -14,7 +14,7 @@ class RegionInfo(Resource):
         genome_key = app.genome_store.check_if_genome_exists('genome_id', self.args.genome_id)
 
         if genome_key is None:
-            return abort(400, {'error': 'Invalid Genome ID'})
+            return abort(400, {'genome_id': 'Invalid Genome ID {}'.format(self.args.genome_id)})
 
         ris = app.region_info_store
 
