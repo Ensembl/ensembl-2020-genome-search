@@ -5,19 +5,19 @@ track_categories:
          - additional_info: 'Forward strand'
            color: 'DARK_GREY'
            label: 'Protein coding genes'
-           track_id: 'gene-pc-fwd'
+           track_id: 'track:gene-pc-fwd'
          - additional_info: 'Forward strand'
            color: 'GREY'
            label: 'Other genes'
-           track_id: 'gene-other-fwd'
+           track_id: 'track:gene-other-fwd'
          - additional_info: 'Reverse strand'
            color: 'DARK_GREY'
            label: 'Protein coding genes'
-           track_id: 'gene-pc-rev'
+           track_id: 'track:gene-pc-rev'
          - additional_info: 'Reverse strand'
            color: 'GREY'
            label: 'Other genes'
-           track_id: 'gene-other-rev'
+           track_id: 'track:gene-other-rev'
        types:
          - 'Genomic'
 
@@ -25,9 +25,9 @@ track_categories:
        track_category_id: 'assembly'
        track_list:
           - label: 'Contigs'
-            track_id: 'contig'
+            track_id: 'track:contig'
           - label: '%GC'
-            track_id: 'gc'
+            track_id: 'track:gc'
        types:
          - 'Genomic'
 
@@ -41,7 +41,7 @@ track_categories:
        track_category_id: 'short-variants'
        track_list:
         - label: '1000 Genomes all SNPs & indels'
-          track_id: 'variant'
+          track_id: 'track:variant'
        types:
          - 'Variation'
 
