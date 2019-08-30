@@ -156,7 +156,7 @@ class ObjectTrack(Resource):
             additional_info=full_data.get('bio_type'),
             label=full_data.get('label'),
             ensembl_object_id=self.args.object_id,
-            track_id='gene-feat',
+            track_id='track:gene-feat',
             description=full_data.get('description')
         )
 
@@ -169,7 +169,7 @@ class ObjectTrack(Resource):
                         label=child_object_id,
                         ensembl_object_id='{}:{}:{}'.format(genome_id, child_object_type, child_object_id),
                         support_level=child_object.get('support_level'),
-                        track_id=child_object.get('track_id'),
+                        track_id='track:{}'.format(child_object.get('track_id')),
                         description=child_object.get('description')
                     )
                 )
