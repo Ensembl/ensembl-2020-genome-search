@@ -26,6 +26,8 @@ if __name__ == "__main__":
                         region_info = rest_client.get_region_info(species_name,karyotype)
                         region_info['type'] = region_info['coordinate_system']
                         region_info['name'] = karyotype
+                        region_info['is_chromosome'] = True if region_info['is_chromosome'] else False
+                        region_info['is_circular'] = True if region_info['is_circular'] else False
                         del region_info['coordinate_system']
                         del region_info['assembly_exception_type']
                         del region_info['assembly_name']
