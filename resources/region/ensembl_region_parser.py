@@ -1,10 +1,10 @@
 from resources.region.region_parser import RegionParser
-import re
 from resources.region.ensembl_region import EnsemblRegion
+import re
 
 class EnsemblRegionParser:
-	def __init__(self, sname=None):
-		RegionParser.__init__(self, sname, rcode=None, rid=None)
+	def __init__(self):
+		RegionParser.__init__(self, rcode=None, rname=None)
 		self.subject_regex = re.compile(r'(.*):(.*)')
 		self.region_regex = re.compile(r'(.*)\s+(.*)')
 		self.location_regex = re.compile(r'(\d+)')
@@ -35,9 +35,9 @@ class EnsemblRegionParser:
 
 		return False
 
-	def parse_region(self):
+	def parse_region_name(self):
 		"""
-		Purpose: Given region_subject it Sets region_code, region_id
+		Purpose: Given region_subject it Sets region_code, region_name
 		Returns : True/False 
 
 		"""
@@ -47,10 +47,10 @@ class EnsemblRegionParser:
 				if region_tokens_match:
 					region_match_groups = region_tokens_match.groups()
 					self.region_code = region_match_groups[0].strip().lower()
-					self.region_id = region_match_groups[1].strip().lower()
+					self.region_name = region_match_groups[1].strip().lower()
 					return True
 				else:
-					self.region_id = self.region_subject.strip().lower()
+					self.region_name = self.region_subject.strip().lower()
 					return True
 			else:
 				return False
