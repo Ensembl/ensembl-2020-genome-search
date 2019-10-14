@@ -66,7 +66,7 @@ class RegionValidate(Resource):
     def _parse_region(self, iregion):
         erp = EnsemblRegionParser()
         #ro = EnsemblRegion()
-        if erp.parse_subject(iregion): 
+        if erp.parse_subject(iregion):
             pr_valid = erp.parse_region_name()
             pl_valid = erp.parse_location()
             if pr_valid and pl_valid:
@@ -106,7 +106,7 @@ class RegionValidate(Resource):
                 self.vro.is_region_start_valid = True
                 return True
         else:
-            if self.vro.start > region['length']:
+            if self.vro.start >= region['length']:
                 self.vro.start_error_message = "Start should be between {} and {}".format(1,region['length'])
                 return False
             elif self.vro.start < 1:
@@ -183,6 +183,11 @@ class RegionValidate(Resource):
                             self.vro.is_region_start_valid = self._validate_start(region)
                             self.vro.is_region_end_valid = self._validate_end(region)
                             self.vro.is_region_valid = self._validate_location(region)
+                        else:
+                            self.vro.is_region_code_valid = False
+                            self.vro.is_region_name_valid = False
+                    if not self.vro.is_region_name_valid:
+                        self.vro.region_error_message = "Could not find region {}".format(self.vro.region_name)
 
             else:
                 print ("Cound not get region information")
