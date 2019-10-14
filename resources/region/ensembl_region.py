@@ -26,10 +26,10 @@ class EnsemblRegion:
 		self.region_id  = None
 		
 	def set_is_all_valid(self):
-		self.is_all_valid = self.is_region_code_valid and self.is_region_name_valid and self.is_region_start_valid and self.is_region_end_valid
+		self.is_all_valid = self.is_region_valid and self.is_region_code_valid and self.is_region_name_valid and self.is_region_start_valid and self.is_region_end_valid
 
 	def set_is_partial_valid(self):
-		self.is_partial_valid = self.is_region_code_valid or self.is_region_name_valid or self.is_region_start_valid or self.is_region_end_valid
+		self.is_partial_valid = self.is_region_valid or self.is_region_code_valid or self.is_region_name_valid or self.is_region_start_valid or self.is_region_end_valid
 
 	def get_genome_id_response(self):
 		return dict(value=self.genome_id, \
@@ -60,7 +60,7 @@ class EnsemblRegion:
 
 	def generate_region_id(self):
 		# homo_sapiens_GCA_000001405_14:region:17:64155265-64255266
-		# genome_id:region:region_name:start-end
+		# <genome_id>:region:<region_name<:<start>-<end>
 		self.region_id = "{}:{}:{}:{}-{}".format(self.genome_id, "region", self.region_name,self.start,self.end)
 		return self.region_id
 		
