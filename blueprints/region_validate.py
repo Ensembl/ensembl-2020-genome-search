@@ -146,6 +146,7 @@ class RegionValidate(Resource):
                 return True
             else:                
                 if self.vro.start > self.vro.end:
+                    self.vro.is_region_start_valid = False
                     self.vro.start_error_message = "Start can not be greater than end".format(self.vro.start, self.vro.end)
                     return False
                 else:
@@ -185,6 +186,7 @@ class RegionValidate(Resource):
                             self.vro.is_region_start_valid = self._validate_start(region)
                             self.vro.is_region_end_valid = self._validate_end(region)
                             self.vro.is_valid = self._validate_location(region)
+                            break
                         else:
                             self.vro.is_region_code_valid = False
                             self.vro.is_region_name_valid = False
