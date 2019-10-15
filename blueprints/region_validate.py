@@ -165,10 +165,11 @@ class RegionValidate(Resource):
                         if self.vro.region_name:
                             if self.vro.region_name in species_regions.keys():
                                 self.vro.is_region_name_valid = True
+                                self.vro.is_region_valid = True
                                 region = species_regions[self.vro.region_name]
                                 self.vro.is_region_start_valid = self._validate_start(region)
                                 self.vro.is_region_end_valid = self._validate_end(region)
-                                self.vro.is_region_valid = self._validate_location(region)
+                                self.vro.is_valid = self._validate_location(region)
                         else:
                             self.vro.region_error_message = "Region name is needed"
                     
@@ -179,10 +180,11 @@ class RegionValidate(Resource):
                             region = species_regions[self.vro.region_name]
                             self.vro.is_region_code_valid = True
                             self.vro.is_region_name_valid = True
+                            self.vro.is_region_valid = True
                             self.vro.region_code = region['type']
                             self.vro.is_region_start_valid = self._validate_start(region)
                             self.vro.is_region_end_valid = self._validate_end(region)
-                            self.vro.is_region_valid = self._validate_location(region)
+                            self.vro.is_valid = self._validate_location(region)
                         else:
                             self.vro.is_region_code_valid = False
                             self.vro.is_region_name_valid = False
