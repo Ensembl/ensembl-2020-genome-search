@@ -7,9 +7,7 @@ class EnsemblRegionParser:
 		RegionParser.__init__(self, rcode=None, rname=None)
 		self.subject_regex = re.compile(r'(.*):(.*)')
 		self.region_regex = re.compile(r'(.*)\s+(.*)')
-		self.location_regex = re.compile(r'(\d+)')
-		self.location_pair_regex = re.compile(r'(\d+)-(\d+)')
-
+		self.location_pair_regex = re.compile(r'(.*)-(.*)')
 
 
 	def parse_subject(self, istring):
@@ -65,11 +63,10 @@ class EnsemblRegionParser:
 				location_pair_match = self.location_pair_regex.match(self.location_subject)
 				if location_pair_match:
 					location_pair_match_groups = location_pair_match.groups()
-					# print (location_match_groups)
 					if (len(location_pair_match_groups)) == 2:
 						try:
-							self.start = int(location_pair_match_groups[0].strip())
-							self.end = int(location_pair_match_groups[1].strip())
+							self.start = location_pair_match_groups[0].strip()
+							self.end = location_pair_match_groups[1].strip()
 							return True
 						except ValueError as ve:
 							return False

@@ -94,50 +94,67 @@ class RegionValidate(Resource):
                 self.vro.is_parseable = False
              
     def _validate_start(self,region):
-        if region['is_circular']:
-            # For cicular regions check if start is out of bound
-            if self.vro.start > region['length']:
-                self.vro.start_error_message = "Start should be between {} and {}".format(1,region['length'])
-                return False
-            elif self.vro.start < 1:
-                self.vro.start_error_message = "Start should be between {} and {}".format(1,region['length'])
-                return False
+        try:
+            self.vro.start = int(self.vro.start)
+            if region['is_circular']:
+                # For cicular regions check if start is out of bound
+                if self.vro.start > region['length']:
+                    self.vro.start_error_message = "Start should be between {} and {}".format(1,region['length'])
+                    return False
+                elif self.vro.start < 1:
+                    self.vro.start_error_message = "Start should be between {} and {}".format(1,region['length'])
+                    return False
+                else:
+                    self.vro.is_region_start_valid = True
+                    return True
             else:
-                self.vro.is_region_start_valid = True
-                return True
-        else:
-            if self.vro.start >= region['length']:
-                self.vro.start_error_message = "Start should be between {} and {}".format(1,region['length'])
-                return False
-            elif self.vro.start < 1:
-                self.vro.start_error_message = "Start should be between {} and {}".format(1,region['length'])
-                return False             
-            else:
-                self.vro.is_region_start_valid = True
-                return True
-        
+                if self.vro.start >= region['length']:
+                    self.vro.start_error_message = "Start should be between {} and {}".format(1,region['length'])
+                    return False
+                elif self.vro.start < 1:
+                    self.vro.start_error_message = "Start should be between {} and {}".format(1,region['length'])
+                    return False
+                else:
+                    self.vro.is_region_start_valid = True
+                    return True
+        except ValueError as ve:
+            self.vro.start_error_message = "Start should be number"
+            return False
+        except Exception as ex:
+            self.vro.start_error_message = "Unknown Error"
+            return False
+
     def _validate_end(self,region):
-        # For cicular regions check if end is out of bound
-        if region['is_circular']:
-            if self.vro.end > region['length']:
-                self.vro.end_error_message = "End should be between {} and {}".format(1,region['length'])
-                return False
-            elif self.vro.end < 1:
-                self.vro.end_error_message = "End should be between {} and {}".format(1,region['length'])
-                return False
+        try:
+            self.vro.end = int(self.vro.end)
+            if region['is_circular']:
+                # For cicular regions check if end is out of bound
+                if self.vro.end > region['length']:
+                    self.vro.end_error_message = "End should be between {} and {}".format(1,region['length'])
+                    return False
+                elif self.vro.end < 1:
+                    self.vro.end_error_message = "End should be between {} and {}".format(1,region['length'])
+                    return False
+                else:
+                    self.vro.is_region_end_valid = True
+                    return True
             else:
-                self.vro.is_region_end_valid = True
-                return True
-        else:
-            if self.vro.end > region['length']:
-                self.vro.end_error_message = "End should be between {} and {}".format(1,region['length'])
-                return False
-            elif self.vro.end < 1:
-                self.vro.end_error_message = "End should be between {} and {}".format(1,region['length'])
-                return False
-            else:
-                self.vro.is_region_end_valid = True
-                return True
+                if self.vro.end > region['length']:
+                    self.vro.end_error_message = "End should be between {} and {}".format(1,region['length'])
+                    return False
+                elif self.vro.end < 1:
+                    self.vro.end_error_message = "End should be between {} and {}".format(1,region['length'])
+                    return False
+                else:
+                    self.vro.is_region_end_valid = True
+                    return True
+        except ValueError as ve:
+            self.vro.end_error_message = "End should be number"
+            return False
+        except Exception as ex:
+            self.vro.end_error_message = "Unknown Error"
+            return False
+
 
     def _validate_location(self, region):
         # Check if start is less than end
