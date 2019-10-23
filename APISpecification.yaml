@@ -1,0 +1,307 @@
+swagger: "2.0"
+info:
+  description: "Backed API for 2020.ensembl.org"
+  version: "1.0.0"
+  title: "Ensembl - 2020"
+  contact:
+    email: "kamal@ebi.ac.uk"
+host: "2020.ensembl.org"
+basePath: "/v1"
+tags:
+- name: "api"
+  description: "Genome searcch"
+schemes:
+- "https"
+- "http"
+paths:
+  /api/genome/info:
+    get:
+      tags:
+      - api
+      summary: "Returns information about particular genome"
+      description: "Returns a single genome"
+      #operationId: "getGenomeById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "genome_id"
+          in: "query"
+          description: "ID of genome to return"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Genome"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Genome not found"
+      security:
+        - api_key: []
+  /api/popular_genomes/:
+    get:
+      tags:
+      - api
+      summary: "Get popular genomes"
+      description: ""
+      #operationId: "getGenomeById"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Genome"
+        400:
+          description: "Invalid genome_id"
+        404:
+          description: "Genome not found"
+      security:
+      - api_key: []
+  /api/alternative_assemblies/:
+    get:
+      tags:
+      - api
+      summary: "Get alternative assemblies"
+      description: ""
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Assembly"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Alternate assemblies not found"
+      security:
+      - api_key: []
+  /api/genome_search/:
+    get:
+      tags:
+      - api
+      summary: "search for genomes with their common name/scientific name/assembly name"
+      description: "Returns a list of matched genomes"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "query"
+          in: "query"
+          description: "String to be matched"
+          required: true
+          type: "string"
+        - name: "division"
+          in: "query"
+          description: "Restrict match to particular division"
+          type: "array"
+          items:
+            type: "string"
+            enum:
+            - "EnsemblMetazoa"
+            - "EnsemblBacteria"
+            - "EnsemblPlants"
+            - "EnsemblFungi"
+            - "EnsemblProtists"
+            - "EnsemblVertebrates"
+        - name: "limit"
+          in: "query"
+          description: "Limit the number of search hits"
+          type: "integer"
+          format: "int32"
+        - name: "exclude"
+          in: "query"
+          description: "Exclude a genome(Identified by genome_id) from the search hits"
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Genome"
+        400:
+          description: ""
+        404:
+          description: "Genome not found"
+      security:
+        - api_key: []
+  /api/genome/track_categories/:
+    get:
+      tags:
+      - api
+      summary: "Returns information about particular genome"
+      description: "Returns a single genome"
+      #operationId: "getGenomeById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "genome_id"
+          in: "query"
+          description: "ID of genome to return"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/TrackCategory"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+      security:
+        - api_key: []
+  /api/ensembl_object/:
+    get:
+      tags:
+      - api
+      summary: "Returns information about particular genome"
+      description: "Returns a single genome"
+      #operationId: "getGenomeById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "genome_id"
+          in: "query"
+          description: "ID of genome to return"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Genome"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+      security:
+        - api_key: []
+  /api/ensembl_object/track_list/:
+    get:
+      tags:
+      - api
+      summary: "Returns information about particular genome"
+      description: "Returns a single genome"
+      #operationId: "getGenomeById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "genome_id"
+          in: "query"
+          description: "ID of genome to return"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Genome"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+      security:
+        - api_key: []
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Genome:
+    type: "object"
+    properties:
+      assembly_name:
+        type: "string"
+        example: "GRCh38.p12"
+      common_name:
+        type: "string"
+        example: "Human"
+      genome_id:
+        type: "string"
+        example: "homo_sapiens_GCA_000001405_27"
+      image:
+        type: "string"
+        example: "http://2020.ensembl.org/static/genome_images/homo_sapiens_GCA_000001405_27.svg"
+      is_available:
+        type: "boolean"
+        example: True
+      popular_order:
+        type: "integer"
+        format: "int32"
+        example: 0
+      reference_genome_id:
+        type: "string"
+        example: "null"
+      scientific_name:
+        type: "string"
+        example: "Homo sapiens"
+      division_ids:
+        type: "array"
+        items:
+          $ref: "#/definitions/Division/properties/division_name"
+  Division:
+    type: "object"
+    properties:
+      division_name:
+        type: "string"
+        example: "EnsemblVertebrates"
+  Assembly:
+    type: "object"
+    properties:
+      assembly_name:
+        type: "string"
+        example: "GRCh37.p13"
+      genome_id:
+        type: "string"
+        example: "homo_sapiens_GCA_000001405_14"
+  TrackCategory:
+    type: "object"
+    properties:
+      track_category_id: 
+        type: "string" 
+        example: "genes-transcripts"
+      label:
+        type: "string"
+        example: "Genes & transcripts"
+      track_list:
+        type: "array"
+        items:
+          $ref: "#/definitions/Track"
+      types:
+        type: "array"
+        items:
+          type: "string"
+
+  Track:
+    type: "object"
+    properties:
+      track_id:
+        type: "string"
+        example: "track:gene-pc-fwd"
+      label:
+        type: "string"
+        example: "Protein coding genes"
+      color:
+        type: "string"
+        example: "GREY"
+      additional_info:
+        type: "string"
+        example: "Forward strand"
