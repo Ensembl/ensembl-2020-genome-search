@@ -54,12 +54,16 @@ class GenomeTracks(Resource):
 
         if genome_key is None:
             return abort(400, {'error': 'Invalid Genome ID'})
-
+        genome_id = self.args.genome_id
+        track_cat_response_data = {}
+        track_cat_response_data['track_categories'] = []
         with open('configs/flask_endpoints_tmp_configs/track_categories.yaml') as f:
             data = yaml.load(f)
-            return make_response(jsonify(data), 200)
+            track_cats = data['genome_track_categories']
+            if genome_id in track_cats.keys():
+                track_cat_response_data['track_categories'] = track_cats[genome_id]
 
-        return make_response(jsonify(popular_genomes_response), 200)
+        return make_response(jsonify(track_cat_response_data), 200)
 
 
 
