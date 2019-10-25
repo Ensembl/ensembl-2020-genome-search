@@ -338,14 +338,14 @@ components:
           type: string
           example: Forward strand
   securitySchemes:
-    petstore_auth:
+    genome_search_auth:
       type: oauth2
       flows:
         implicit:
-          authorizationUrl: http://petstore.swagger.io/oauth/dialog
+          authorizationUrl: http://2020.ensembl.org/oauth/dialog
           scopes:
-            write:pets: modify pets in your account
-            read:pets: read your pets
+            write:pets: modify genome in your account
+            read:pets: read your genome
     api_key:
       type: apiKey
       name: api_key
