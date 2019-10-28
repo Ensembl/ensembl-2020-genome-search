@@ -6,13 +6,13 @@ info:
     email: kamal@ebi.ac.uk
   version: 0.0.1
 servers:
-- url: https://2020.ensembl.org/v1
-- url: http://2020.ensembl.org/v1
+- url: https://2020.ensembl.org
+- url: http://2020.ensembl.org
 tags:
 - name: api
   description: Genome searcch
 paths:
-  /api/genome/info:
+  /api/genome/info/:
     get:
       tags:
       - api
@@ -51,9 +51,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Genome'
+                type: object
+                properties:
+                  popular_species:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Genome'
         400:
           description: Invalid genome_id
           content: {}
@@ -73,9 +76,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Assembly'
+                type: object
+                properties:
+                  alternate_assemblies:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Assembly'
         400:
           description: Invalid ID supplied
           content: {}
@@ -84,6 +90,39 @@ paths:
           content: {}
       security:
       - api_key: []
+  /api/genome/track_categories/:
+    get:
+      tags:
+      - api
+      summary: Returns track ctegories for given genome_id
+      description: Returns track categories for given genome
+      parameters:
+      - name: genome_id
+        in: query
+        description: genome_id for which track categories are requested
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  track_categories:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TrackCategory'
+        400:
+          description: Invalid genome ID
+          content: {}
+        404:
+          description: Genome ID not found
+          content: {}
+      security:
+      - api_key: []  
   /api/genome_search/:
     get:
       tags:
@@ -142,37 +181,7 @@ paths:
           content: {}
       security:
       - api_key: []
-  /api/genome/track_categories/:
-    get:
-      tags:
-      - api
-      summary: Returns track ctegories for given genome_id
-      description: Returns track categories for given genome
-      parameters:
-      - name: genome_id
-        in: query
-        description: genome_id for which track categories are requested
-        required: true
-        schema:
-          type: string
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TrackCategory'
-        400:
-          description: Invalid genome ID
-          content: {}
-        404:
-          description: Genome ID not found
-          content: {}
-      security:
-      - api_key: []
-  /api/ensembl_object/:
+  /api/object/:
     get:
       tags:
       - api
@@ -194,11 +203,11 @@ paths:
           description: Invalid ID supplied
           content: {}
         404:
-          description: Pet not found
+          description: Genome ID not found
           content: {}
       security:
       - api_key: []
-  /api/ensembl_object/track_list/:
+  /api/object/track_list/:
     get:
       tags:
       - api
@@ -221,7 +230,7 @@ paths:
           description: Invalid ID supplied
           content: {}
         404:
-          description: Pet not found
+          description: Genome ID not found
           content: {}
       security:
       - api_key: []
@@ -337,16 +346,4 @@ components:
         additional_info:
           type: string
           example: Forward strand
-  securitySchemes:
-    genome_search_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: http://2020.ensembl.org/oauth/dialog
-          scopes:
-            write:pets: modify genome in your account
-            read:pets: read your genome
-    api_key:
-      type: apiKey
-      name: api_key
-      in: header
+
