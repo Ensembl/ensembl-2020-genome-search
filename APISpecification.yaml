@@ -136,6 +136,34 @@ paths:
           content: {}
       security:
       - api_key: [] 
+  /api/object/info/:
+    get:
+      tags:
+      - api
+      summary: Get ojbect info for given object_id
+      description: Returns info for given object
+      parameters:
+      - name: object_id
+        in: query
+        description: object_id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+        400:
+          description: Invalid Genome ID
+          content: {}
+        404:
+          description: Genome ID not found
+          content: {}
+      security:
+      - api_key: []
 components:
   schemas:
     Genome:
@@ -238,3 +266,49 @@ components:
         additional_info:
           type: string
           example: Forward strand
+    Object:
+      type: object
+      properties:
+        bio_type:
+          type: string
+          example: "Protein Coding"
+        description:
+          type: string
+          example: "BRCA2 DNA repair associated"
+        genome_id:
+          type: string
+          example: '#components/schemas/Genome/properties/genome_id'
+        label:
+          type: string
+          example: "BRCA2"
+        location:
+          $ref: '#/components/schemas/Location'
+        object_id:
+          type: string
+          example: "homo_sapiens_GCA_000001405_27:gene:ENSG00000139618"
+        object_type:
+          type: string
+          example: "gene"
+        stable_id:
+          type: string
+          example: "ENSG00000139618"
+        strand:
+          type: string
+          example: "forward"
+        version_stable_id:
+          type: string
+          example: "ENSG00000139618.15"
+    Location:
+      type: object
+      properties:
+        chromosome:
+          type: string
+          example: "14"
+        start:
+          type: integer
+          format: int64
+          example: 32400266
+        end:
+          type: integer
+          format: int64
+          example: 32315086
