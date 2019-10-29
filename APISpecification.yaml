@@ -31,7 +31,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Genome'
+                type: object
+                properties:
+                  genome_info:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Genome'
         400:
           description: Invalid Genome ID
           content: {}
@@ -130,18 +135,33 @@ paths:
           description: Genome ID not found
           content: {}
       security:
-      - api_key: []  
+      - api_key: [] 
 components:
   schemas:
     Genome:
       type: object
       properties:
+        alternative_assemblies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Assembly'
+        assembly_accession:
+          type: string
+          example: GCA_000001405.27
         assembly_name:
           type: string
           example: GRCh38.p12
         common_name:
           type: string
           example: Human
+        division:
+          type: array
+          items:
+            $ref: '#/components/schemas/Division/properties/division_name'
+        example_objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Object/properties/object_id'
         genome_id:
           type: string
           example: homo_sapiens_GCA_000001405_27
@@ -151,20 +171,22 @@ components:
         is_available:
           type: boolean
           example: true
+        is_strain:
+          type: boolean
+          example: false
         popular_order:
           type: integer
           format: int32
           example: 0
+        production_name:
+          type: string
+          example: homo_sapiens
         reference_genome_id:
           type: string
           example: null
         scientific_name:
           type: string
           example: Homo sapiens
-        division_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/Division/properties/division_name'
     Division:
       type: object
       properties:
