@@ -69,7 +69,15 @@ paths:
     get:
       tags:
       - api
-      summary: Get alternative assemblies
+      summary: Get alternative assemblies for given genome
+      description: ""
+      parameters:
+      - name: genome_id
+        in: query
+        description: ID of genome to return
+        required: true
+        schema:
+          type: string
       responses:
         200:
           description: successful operation
@@ -94,7 +102,7 @@ paths:
     get:
       tags:
       - api
-      summary: Returns track ctegories for given genome_id
+      summary: Get track ctegories for given genome
       description: Returns track categories for given genome
       parameters:
       - name: genome_id
@@ -119,7 +127,7 @@ paths:
           description: Invalid Genome ID
           content: {}
         404:
-          description: Track categories not found
+          description: Genome ID not found
           content: {}
       security:
       - api_key: []  
@@ -208,4 +216,3 @@ components:
         additional_info:
           type: string
           example: Forward strand
-
