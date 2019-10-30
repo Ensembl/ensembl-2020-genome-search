@@ -43,16 +43,19 @@ class RegionValidate(Resource):
             validate_response = {}
             if self.vro.genome_id in ris.keys():
                 region_info_data = app.region_info_store[self.vro.genome_id]
-                self._parse_region(iregion)
-                self.vro.is_valid = True
-                self._validate_region()
-                self.vro.set_is_all_valid()
-                self.vro.set_is_partial_valid()
-                if self.vro.is_all_valid:
-                    self.vro.generate_region_id()
-                validate_response = self.vro.serialize()
-                self.vro = None
-                return make_response(validate_response, 200)
+                if self._parse_region(iregion):
+                    self.vro.is_valid = True
+                    self._validate_region()
+                    self.vro.set_is_all_valid()
+                    self.vro.set_is_partial_valid()
+                    if self.vro.is_all_valid:
+                        self.vro.generate_region_id()
+                    validate_response = self.vro.serialize()
+                    self.vro = None
+                    return make_response(validate_response, 200)
+                else:
+                    return make_response(jsonify({'message': 'Could not parse region: {}'.format(iregion), 'type' : 'PARSE_ERROR'}), 400)
+
             else:
                 self.vro.genome_id_error_message = "Could not find genome_id"
                 validate_response = self.vro.serialize()
@@ -89,9 +92,11 @@ class RegionValidate(Resource):
                 self.vro.is_parseable = True
                 self.vro.start = erp.start
                 self.vro.end = erp.end
+                return True
             else:
                 erp.is_parseable = False
                 self.vro.is_parseable = False
+        return False
              
     def _validate_start(self,region):
         try:
