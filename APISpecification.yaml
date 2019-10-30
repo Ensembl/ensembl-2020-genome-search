@@ -140,7 +140,7 @@ paths:
     get:
       tags:
       - api
-      summary: Get ojbect info for given object_id
+      summary: Get object info for given object_id
       description: Returns info for given object
       parameters:
       - name: object_id
