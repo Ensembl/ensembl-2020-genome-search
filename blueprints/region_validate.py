@@ -54,7 +54,7 @@ class RegionValidate(Resource):
                     self.vro = None
                     return make_response(validate_response, 200)
                 else:
-                    return make_response(jsonify({'message': 'Could not parse region: {}'.format(iregion), 'type' : 'PARSE_ERROR'}), 400)
+                    return make_response(jsonify({'message': {'region' : 'Could not parse region {}'.format(iregion) }}), 400)
 
             else:
                 self.vro.genome_id_error_message = "Could not find genome_id"
