@@ -8,7 +8,7 @@ class EnsemblRegion:
 		self.region_name = rname
 		self.start = int(rstart) if isinstance(rstart, int) else None
 		self.end = int(rend) if isinstance(rend, int) else None
-		self.is_valid = False
+		self.is_genome_id_valid = False
 		self.is_region_code_valid = False
 		self.is_region_name_valid = False
 		self.is_region_start_valid = False
@@ -17,6 +17,7 @@ class EnsemblRegion:
 		self.is_all_valid = False
 		self.is_partial_valid = False
 		self.is_parseable = False
+		self.is_valid = False
 		self.start_error_message = None
 		self.end_error_message = None
 		self.region_code_error_message = None
@@ -33,7 +34,7 @@ class EnsemblRegion:
 
 	def get_genome_id_response(self):
 		return dict(value=self.genome_id, \
-					is_valid=self.is_valid, \
+					is_valid=self.is_genome_id_valid, \
 					error_message=self.genome_id_error_message, \
 					error_code=None)
 
@@ -68,7 +69,8 @@ class EnsemblRegion:
 
 	def get_dict_response(self):
 		dict_response = {}
-		dict_response['is_parseable'] = self.is_parseable
+		# returns 400 if its not parseable
+		# dict_response['is_parseable'] = self.is_parseable
 		dict_response['genome_id'] = self.get_genome_id_response()
 		dict_response['region_id'] = self.region_id
 		if self.region_code:

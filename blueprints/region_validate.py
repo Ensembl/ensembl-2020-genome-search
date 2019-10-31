@@ -25,25 +25,28 @@ class RegionValidate(Resource):
         # Check if genome_id is provided as param and exist in genome_store
         if self.args.genome_id:
             self.vro.genome_id = self.args.genome_id
+            self.vro.is_genome_id_valid = True
             if self.args.genome_id not in app.region_info_store:
+                self.vro.is_genome_id_valid = False
                 self.vro.genome_id_error_message = "Cound not find region info for genome {}".format(self.args.genome_id)
                 validate_response = self.vro.serialize()
                 return make_response(validate_response, 200)
         else:
+            self.vro.is_genome_id_valid = False
             self.vro.genome_id_error_message = "No value for genome_id"
             validate_response = self.vro.serialize()
             return make_response(validate_response, 200)
 
         if iregion_code:
             self.vro.region_code = iregion_code.lower()
-
         ris = app.region_info_store
-
         if iregion:
             validate_response = {}
             if self.vro.genome_id in ris.keys():
+                self.vro.is_genome_id_valid = True
                 region_info_data = app.region_info_store[self.vro.genome_id]
                 if self._parse_region(iregion):
+                    self.vro.is_genome_id_valid = True
                     self.vro.is_valid = True
                     self._validate_region()
                     self.vro.set_is_all_valid()
@@ -54,7 +57,7 @@ class RegionValidate(Resource):
                     self.vro = None
                     return make_response(validate_response, 200)
                 else:
-                    return make_response(jsonify({'message': {'region' : 'Could not parse region {}'.format(iregion) }}), 400)
+                    return make_response(jsonify({'message': {'parse' : 'Could not parse region {}'.format(iregion) }}), 400)
 
             else:
                 self.vro.genome_id_error_message = "Could not find genome_id"
@@ -176,6 +179,15 @@ class RegionValidate(Resource):
         else:
             return False
 
+    def _validate_region_size(self, region):
+        # Check if the requested region has minimum size (bp)
+        MINIMUM_REGION_SIZE = 50
+        region_size_in_bp = self.vro.end - self.vro.start
+        if region_size_in_bp < MINIMUM_REGION_SIZE:
+            self.vro.region_error_message = "Region needs atleast {} basepair for visualisation.".format(MINIMUM_REGION_SIZE)
+            return False
+        return True
+
 
     def _validate_region(self):
         try :
@@ -188,11 +200,15 @@ class RegionValidate(Resource):
                         if self.vro.region_name:
                             if self.vro.region_name in species_regions.keys():
                                 self.vro.is_region_name_valid = True
-                                self.vro.is_region_valid = True
+                                # self.vro.is_region_valid = True
                                 region = species_regions[self.vro.region_name]
                                 self.vro.is_region_start_valid = self._validate_start(region)
                                 self.vro.is_region_end_valid = self._validate_end(region)
-                                self.vro.is_valid = self._validate_location(region)
+                                if self._validate_location(region):
+                                    self.vro.is_region_valid = self._validate_region_size(region)
+                                    self.vro.is_valid = self.vro.is_region_valid
+                                else:
+                                    self.vro.is_valid = False
                         else:
                             self.vro.region_error_message = "Region name is needed"
                     
@@ -207,7 +223,11 @@ class RegionValidate(Resource):
                             self.vro.region_code = region['type']
                             self.vro.is_region_start_valid = self._validate_start(region)
                             self.vro.is_region_end_valid = self._validate_end(region)
-                            self.vro.is_valid = self._validate_location(region)
+                            if self._validate_location(region):
+                                self.vro.is_region_valid = self._validate_region_size(region)
+                                self.vro.is_valid = self.vro.is_region_valid
+                            else:
+                                self.vro.is_valid = False
                             break
                         else:
                             self.vro.is_region_code_valid = False
