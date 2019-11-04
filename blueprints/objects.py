@@ -133,7 +133,6 @@ class ObjectTrack(Resource):
 
         try:
             genome_id, object_type, object_value = self.args.object_id.split(':')
-            print(genome_id, object_type, object_value)
         except:
             return abort(400, {'error': 'Problem parsing object_id'})
 

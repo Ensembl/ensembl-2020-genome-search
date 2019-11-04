@@ -19,6 +19,9 @@ def create_app():
     application.genome_store = GenomeStore(open_data_file(application.config['GENOME_STORE_FILE']))
     print("Loaded Genome store")
 
+    application.region_info_store = open_data_file(application.config['REGION_INFO_FILE'])
+    print("Loaded Region info Store")
+
     with application.app_context():
         from blueprints import genome_search
 
@@ -35,6 +38,12 @@ def create_app():
 
         from blueprints import objects
         application.register_blueprint(objects.objects_bp, url_prefix='/api/object/')
+
+        from blueprints import region_info
+        application.register_blueprint(region_info.region_info_bp, url_prefix='/api/genome/karyotype/')
+
+        from blueprints import region_validate
+        application.register_blueprint(region_validate.region_validate_bp, url_prefix='/api/genome/region')
 
         application.register_blueprint(Blueprint('temp_static_blueprint', __name__, static_folder='static', static_url_path='/static/genome_images'))
 
