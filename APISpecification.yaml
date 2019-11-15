@@ -25,6 +25,7 @@ paths:
         required: true
         schema:
           type: string
+          default: homo_sapiens_GCA_000001405_27
       responses:
         200:
           description: successful operation
@@ -83,6 +84,7 @@ paths:
         required: true
         schema:
           type: string
+          default: homo_sapiens_GCA_000001405_27
       responses:
         200:
           description: successful operation
@@ -116,6 +118,7 @@ paths:
         required: true
         schema:
           type: string
+          default: homo_sapiens_GCA_000001405_27
       responses:
         200:
           description: successful operation
@@ -149,6 +152,7 @@ paths:
         required: true
         schema:
           type: string
+          default: homo_sapiens_GCA_000001405_27:gene:ENSG00000139618
       responses:
         200:
           description: successful operation
