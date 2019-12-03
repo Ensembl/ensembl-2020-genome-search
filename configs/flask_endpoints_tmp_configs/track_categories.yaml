@@ -1,90 +1,621 @@
-track_categories:
-     - label: 'Genes & transcripts'
-       track_category_id: 'genes-transcripts'
-       track_list:
-         - additional_info: 'Forward strand'
-           colour: 'DARK_GREY'
-           label: 'Protein coding genes'
-           track_id: 'track:gene-pc-fwd'
-         - additional_info: 'Forward strand'
-           colour: 'GREY'
-           label: 'Other genes'
-           track_id: 'track:gene-other-fwd'
-         - additional_info: 'Reverse strand'
-           colour: 'DARK_GREY'
-           label: 'Protein coding genes'
-           track_id: 'track:gene-pc-rev'
-         - additional_info: 'Reverse strand'
-           colour: 'GREY'
-           label: 'Other genes'
-           track_id: 'track:gene-other-rev'
-       types:
-         - 'Genomic'
+genome_track_categories:
+  homo_sapiens_GCA_000001405_27:
+    - label: 'Genes & transcripts'
+      track_category_id: 'genes-transcripts'
+      track_list:
+        - additional_info: 'Forward strand'
+          colour: 'DARK_GREY'
+          label: 'Protein coding genes'
+          track_id: 'track:gene-pc-fwd'
+        - additional_info: 'Forward strand'
+          colour: 'GREY'
+          label: 'Other genes'
+          track_id: 'track:gene-other-fwd'
+        - additional_info: 'Reverse strand'
+          colour: 'DARK_GREY'
+          label: 'Protein coding genes'
+          track_id: 'track:gene-pc-rev'
+        - additional_info: 'Reverse strand'
+          colour: 'GREY'
+          label: 'Other genes'
+          track_id: 'track:gene-other-rev'
+      types:
+        - 'Genomic'
 
-     - label: 'Assembly'
-       track_category_id: 'assembly'
-       track_list:
-          - label: 'Contigs'
-            track_id: 'track:contig'
-          - label: '%GC'
-            track_id: 'track:gc'
-       types:
-         - 'Genomic'
+    - label: 'Assembly'
+      track_category_id: 'assembly'
+      track_list:
+        - label: 'Contigs'
+          track_id: 'track:contig'
+        - label: '%GC'
+          track_id: 'track:gc'
+      types:
+        - 'Genomic'
 
-     - label: 'Comparative genomics'
-       track_category_id: 'comparative-genomics'
-       track_list: []
-       types:
-         - 'Genomic'
+    - label: 'Comparative genomics'
+      track_category_id: 'comparative-genomics'
+      track_list: []
+      types:
+        - 'Genomic'
 
-     - track_id: 'Short variants'
-       track_category_id: 'short-variants'
-       track_list:
+    - label: 'Short variants'
+      track_category_id: 'short-variants'
+      track_list:
         - label: '1000 Genomes all SNPs & indels'
           track_id: 'track:variant'
-       types:
-         - 'Variation'
+      types:
+        - 'Variation'
 
-     - label: 'Somatic variants'
-       track_category_id: 'somatic-variants'
-       track_list: []
-       types:
-         - 'Variation'
+    - label: 'Somatic variants'
+      track_category_id: 'somatic-variants'
+      track_list: []
+      types:
+        - 'Variation'
 
-     - label: 'Structural variants'
-       track_category_id: 'structural-variants'
-       track_list: []
-       types:
-         - 'Variation'
+    - label: 'Structural variants'
+      track_category_id: 'structural-variants'
+      track_list: []
+      types:
+        - 'Variation'
 
-     - label: 'Experiment design'
-       track_category_id: 'experiment-design'
-       track_list: []
-       types:
-         - 'Genomic'
-         - 'Expression'
-         - 'Variation'
+    - label: 'Experiment design'
+      track_category_id: 'experiment-design'
+      track_list: []
+      types:
+        - 'Genomic'
+        - 'Expression'
+        - 'Variation'
 
-     - label: 'References & evidence'
-       track_category_id: 'references-evidence'
-       track_list: []
-       types:
-         - 'Genomic'
+    - label: 'References & evidence'
+      track_category_id: 'references-evidence'
+      track_list: []
+      types:
+        - 'Genomic'
 
-     - label: 'Regulatory features'
-       track_category_id: 'regulatory-features'
-       track_list: []
-       types:
-         - 'Expression'
+    - label: 'Regulatory features'
+      track_category_id: 'regulatory-features'
+      track_list: []
+      types:
+        - 'Expression'
 
-     - label: 'Gene expression correlations'
-       track_category_id: 'gene-expression'
-       track_list: []
-       types:
-         - 'Expression'
+    - label: 'Gene expression correlations'
+      track_category_id: 'gene-expression'
+      track_list: []
+      types:
+        - 'Expression'
 
-     - label: 'Other regulatory regions'
-       track_category_id: 'regulatory-regions'
-       track_list: []
-       types:
-         - 'Expression'
+    - label: 'Other regulatory regions'
+      track_category_id: 'regulatory-regions'
+      track_list: []
+      types:
+        - 'Expression'
+  homo_sapiens_GCA_000001405_14:
+    - label: 'Genes & transcripts'
+      track_category_id: 'genes-transcripts'
+      track_list:
+        - additional_info: 'Forward strand'
+          colour: 'DARK_GREY'
+          label: 'Protein coding genes'
+          track_id: 'track:gene-pc-fwd'
+        - additional_info: 'Forward strand'
+          colour: 'GREY'
+          label: 'Other genes'
+          track_id: 'track:gene-other-fwd'
+        - additional_info: 'Reverse strand'
+          colour: 'DARK_GREY'
+          label: 'Protein coding genes'
+          track_id: 'track:gene-pc-rev'
+        - additional_info: 'Reverse strand'
+          colour: 'GREY'
+          label: 'Other genes'
+          track_id: 'track:gene-other-rev'
+      types:
+        - 'Genomic'
+
+    - label: 'Assembly'
+      track_category_id: 'assembly'
+      track_list:
+        - label: 'Contigs'
+          track_id: 'track:contig'
+        - label: '%GC'
+          track_id: 'track:gc'
+      types:
+        - 'Genomic'
+
+    - label: 'Comparative genomics'
+      track_category_id: 'comparative-genomics'
+      track_list: []
+      types:
+        - 'Genomic'
+
+    - label: 'Short variants'
+      track_category_id: 'short-variants'
+      track_list:
+        - label: '1000 Genomes all SNPs & indels'
+          track_id: 'track:variant'
+      types:
+        - 'Variation'
+
+    - label: 'Somatic variants'
+      track_category_id: 'somatic-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Structural variants'
+      track_category_id: 'structural-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Experiment design'
+      track_category_id: 'experiment-design'
+      track_list: []
+      types:
+        - 'Genomic'
+        - 'Expression'
+        - 'Variation'
+
+    - label: 'References & evidence'
+      track_category_id: 'references-evidence'
+      track_list: []
+      types:
+        - 'Genomic'
+
+    - label: 'Regulatory features'
+      track_category_id: 'regulatory-features'
+      track_list: []
+      types:
+        - 'Expression'
+
+    - label: 'Gene expression correlations'
+      track_category_id: 'gene-expression'
+      track_list: []
+      types:
+        - 'Expression'
+
+    - label: 'Other regulatory regions'
+      track_category_id: 'regulatory-regions'
+      track_list: []
+      types:
+        - 'Expression'
+  triticum_aestivum_GCA_900519105_1:
+    - label: 'Genes & transcripts'
+      track_category_id: 'genes-transcripts'
+      track_list:
+        - additional_info: 'Forward strand'
+          colour: 'DARK_GREY'
+          label: 'Protein coding genes'
+          track_id: 'track:gene-pc-fwd'
+        - additional_info: 'Forward strand'
+          colour: 'GREY'
+          label: 'Other genes'
+          track_id: 'track:gene-other-fwd'
+        - additional_info: 'Reverse strand'
+          colour: 'DARK_GREY'
+          label: 'Protein coding genes'
+          track_id: 'track:gene-pc-rev'
+        - additional_info: 'Reverse strand'
+          colour: 'GREY'
+          label: 'Other genes'
+          track_id: 'track:gene-other-rev'
+      types:
+        - 'Genomic'
+
+    - label: 'Assembly'
+      track_category_id: 'assembly'
+      track_list:
+        - label: 'Contigs'
+          track_id: 'track:contig'
+        - label: '%GC'
+          track_id: 'track:gc'
+      types:
+        - 'Genomic'
+
+    - label: 'Comparative genomics'
+      track_category_id: 'comparative-genomics'
+      track_list: []
+      types:
+        - 'Genomic'
+
+    - label: 'Short variants'
+      track_category_id: 'short-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Somatic variants'
+      track_category_id: 'somatic-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Structural variants'
+      track_category_id: 'structural-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Experiment design'
+      track_category_id: 'experiment-design'
+      track_list: []
+      types:
+        - 'Genomic'
+        - 'Expression'
+        - 'Variation'
+
+    - label: 'References & evidence'
+      track_category_id: 'references-evidence'
+      track_list: []
+      types:
+        - 'Genomic'
+
+    - label: 'Regulatory features'
+      track_category_id: 'regulatory-features'
+      track_list: []
+      types:
+        - 'Expression'
+
+    - label: 'Gene expression correlations'
+      track_category_id: 'gene-expression'
+      track_list: []
+      types:
+        - 'Expression'
+
+    - label: 'Other regulatory regions'
+      track_category_id: 'regulatory-regions'
+      track_list: []
+      types:
+        - 'Expression'
+  saccharomyces_cerevisiae_GCA_000146045_2:
+    - label: 'Genes & transcripts'
+      track_category_id: 'genes-transcripts'
+      track_list:
+        - additional_info: 'Forward strand'
+          colour: 'DARK_GREY'
+          label: 'Protein coding genes'
+          track_id: 'track:gene-pc-fwd'
+        - additional_info: 'Forward strand'
+          colour: 'GREY'
+          label: 'Other genes'
+          track_id: 'track:gene-other-fwd'
+        - additional_info: 'Reverse strand'
+          colour: 'DARK_GREY'
+          label: 'Protein coding genes'
+          track_id: 'track:gene-pc-rev'
+        - additional_info: 'Reverse strand'
+          colour: 'GREY'
+          label: 'Other genes'
+          track_id: 'track:gene-other-rev'
+      types:
+        - 'Genomic'
+
+    - label: 'Assembly'
+      track_category_id: 'assembly'
+      track_list:
+        - label: 'Contigs'
+          track_id: 'track:contig'
+        - label: '%GC'
+          track_id: 'track:gc'
+      types:
+        - 'Genomic'
+
+    - label: 'Comparative genomics'
+      track_category_id: 'comparative-genomics'
+      track_list: []
+      types:
+        - 'Genomic'
+
+    - label: 'Short variants'
+      track_category_id: 'short-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Somatic variants'
+      track_category_id: 'somatic-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Structural variants'
+      track_category_id: 'structural-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Experiment design'
+      track_category_id: 'experiment-design'
+      track_list: []
+      types:
+        - 'Genomic'
+        - 'Expression'
+        - 'Variation'
+
+    - label: 'References & evidence'
+      track_category_id: 'references-evidence'
+      track_list: []
+      types:
+        - 'Genomic'
+
+    - label: 'Regulatory features'
+      track_category_id: 'regulatory-features'
+      track_list: []
+      types:
+        - 'Expression'
+
+    - label: 'Gene expression correlations'
+      track_category_id: 'gene-expression'
+      track_list: []
+      types:
+        - 'Expression'
+
+    - label: 'Other regulatory regions'
+      track_category_id: 'regulatory-regions'
+      track_list: []
+      types:
+        - 'Expression'
+  escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2:
+    - label: 'Genes & transcripts'
+      track_category_id: 'genes-transcripts'
+      track_list:
+        - additional_info: 'Forward strand'
+          colour: 'DARK_GREY'
+          label: 'Protein coding genes'
+          track_id: 'track:gene-pc-fwd'
+        - additional_info: 'Forward strand'
+          colour: 'GREY'
+          label: 'Other genes'
+          track_id: 'track:gene-other-fwd'
+        - additional_info: 'Reverse strand'
+          colour: 'DARK_GREY'
+          label: 'Protein coding genes'
+          track_id: 'track:gene-pc-rev'
+        - additional_info: 'Reverse strand'
+          colour: 'GREY'
+          label: 'Other genes'
+          track_id: 'track:gene-other-rev'
+      types:
+        - 'Genomic'
+
+    - label: 'Assembly'
+      track_category_id: 'assembly'
+      track_list:
+        - label: 'Contigs'
+          track_id: 'track:contig'
+        - label: '%GC'
+          track_id: 'track:gc'
+      types:
+        - 'Genomic'
+
+    - label: 'Comparative genomics'
+      track_category_id: 'comparative-genomics'
+      track_list: []
+      types:
+        - 'Genomic'
+
+    - label: 'Short variants'
+      track_category_id: 'short-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Somatic variants'
+      track_category_id: 'somatic-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Structural variants'
+      track_category_id: 'structural-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Experiment design'
+      track_category_id: 'experiment-design'
+      track_list: []
+      types:
+        - 'Genomic'
+        - 'Expression'
+        - 'Variation'
+
+    - label: 'References & evidence'
+      track_category_id: 'references-evidence'
+      track_list: []
+      types:
+        - 'Genomic'
+
+    - label: 'Regulatory features'
+      track_category_id: 'regulatory-features'
+      track_list: []
+      types:
+        - 'Expression'
+
+    - label: 'Gene expression correlations'
+      track_category_id: 'gene-expression'
+      track_list: []
+      types:
+        - 'Expression'
+
+    - label: 'Other regulatory regions'
+      track_category_id: 'regulatory-regions'
+      track_list: []
+      types:
+        - 'Expression'
+  caenorhabditis_elegans_GCA_000002985_3:
+    - label: 'Genes & transcripts'
+      track_category_id: 'genes-transcripts'
+      track_list:
+        - additional_info: 'Forward strand'
+          colour: 'DARK_GREY'
+          label: 'Protein coding genes'
+          track_id: 'track:gene-pc-fwd'
+        - additional_info: 'Forward strand'
+          colour: 'GREY'
+          label: 'Other genes'
+          track_id: 'track:gene-other-fwd'
+        - additional_info: 'Reverse strand'
+          colour: 'DARK_GREY'
+          label: 'Protein coding genes'
+          track_id: 'track:gene-pc-rev'
+        - additional_info: 'Reverse strand'
+          colour: 'GREY'
+          label: 'Other genes'
+          track_id: 'track:gene-other-rev'
+      types:
+        - 'Genomic'
+
+    - label: 'Assembly'
+      track_category_id: 'assembly'
+      track_list:
+        - label: 'Contigs'
+          track_id: 'track:contig'
+        - label: '%GC'
+          track_id: 'track:gc'
+      types:
+        - 'Genomic'
+
+    - label: 'Comparative genomics'
+      track_category_id: 'comparative-genomics'
+      track_list: []
+      types:
+        - 'Genomic'
+
+    - label: 'Short variants'
+      track_category_id: 'short-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Somatic variants'
+      track_category_id: 'somatic-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Structural variants'
+      track_category_id: 'structural-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Experiment design'
+      track_category_id: 'experiment-design'
+      track_list: []
+      types:
+        - 'Genomic'
+        - 'Expression'
+        - 'Variation'
+
+    - label: 'References & evidence'
+      track_category_id: 'references-evidence'
+      track_list: []
+      types:
+        - 'Genomic'
+
+    - label: 'Regulatory features'
+      track_category_id: 'regulatory-features'
+      track_list: []
+      types:
+        - 'Expression'
+
+    - label: 'Gene expression correlations'
+      track_category_id: 'gene-expression'
+      track_list: []
+      types:
+        - 'Expression'
+
+    - label: 'Other regulatory regions'
+      track_category_id: 'regulatory-regions'
+      track_list: []
+      types:
+        - 'Expression'
+  plasmodium_falciparum_GCA_000002765_2:
+    - label: 'Genes & transcripts'
+      track_category_id: 'genes-transcripts'
+      track_list:
+        - additional_info: 'Forward strand'
+          colour: 'DARK_GREY'
+          label: 'Protein coding genes'
+          track_id: 'track:gene-pc-fwd'
+        - additional_info: 'Forward strand'
+          colour: 'GREY'
+          label: 'Other genes'
+          track_id: 'track:gene-other-fwd'
+        - additional_info: 'Reverse strand'
+          colour: 'DARK_GREY'
+          label: 'Protein coding genes'
+          track_id: 'track:gene-pc-rev'
+        - additional_info: 'Reverse strand'
+          colour: 'GREY'
+          label: 'Other genes'
+          track_id: 'track:gene-other-rev'
+      types:
+        - 'Genomic'
+
+    - label: 'Assembly'
+      track_category_id: 'assembly'
+      track_list:
+        - label: 'Contigs'
+          track_id: 'track:contig'
+        - label: '%GC'
+          track_id: 'track:gc'
+      types:
+        - 'Genomic'
+
+    - label: 'Comparative genomics'
+      track_category_id: 'comparative-genomics'
+      track_list: []
+      types:
+        - 'Genomic'
+
+    - label: 'Short variants'
+      track_category_id: 'short-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Somatic variants'
+      track_category_id: 'somatic-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Structural variants'
+      track_category_id: 'structural-variants'
+      track_list: []
+      types:
+        - 'Variation'
+
+    - label: 'Experiment design'
+      track_category_id: 'experiment-design'
+      track_list: []
+      types:
+        - 'Genomic'
+        - 'Expression'
+        - 'Variation'
+
+    - label: 'References & evidence'
+      track_category_id: 'references-evidence'
+      track_list: []
+      types:
+        - 'Genomic'
+
+    - label: 'Regulatory features'
+      track_category_id: 'regulatory-features'
+      track_list: []
+      types:
+        - 'Expression'
+
+    - label: 'Gene expression correlations'
+      track_category_id: 'gene-expression'
+      track_list: []
+      types:
+        - 'Expression'
+
+    - label: 'Other regulatory regions'
+      track_category_id: 'regulatory-regions'
+      track_list: []
+      types:
+        - 'Expression'
