@@ -1,0 +1,318 @@
+openapi: 3.0.1
+info:
+  title: Ensembl - 2020
+  description: API for 2020.ensembl.org
+  contact:
+    email: kamal@ebi.ac.uk
+  version: 0.0.1
+servers:
+- url: https://2020.ensembl.org
+- url: http://2020.ensembl.org
+tags:
+- name: api
+  description: Genome searcch
+paths:
+  /api/genome/info/:
+    get:
+      tags:
+      - api
+      summary: Returns information about particular genome
+      description: Returns a single genome
+      parameters:
+      - name: genome_id
+        in: query
+        description: ID of genome to return
+        required: true
+        schema:
+          type: string
+          default: homo_sapiens_GCA_000001405_27
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  genome_info:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Genome'
+        400:
+          description: Invalid Genome ID
+          content: {}
+        404:
+          description: Genome not found
+          content: {}
+      security:
+      - api_key: []
+  /api/popular_genomes/:
+    get:
+      tags:
+      - api
+      summary: Get popular genomes
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  popular_species:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Genome'
+        400:
+          description: Invalid Genome ID
+          content: {}
+        404:
+          description: Genome not found
+          content: {}
+      security:
+      - api_key: []
+  /api/alternative_assemblies/:
+    get:
+      tags:
+      - api
+      summary: Get alternative assemblies for given genome
+      description: ""
+      parameters:
+      - name: genome_id
+        in: query
+        description: ID of genome to return
+        required: true
+        schema:
+          type: string
+          default: homo_sapiens_GCA_000001405_27
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alternate_assemblies:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Assembly'
+        400:
+          description: Invalid Genome ID
+          content: {}
+        404:
+          description: Alternate assemblies not found
+          content: {}
+      security:
+      - api_key: []
+  /api/genome/track_categories/:
+    get:
+      tags:
+      - api
+      summary: Get track ctegories for given genome
+      description: Returns track categories for given genome
+      parameters:
+      - name: genome_id
+        in: query
+        description: genome_id for which track categories are requested
+        required: true
+        schema:
+          type: string
+          default: homo_sapiens_GCA_000001405_27
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  track_categories:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TrackCategory'
+        400:
+          description: Invalid Genome ID
+          content: {}
+        404:
+          description: Genome ID not found
+          content: {}
+      security:
+      - api_key: [] 
+  /api/object/info/:
+    get:
+      tags:
+      - api
+      summary: Get object info for given object_id
+      description: Returns info for given object
+      parameters:
+      - name: object_id
+        in: query
+        description: object_id
+        required: true
+        schema:
+          type: string
+          default: homo_sapiens_GCA_000001405_27:gene:ENSG00000139618
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+        400:
+          description: Invalid Genome ID
+          content: {}
+        404:
+          description: Genome ID not found
+          content: {}
+      security:
+      - api_key: []
+components:
+  schemas:
+    Genome:
+      type: object
+      properties:
+        alternative_assemblies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Assembly'
+        assembly_accession:
+          type: string
+          example: GCA_000001405.27
+        assembly_name:
+          type: string
+          example: GRCh38.p12
+        common_name:
+          type: string
+          example: Human
+        division:
+          type: array
+          items:
+            $ref: '#/components/schemas/Division/properties/division_name'
+        example_objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Object/properties/object_id'
+        genome_id:
+          type: string
+          example: homo_sapiens_GCA_000001405_27
+        image:
+          type: string
+          example: http://2020.ensembl.org/static/genome_images/homo_sapiens_GCA_000001405_27.svg
+        is_available:
+          type: boolean
+          example: true
+        is_strain:
+          type: boolean
+          example: false
+        popular_order:
+          type: integer
+          format: int32
+          example: 0
+        production_name:
+          type: string
+          example: homo_sapiens
+        reference_genome_id:
+          type: string
+          example: null
+        scientific_name:
+          type: string
+          example: Homo sapiens
+    Division:
+      type: object
+      properties:
+        division_name:
+          type: string
+          example: EnsemblVertebrates
+    Assembly:
+      type: object
+      properties:
+        assembly_name:
+          type: string
+          example: GRCh37.p13
+        genome_id:
+          type: string
+          example: homo_sapiens_GCA_000001405_14
+    TrackCategory:
+      type: object
+      properties:
+        track_category_id:
+          type: string
+          example: genes-transcripts
+        label:
+          type: string
+          example: Genes & transcripts
+        track_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Track'
+        types:
+          type: array
+          items:
+            type: string
+            enum:
+            - Genomic
+            - Variation
+            - Expression
+    Track:
+      type: object
+      properties:
+        track_id:
+          type: string
+          example: track:gene-pc-fwd
+        label:
+          type: string
+          example: Protein coding genes
+        color:
+          type: string
+          example: GREY
+        additional_info:
+          type: string
+          example: Forward strand
+    Object:
+      type: object
+      properties:
+        bio_type:
+          type: string
+          example: "Protein Coding"
+        description:
+          type: string
+          example: "BRCA2 DNA repair associated"
+        genome_id:
+          type: string
+          example: '#components/schemas/Genome/properties/genome_id'
+        label:
+          type: string
+          example: "BRCA2"
+        location:
+          $ref: '#/components/schemas/Location'
+        object_id:
+          type: string
+          example: "homo_sapiens_GCA_000001405_27:gene:ENSG00000139618"
+        object_type:
+          type: string
+          example: "gene"
+        stable_id:
+          type: string
+          example: "ENSG00000139618"
+        strand:
+          type: string
+          example: "forward"
+        version_stable_id:
+          type: string
+          example: "ENSG00000139618.15"
+    Location:
+      type: object
+      properties:
+        chromosome:
+          type: string
+          example: "14"
+        start:
+          type: integer
+          format: int64
+          example: 32400266
+        end:
+          type: integer
+          format: int64
+          example: 32315086
