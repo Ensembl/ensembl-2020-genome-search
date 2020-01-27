@@ -184,6 +184,10 @@ Deploy:feature:
   environment:
     name : exp-staging
 
+  before_script:
+  - kubectl get ns
+  - kubectl config view
+  
   script:
   - feature_branch=${CI_COMMIT_REF_NAME}
   - feature_tag=${feature_branch#"feature/"}
