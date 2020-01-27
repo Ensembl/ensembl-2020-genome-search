@@ -84,7 +84,6 @@ Build:feature:
   only:
   - /^feature\/.*$/
 
-  when: manual
 
 # Deploy Stage 
 Deploy:staging:
@@ -173,9 +172,10 @@ Deploy:feature:
   image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
 
   environment:
-    name : exp-staging
+    name : wp-staging
 
   script:
+  - kubectl cofig view
   - feature_branch=${CI_COMMIT_REF_NAME}
   - feature_tag=${feature_branch#"feature/"}
   - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
@@ -190,5 +190,3 @@ Deploy:feature:
 
   only:
   - /^feature\/.*$/
-
-  when: manual
