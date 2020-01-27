@@ -84,6 +84,7 @@ Build:feature:
   only:
   - /^feature\/.*$/
 
+  when: manual
 
 # Deploy Stage 
 Deploy:staging:
@@ -106,6 +107,28 @@ Deploy:staging:
   - cat ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
   - kubectl config view
   - kubectl config use-context ens-stage-ctx
+  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
+  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+
+  only:
+  - dev
+
+# Deploy staging
+Deploy-WP-HX:staging:
+  stage: deploy
+  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
+
+  environment:
+    name : wp-staging
+
+  script:
+  - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
+  - cd ensembl-client-caas-deploy
+  - git checkout refactor-manifest
+  - cd ..
+  - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - sed -i "s/-<DEPLOYMENT_ENV>//g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - sed -i "s/-<DEPLOYMENT_ENV>//g" ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
 
@@ -171,11 +194,12 @@ Deploy:feature:
   stage: deploy
   image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
 
-  environment:
-    name : wp-staging
+  before_script:
+  - export KUBECONFIG=/etc/deploy/config
+  - mkdir -p /etc/deploy
+  - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
 
   script:
-  - kubectl config view
   - feature_branch=${CI_COMMIT_REF_NAME}
   - feature_tag=${feature_branch#"feature/"}
   - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
@@ -185,8 +209,11 @@ Deploy:feature:
   - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}-$feature_tag/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
   - sed -i "s/<DEPLOYMENT_ENV>/$feature_tag/g" ensembl-client-caas-deploy/ensembl_genome_search_cm.yaml
   - sed -i "s/<DEPLOYMENT_ENV>/$feature_tag/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - kubectl config use-context ens-dev-ctx
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_cm.yaml
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
 
   only:
   - /^feature\/.*$/
+
+  when: manual
