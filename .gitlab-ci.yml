@@ -5,7 +5,7 @@ variables:
   DOCKER_TLS_CERTDIR: ""
 
 
-Deploy:feature:
+Test:
   stage: test_deploy
   image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
 
@@ -13,5 +13,7 @@ Deploy:feature:
     name : exp-staging
 
   before_script:
-  - kubectl get ns
-  - kubectl config view
+    - kubectl get ns
+
+  script:
+    - kubectl config view
