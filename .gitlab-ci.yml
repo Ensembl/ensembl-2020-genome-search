@@ -175,7 +175,7 @@ Deploy:feature:
     name : wp-staging
 
   script:
-  - kubectl cofig view
+  - kubectl config view
   - feature_branch=${CI_COMMIT_REF_NAME}
   - feature_tag=${feature_branch#"feature/"}
   - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
