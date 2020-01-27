@@ -89,17 +89,14 @@ Build:feature:
 # Deploy Stage 
 Deploy:staging:
   stage: deploy
-  image: alpine
+  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
   
   before_script:
   - mkdir -p /etc/deploy
   - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
-  
+  - export KUBECONFIG=/etc/deploy/config
+
   script:
-  - apk update && apk add --no-cache curl git
-  - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-  - chmod +x ./kubectl
-  - mv ./kubectl /usr/local/bin/kubectl
   - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
   - cd ensembl-client-caas-deploy
   - git checkout refactor-manifest
@@ -119,16 +116,13 @@ Deploy:staging:
 # Deploy Live
 Deploy:live:
   stage: deploy
-  image: alpine
+  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
 
   before_script:
+  - export KUBECONFIG=/etc/deploy/config
   - mkdir -p /etc/deploy
   - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
   script:
-  - apk update && apk add --no-cache curl git
-  - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-  - chmod +x ./kubectl
-  - mv ./kubectl /usr/local/bin/kubectl
   - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
   - cd ensembl-client-caas-deploy
   - git checkout refactor-manifest
@@ -150,16 +144,14 @@ Deploy:live:
 # Deploy internal
 Deploy:internal:
   stage: deploy
-  image: alpine
+  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
 
   before_script:
+  - export KUBECONFIG=/etc/deploy/config
   - mkdir -p /etc/deploy
   - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
+
   script:
-  - apk update && apk add --no-cache curl git
-  - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-  - chmod +x ./kubectl
-  - mv ./kubectl /usr/local/bin/kubectl
   - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
   - cd ensembl-client-caas-deploy
   - git checkout refactor-manifest
@@ -182,6 +174,8 @@ Deploy:feature:
 
   environment:
     name : exp-staging
+    kubernetes:
+      namespace: ensembl-experiments
 
   script:
   - feature_branch=${CI_COMMIT_REF_NAME}
