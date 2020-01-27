@@ -92,9 +92,10 @@ Deploy:staging:
   image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
   
   before_script:
+  - export KUBECONFIG=/etc/deploy/config
   - mkdir -p /etc/deploy
   - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
-  - export KUBECONFIG=/etc/deploy/config
+
 
   script:
   - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
@@ -144,6 +145,7 @@ Deploy:live:
   - export KUBECONFIG=/etc/deploy/config
   - mkdir -p /etc/deploy
   - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
+  
   script:
   - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
   - cd ensembl-client-caas-deploy
