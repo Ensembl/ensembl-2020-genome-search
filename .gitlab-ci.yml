@@ -6,7 +6,6 @@ stages:
 variables:
   CONTAINER_IMAGE: $GITLAB_REGISTRY_URL/$GITLAB_REGISTRY_NAMESPACE/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
   CONTAINER_INTERNAL_IMAGE: $GITLAB_REGISTRY_URL/$GITLAB_REGISTRY_NAMESPACE/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}-internal
-  KUBECONFIG: /etc/deploy/config
   DOCKER_TLS_CERTDIR: ""
 
 # Run Tests
@@ -90,17 +89,15 @@ Build:feature:
 # Deploy Stage 
 Deploy:staging:
   stage: deploy
-  image: alpine
+  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
   
   before_script:
+  - export KUBECONFIG=/etc/deploy/config
   - mkdir -p /etc/deploy
   - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
-  
+
+
   script:
-  - apk update && apk add --no-cache curl git
-  - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-  - chmod +x ./kubectl
-  - mv ./kubectl /usr/local/bin/kubectl
   - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
   - cd ensembl-client-caas-deploy
   - git checkout refactor-manifest
@@ -117,19 +114,37 @@ Deploy:staging:
   only:
   - dev
 
+# Deploy staging
+Deploy-WP-HX:staging:
+  stage: deploy
+  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
+
+  environment:
+    name : wp-staging
+
+  script:
+  - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
+  - cd ensembl-client-caas-deploy
+  - git checkout migration/wp-hx
+  - cd ..
+  - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
+  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+
+  only:
+  - dev
+
 # Deploy Live
 Deploy:live:
   stage: deploy
-  image: alpine
+  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
 
   before_script:
+  - export KUBECONFIG=/etc/deploy/config
   - mkdir -p /etc/deploy
   - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
+  
   script:
-  - apk update && apk add --no-cache curl git
-  - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-  - chmod +x ./kubectl
-  - mv ./kubectl /usr/local/bin/kubectl
   - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
   - cd ensembl-client-caas-deploy
   - git checkout refactor-manifest
@@ -151,16 +166,14 @@ Deploy:live:
 # Deploy internal
 Deploy:internal:
   stage: deploy
-  image: alpine
+  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
 
   before_script:
+  - export KUBECONFIG=/etc/deploy/config
   - mkdir -p /etc/deploy
   - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
+
   script:
-  - apk update && apk add --no-cache curl git
-  - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-  - chmod +x ./kubectl
-  - mv ./kubectl /usr/local/bin/kubectl
   - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
   - cd ensembl-client-caas-deploy
   - git checkout refactor-manifest
@@ -179,18 +192,16 @@ Deploy:internal:
 # Deploy Feature
 Deploy:feature:
   stage: deploy
-  image: alpine
+  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
 
   before_script:
+  - export KUBECONFIG=/etc/deploy/config
   - mkdir -p /etc/deploy
   - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
+
   script:
   - feature_branch=${CI_COMMIT_REF_NAME}
   - feature_tag=${feature_branch#"feature/"}
-  - apk update && apk add --no-cache curl git
-  - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-  - chmod +x ./kubectl
-  - mv ./kubectl /usr/local/bin/kubectl
   - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
   - cd ensembl-client-caas-deploy
   - git checkout refactor-manifest
