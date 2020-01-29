@@ -125,11 +125,9 @@ Deploy-WP-HX:staging:
   script:
   - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
   - cd ensembl-client-caas-deploy
-  - git checkout refactor-manifest
+  - git checkout migration/wp-hx
   - cd ..
   - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s/-<DEPLOYMENT_ENV>//g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s/-<DEPLOYMENT_ENV>//g" ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
 
