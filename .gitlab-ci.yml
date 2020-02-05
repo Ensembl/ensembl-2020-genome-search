@@ -48,20 +48,7 @@ Test:feature:
 
 # Build Prod/Stage
 Build:
-  stage: build_flask
-
-  image: docker
-
-  services:
-    - docker:dind
-
-  script:
-  - docker build -t ${CONTAINER_IMAGE} --no-cache -f docker/Dockerfile.prod .
-  - docker images
-  - echo "$GITLAB_REGISTRY_TOKEN" | docker login -u "$GITLAB_REGISTRY_USER" --password-stdin https://"$GITLAB_REGISTRY_URL"
-  - docker push ${CONTAINER_IMAGE}
-  - docker rmi ${CONTAINER_IMAGE}
-  - docker logout $GITLAB_REGISTRY_URL
+  extends: .build
 
   only:
   - dev
