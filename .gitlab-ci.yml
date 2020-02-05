@@ -126,11 +126,11 @@ Staging:EHK-HH:
   only:
   - dev
 
-# Deploy staging
-Staging:WP-HX:
+# Deploy staging to K8S_CLUSTER : WP-HH cluster
+Staging:WP-HH:
   extends: .deploy-wp
   environment:
-    name : wp-hx-staging
+    name : wp-hh-staging
 
   only:
   - dev
