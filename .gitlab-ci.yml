@@ -3,7 +3,7 @@ stages:
   - build_flask
   - deploy
 
-.build
+.build:
   stage: build_flask
   image: docker
   services:
@@ -17,7 +17,7 @@ stages:
   - docker rmi ${CONTAINER_IMAGE}
   - docker logout $GITLAB_REGISTRY_URL
 
-.deploy-wp
+.deploy-wp:
   stage: deploy
   image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
 
