@@ -130,7 +130,7 @@ Deploy:staging:
 Deploy-WP-HX:staging:
   extends: .deploy-wp
   environment:
-    name : wp-staging
+    name : wp-hx-staging
 
   only:
   - dev
