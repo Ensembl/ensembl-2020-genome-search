@@ -1,10 +1,10 @@
 stages:
   - test
-  - build_flask
+  - build_docker_image
   - deploy
 
 .build:
-  stage: build_flask
+  stage: build_docker_image
   image: docker
   services:
     - docker:dind
@@ -47,7 +47,7 @@ Test:feature:
     - python -m unittest discover -s tests
 
 # Build Prod/Stage
-Build:
+Docker-IMG:
   extends: .build
 
   only:
@@ -55,8 +55,8 @@ Build:
   - master
 
 # Build internal
-Build:internal:
-  stage: build_flask
+Docker-IMG:internal:
+  stage: build_docker_image
 
   image: docker
 
@@ -75,8 +75,8 @@ Build:internal:
   - master
 
 # Build Prod/Stage
-Build:feature:
-  stage: build_flask
+Docker-IMG:feature:
+  stage: build_docker_image
 
   image: docker
 
@@ -99,7 +99,7 @@ Build:feature:
   when: manual
 
 # Deploy Stage 
-Deploy:staging:
+Staging:EHK-HH:
   stage: deploy
   image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
   
@@ -127,7 +127,7 @@ Deploy:staging:
   - dev
 
 # Deploy staging
-Deploy-WP-HX:staging:
+Staging:WP-HX:
   extends: .deploy-wp
   environment:
     name : wp-hx-staging
@@ -136,7 +136,7 @@ Deploy-WP-HX:staging:
   - dev
 
 # Deploy Live
-Deploy:live:
+Live:EHK-HH:
   stage: deploy
   image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
 
@@ -165,7 +165,7 @@ Deploy:live:
   when: manual
 
 # Deploy internal
-Deploy:internal:
+Internal:EHK-HH:
   stage: deploy
   image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
 
@@ -191,7 +191,7 @@ Deploy:internal:
   when: manual
 
 # Deploy Feature
-Deploy:feature:
+Feature:EHK-HH:
   stage: deploy
   image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
 
