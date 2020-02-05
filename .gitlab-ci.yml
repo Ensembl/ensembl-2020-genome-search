@@ -3,6 +3,31 @@ stages:
   - build_flask
   - deploy
 
+.build:
+  stage: build_flask
+  image: docker
+  services:
+    - docker:dind
+
+  script:
+  - docker build -t ${CONTAINER_IMAGE} --no-cache -f docker/Dockerfile.prod .
+  - docker images
+  - echo "$GITLAB_REGISTRY_TOKEN" | docker login -u "$GITLAB_REGISTRY_USER" --password-stdin https://"$GITLAB_REGISTRY_URL"
+  - docker push ${CONTAINER_IMAGE}
+  - docker rmi ${CONTAINER_IMAGE}
+  - docker logout $GITLAB_REGISTRY_URL
+
+.deploy-wp:
+  stage: deploy
+  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
+
+  script:
+  - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
+  - git -C ensembl-client-caas-deploy/ checkout migration/wp-hx
+  - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
+  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+
 variables:
   CONTAINER_IMAGE: $GITLAB_REGISTRY_URL/$GITLAB_REGISTRY_NAMESPACE/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
   CONTAINER_INTERNAL_IMAGE: $GITLAB_REGISTRY_URL/$GITLAB_REGISTRY_NAMESPACE/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}-internal
@@ -23,20 +48,7 @@ Test:feature:
 
 # Build Prod/Stage
 Build:
-  stage: build_flask
-
-  image: docker
-
-  services:
-    - docker:dind
-
-  script:
-  - docker build -t ${CONTAINER_IMAGE} --no-cache -f docker/Dockerfile.prod .
-  - docker images
-  - echo "$GITLAB_REGISTRY_TOKEN" | docker login -u "$GITLAB_REGISTRY_USER" --password-stdin https://"$GITLAB_REGISTRY_URL"
-  - docker push ${CONTAINER_IMAGE}
-  - docker rmi ${CONTAINER_IMAGE}
-  - docker logout $GITLAB_REGISTRY_URL
+  extends: .build
 
   only:
   - dev
@@ -116,20 +128,9 @@ Deploy:staging:
 
 # Deploy staging
 Deploy-WP-HX:staging:
-  stage: deploy
-  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
-
+  extends: .deploy-wp
   environment:
     name : wp-staging
-
-  script:
-  - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
-  - cd ensembl-client-caas-deploy
-  - git checkout migration/wp-hx
-  - cd ..
-  - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
-  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
 
   only:
   - dev
