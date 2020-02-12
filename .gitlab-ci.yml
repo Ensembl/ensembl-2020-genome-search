@@ -83,22 +83,10 @@ Docker-IMG:internal:
 
 # Build Prod/Stage
 Docker-IMG:feature:
-  stage: build_docker_image
-
-  image: docker
-
-  services:
-    - docker:dind
-
-  script:
-  - feature_branch=${CI_COMMIT_REF_NAME}
-  - feature_tag=${feature_branch#"feature/"}
-  - docker build -t ${CONTAINER_IMAGE}-$feature_tag --no-cache -f docker/Dockerfile.feature .
-  - docker images
-  - echo "$GITLAB_REGISTRY_TOKEN" | docker login -u "$GITLAB_REGISTRY_USER" --password-stdin https://"$GITLAB_REGISTRY_URL"
-  - docker push ${CONTAINER_IMAGE}-$feature_tag
-  - docker rmi ${CONTAINER_IMAGE}-$feature_tag
-  - docker logout $GITLAB_REGISTRY_URL
+  extends: .build
+  variables:
+    CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
+    DOCKERFILE: Dockerfile.feature
 
   only:
   - /^feature\/.*$/
