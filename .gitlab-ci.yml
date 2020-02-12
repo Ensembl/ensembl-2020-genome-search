@@ -146,27 +146,11 @@ Internal:EHK-HH:
 
 # Deploy Feature
 Feature:EHK-HH:
-  stage: deploy
-  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
-
-  before_script:
-  - export KUBECONFIG=/etc/deploy/config
-  - mkdir -p /etc/deploy
-  - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
-
-  script:
-  - feature_branch=${CI_COMMIT_REF_NAME}
-  - feature_tag=${feature_branch#"feature/"}
-  - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
-  - cd ensembl-client-caas-deploy
-  - git checkout refactor-manifest
-  - cd ..
-  - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}-$feature_tag/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s/<DEPLOYMENT_ENV>/$feature_tag/g" ensembl-client-caas-deploy/ensembl_genome_search_cm.yaml
-  - sed -i "s/<DEPLOYMENT_ENV>/$feature_tag/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - kubectl config use-context ens-dev-ctx
-  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_cm.yaml
-  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  extends: .deploy-ehk
+  variables:
+    DEPLOYENV: ${CI_COMMIT_REF_SLUG}
+    KUBE_CONTEXT: ens-dev-ctx
+    CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
 
   only:
   - /^feature\/.*$/
