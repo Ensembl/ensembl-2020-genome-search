@@ -8,14 +8,13 @@ stages:
   image: docker
   services:
     - docker:dind
-
+  before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
   - docker build -t ${CONTAINER_IMAGE} --no-cache -f docker/Dockerfile.prod .
-  - docker images
-  - echo "$GITLAB_REGISTRY_TOKEN" | docker login -u "$GITLAB_REGISTRY_USER" --password-stdin https://"$GITLAB_REGISTRY_URL"
   - docker push ${CONTAINER_IMAGE}
   - docker rmi ${CONTAINER_IMAGE}
-  - docker logout $GITLAB_REGISTRY_URL
+  - docker logout $CI_REGISTRY
 
 .deploy-wp:
   stage: deploy
