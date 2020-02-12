@@ -134,24 +134,10 @@ Live:EHK-HH:
 
 # Deploy internal
 Internal:EHK-HH:
-  stage: deploy
-  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
-
-  before_script:
-  - export KUBECONFIG=/etc/deploy/config
-  - mkdir -p /etc/deploy
-  - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
-
-  script:
-  - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
-  - cd ensembl-client-caas-deploy
-  - git checkout refactor-manifest
-  - cd ..
-  - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}-internal/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s/<DEPLOYMENT_ENV>/internal/g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - kubectl config view
-  - kubectl config use-context ens-dev-ctx
-  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  extends: .deploy-ehk
+  variables:
+    DEPLOYENV: internal
+    KUBE_CONTEXT: ens-dev-ctx
 
   only:
   - master
