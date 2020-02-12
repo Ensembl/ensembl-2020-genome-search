@@ -73,20 +73,10 @@ Docker-IMG:
 
 # Build internal
 Docker-IMG:internal:
-  stage: build_docker_image
-
-  image: docker
-
-  services:
-    - docker:dind
-
-  script:
-  - docker build -t ${CONTAINER_INTERNAL_IMAGE} --no-cache -f docker/Dockerfile.internal .
-  - docker images
-  - echo "$GITLAB_REGISTRY_TOKEN" | docker login -u "$GITLAB_REGISTRY_USER" --password-stdin https://"$GITLAB_REGISTRY_URL"
-  - docker push ${CONTAINER_INTERNAL_IMAGE}
-  - docker rmi ${CONTAINER_INTERNAL_IMAGE}
-  - docker logout $GITLAB_REGISTRY_URL
+  extends: .build
+  variables:
+    CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-internal
+    DOCKERFILE: Dockerfile.internal
 
   only:
   - master
