@@ -28,6 +28,23 @@ stages:
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
 
+.deploy-ehk:
+  stage: deploy
+  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
+  before_script:
+  - export KUBECONFIG=/etc/deploy/config
+  - mkdir -p /etc/deploy
+  - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
+
+  script:
+  - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
+  - sed -i "s#<DOCKER_IMAGE>#${CONTAINER_IMAGE}#g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - sed -i "s#<DEPLOYMENT_ENV>#${DEPLOYENV}#g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+  - sed -i "s#<DEPLOYMENT_ENV>#${DEPLOYENV}#g" ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
+  - kubectl config use-context $KUBE_CONTEXT
+  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
+  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
+
 variables:
   CONTAINER_IMAGE: $GITLAB_REGISTRY_URL/$GITLAB_REGISTRY_NAMESPACE/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
   CONTAINER_INTERNAL_IMAGE: $GITLAB_REGISTRY_URL/$GITLAB_REGISTRY_NAMESPACE/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}-internal
