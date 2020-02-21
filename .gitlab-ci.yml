@@ -171,6 +171,17 @@ Internal:EHK-HH:
 
   when: manual
 
+# Deploy internal to WP-HX cluster
+Internal:WP-HX:
+  extends: .deploy-wp
+  variables:
+    CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-internal
+  environment:
+    name : wp-hx-internal
+
+  only:
+  - dev
+
 # Deploy Feature to EHK k8s cluster
 Feature:EHK-HH:
   extends: .deploy-ehk
