@@ -13,11 +13,16 @@ class ObjectInfo(Resource):
     def get(self, **kwargs):
 
         parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('genome_id',  type=str, required=True, help="Missing genome_id param in the request.", location='args')
         parser.add_argument('object_id',  type=str, required=True, help="Missing object_id param in the request.", location='args')
         self.args = parser.parse_args()
 
+        if not self.args.genome_id:
+            return abort(400, {'error': 'No value for genome_id'})
+        genome_id = self.args.genome_id
+        
         try:
-            genome_id, object_type, object_value = self.args.object_id.split(':', 2)
+            object_type, object_value = self.args.object_id.split(':', 1)
         except:
             return abort(400, {'error': 'Problem parsing object_id'})
 
