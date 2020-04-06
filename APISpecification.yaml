@@ -146,6 +146,13 @@ paths:
       summary: Get object info for given object_id
       description: Returns info for given object
       parameters:
+      - name: genome_id
+        in: query
+        description: ID of genome to return
+        required: true
+        schema:
+          type: string
+          default: homo_sapiens_GCA_000001405_27
       - name: object_id
         in: query
         description: object_id
@@ -160,6 +167,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Object'
+              examples:
+                object-info-gene-success:
+                  $ref: '#/components/examples/object-info-gene-response'
+                object-info-region-success:
+                  $ref: '#/components/examples/object-info-region-response'
         400:
           description: Invalid Genome ID
           content: 
@@ -176,6 +188,7 @@ paths:
           content: {}
       security:
       - api_key: []
+
 components:
   schemas:
     Genome:
@@ -343,3 +356,28 @@ components:
           {
           error:  "Invalid genome_id : abc"
           }
+    object-info-gene-response:
+      value:
+        bio_type: Protein coding
+        description: BRCA2 DNA repair associated
+        genome_id: homo_sapiens_GCA_000001405_27
+        label: BRCA2
+        location:
+          chromosome: '13'
+          end: 32400266
+          start: 32315086
+        object_id: 'gene:ENSG00000139618'
+        object_type: gene
+        stable_id: ENSG00000139618
+        strand: forward
+        versioned_stable_id: ENSG00000139618.15
+    object-info-region-response:
+      value:
+        genome_id: homo_sapiens_GCA_000001405_27
+        label: '17:63992802-64038237'
+        location:
+          chromosome: '17'
+          end: '64038237'
+          start: '63992802'
+        object_id: 'region:17:63992802-64038237'
+        object_type: region
