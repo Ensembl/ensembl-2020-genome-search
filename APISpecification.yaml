@@ -152,7 +152,7 @@ paths:
         required: true
         schema:
           type: string
-          default: homo_sapiens_GCA_000001405_27:gene:ENSG00000139618
+          default: gene:ENSG00000139618
       responses:
         200:
           description: successful operation
@@ -162,7 +162,15 @@ paths:
                 $ref: '#/components/schemas/Object'
         400:
           description: Invalid Genome ID
-          content: {}
+          content: 
+            application/json:
+              examples:
+                missing-genome_id-param:
+                  $ref: '#/components/examples/missing-genome_id-param-response'
+                missing-genome_id-value:
+                  $ref: '#/components/examples/missing-genome_id-value-response'
+                invalid-genome_id:
+                  $ref: '#/components/examples/invalid-genome_id-response'
         404:
           description: Genome ID not found
           content: {}
@@ -316,3 +324,22 @@ components:
           type: integer
           format: int64
           example: 32315086
+  examples:
+    missing-genome_id-param-response:
+      value:
+        message: 
+          {
+          genome_id: "Missing genome_id param in the request." 
+          }
+    missing-genome_id-value-response:
+      value:
+        message: 
+          {
+          error: "No value for genome_id"
+          }
+    invalid-genome_id-response:
+      value:
+        message: 
+          {
+          error:  "Invalid genome_id : abc"
+          }
