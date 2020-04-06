@@ -20,7 +20,7 @@ class ObjectInfo(Resource):
         if not self.args.genome_id:
             return abort(400, {'error': 'No value for genome_id'})
         genome_id = self.args.genome_id
-        
+
         try:
             object_type, object_value = self.args.object_id.split(':', 1)
         except:
@@ -132,12 +132,17 @@ class ObjectTrack(Resource):
     def get(self, **kwargs):
 
         parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('genome_id',  type=str, required=True, help="Missing genome_id param in the request.", location='args')
         parser.add_argument('object_id', type=str, required=True, help="Missing object_id param in the request.",
                             location='args')
         self.args = parser.parse_args()
+        if not self.args.genome_id:
+            return abort(400, {'error': 'No value for genome_id'})
+
+        genome_id = self.args.genome_id
 
         try:
-            genome_id, object_type, object_value = self.args.object_id.split(':')
+            object_type, object_value = self.args.object_id.split(':')
         except:
             return abort(400, {'error': 'Problem parsing object_id'})
 
@@ -171,7 +176,7 @@ class ObjectTrack(Resource):
                         additional_info=child_object.get('additional_info'),
                         colour=child_object.get('colour'),
                         label=child_object_id,
-                        ensembl_object_id='{}:{}:{}'.format(genome_id, child_object_type, child_object_id),
+                        ensembl_object_id='{}:{}'.format(child_object_type, child_object_id),
                         support_level=child_object.get('support_level'),
                         track_id='track:{}'.format(child_object.get('track_id')),
                         description=child_object.get('description')
