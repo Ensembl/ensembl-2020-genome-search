@@ -188,7 +188,51 @@ paths:
           content: {}
       security:
       - api_key: []
-
+  /api/object/track_list:
+    get:
+      tags:
+      - api
+      summary: Get list of track for given object and genome_id
+      description: Returns info for given object
+      parameters:
+      - name: genome_id
+        in: query
+        description: genome id of the object
+        required: true
+        schema:
+          type: string
+          default: homo_sapiens_GCA_000001405_27
+      - name: object_id
+        in: query
+        description: object_id
+        required: true
+        schema:
+          type: string
+          default: gene:ENSG00000139618
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrackList'
+              examples:
+                track-list-gene-success:
+                  $ref: '#/components/examples/track-list-gene-response'
+        400:
+          description: Invalid Genome ID
+          content:
+            application/json:
+              examples:
+                missing-genome_id-param:
+                  $ref: '#/components/examples/missing-genome_id-param-response'
+                missing-genome_id-value:
+                  $ref: '#/components/examples/missing-genome_id-value-response'
+                invalid-genome_id:
+                  $ref: '#/components/examples/invalid-genome_id-response'
+        404:
+          description: Genome ID not found
+          content: {}
 components:
   schemas:
     Genome:
@@ -255,6 +299,23 @@ components:
         genome_id:
           type: string
           example: homo_sapiens_GCA_000001405_14
+    TrackList:
+      type: object
+      properties:
+        additional_info:
+          type: string
+        child_tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChildTrack'
+        descirption:
+          type: string
+        ensembl_object_id:
+          type: string
+        label:
+          type: string
+        track_id:
+          type: string
     TrackCategory:
       type: object
       properties:
@@ -291,6 +352,23 @@ components:
         additional_info:
           type: string
           example: Forward strand
+    ChildTrack:
+      type: object
+      properties:
+        additional_info:
+          type: string
+        color:
+          type: string
+        description:
+          type: string
+        ensembl_object_id:
+          type: string
+        label:
+          type: string
+        support_level:
+          type: string
+        track_id:
+          type: string
     Object:
       type: object
       properties:
@@ -381,3 +459,18 @@ components:
           start: '63992802'
         object_id: 'region:17:63992802-64038237'
         object_type: region
+    track-list-gene-response:
+      value:
+        additional_info: Protein coding
+        child_tracks:
+          - additional_info: Protein coding
+            colour: BLUE
+            description: 'BRCA2, DNA repair associated'
+            ensembl_object_id: 'Transcript:ENST00000380152.7'
+            label: ENST00000380152.7
+            support_level: Canonical
+            track_id: 'track:gene-feat-1'
+        description: 'BRCA2, DNA repair associated'
+        ensembl_object_id: 'gene:ENSG00000139618'
+        label: BRCA2
+        track_id: 'track:gene-feat'
