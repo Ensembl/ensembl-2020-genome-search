@@ -289,7 +289,7 @@ components:
           $ref: '#/components/schemas/Location'
         object_id:
           type: string
-          example: "homo_sapiens_GCA_000001405_27:gene:ENSG00000139618"
+          example: "gene:ENSG00000139618"
         object_type:
           type: string
           example: "gene"
