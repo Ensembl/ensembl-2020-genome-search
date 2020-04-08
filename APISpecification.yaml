@@ -233,6 +233,65 @@ paths:
         404:
           description: Genome ID not found
           content: {}
+  /api/genome/karyotype:
+    get:
+      tags:
+      - api
+      summary: Returns information about karyotype
+      description: Returns a karyotype for given genome
+      parameters:
+      - name: genome_id
+        in: query
+        description: ID of genome to return
+        required: true
+        schema:
+          type: string
+          default: homo_sapiens_GCA_000001405_27
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Karyotype'
+        400:
+          description: Invalid Genome ID
+          content: {}
+        404:
+          description: Genome not found
+          content: {}
+      security:
+      - api_key: []
+  /api/genome/region/validate:
+    get:
+      tags:
+      - api
+      summary: Returns information about karyotype
+      description: Returns a karyotype for given genome
+      parameters:
+      - name: genome_id
+        in: query
+        description: ID of genome to return
+        required: true
+        schema:
+          type: string
+          default: homo_sapiens_GCA_000001405_27
+      - name: region
+        in: query
+        description: region to validate
+        required: true
+        schema: 
+          type: string
+          default: 1:10000-1000000
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidatedRegion'
 components:
   schemas:
     Genome:
@@ -379,8 +438,7 @@ components:
           type: string
           example: "BRCA2 DNA repair associated"
         genome_id:
-          type: string
-          example: '#components/schemas/Genome/properties/genome_id'
+          $ref: '#/components/schemas/Genome/properties/genome_id'
         label:
           type: string
           example: "BRCA2"
@@ -415,6 +473,75 @@ components:
           type: integer
           format: int64
           example: 32315086
+    Karyotype:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "1"
+        type:
+          type: string
+          example: "chromosome"
+        length:
+          type: integer
+          example: 248956422
+        is_chromosome:
+          type: boolean
+          example: true
+        is_circular:
+          type: boolean
+          example: true
+    ValidatedRegion: 
+      type: object
+      properties:
+        genome_id:
+          type: object
+          properties:
+            value: 
+              type: string
+            is_valid:
+              type: boolean
+            error_code:
+              type: string
+            error_message:
+              type: string        
+        start:
+          type: object
+          properties:
+            value: 
+              type: integer
+            is_valid:
+              type: boolean
+            error_code:
+              type: string
+            error_message:
+              type: string
+        end:
+          type: object
+          properties:
+            value: 
+              type: integer
+            is_valid:
+              type: boolean
+            error_code:
+              type: string
+            error_message:
+              type: string
+        region: 
+          type: object
+          properties:
+            region_code: 
+              type: string
+            region_name:
+              type: string
+            is_valid:
+              type: boolean
+            error_code:
+              type: string
+            error_message:
+              type: string
+        region_id:
+          $ref: '#/components/schemas/Object/properties/object_id' 
   examples:
     missing-genome_id-param-response:
       value:
@@ -474,3 +601,27 @@ components:
         ensembl_object_id: 'gene:ENSG00000139618'
         label: BRCA2
         track_id: 'track:gene-feat'
+    valid-region-response:
+      value:
+        end:
+          error_code: null
+          error_message: null
+          is_valid: true
+          value: 1000000
+        genome_id:
+          error_code: null
+          error_message: null
+          is_valid: true
+          value: homo_sapiens_GCA_000001405_27
+        region:
+          error_code: null
+          error_message: null
+          is_valid: true
+          region_code: chromosome
+          region_name: '1'
+        region_id: 'homo_sapiens_GCA_000001405_27:region:1:10000-1000000'
+        start:
+          error_code: null
+          error_message: null
+          is_valid: true
+          value: 10000
