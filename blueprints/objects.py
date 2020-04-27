@@ -182,7 +182,7 @@ class ObjectTrack(Resource):
                         colour=child_object.get('colour'),
                         label=child_object_id,
                         stable_id=child_object_id,
-                        type=child_object_type,
+                        type=child_object_type.lower(),
                         support_level=child_object.get('support_level'),
                         track_id='track:{}'.format(child_object.get('track_id')),
                         description=child_object.get('description')
