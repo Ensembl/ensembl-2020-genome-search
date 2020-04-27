@@ -36,7 +36,10 @@ class GenomeInfo(Resource):
         if 'example_objects' in genome:
             processed_example_objects = []
             for object_type, object_value in genome['example_objects'].items():
-                processed_example_objects.append("{}:{}".format(object_type.lower(), object_value))
+                ex_object = {}
+                ex_object["type"] = object_type.lower()
+                ex_object["id"] = object_value
+                processed_example_objects.append(ex_object)
 
             genome.update({'example_objects': processed_example_objects})
 
