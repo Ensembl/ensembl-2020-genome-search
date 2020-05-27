@@ -100,7 +100,7 @@ Docker-IMG:internal:
     DOCKERFILE: Dockerfile.internal
 
   only:
-  - master
+  - dev
 
 # Build docker image for feature_branch environment
 Docker-IMG:feature:
@@ -192,6 +192,17 @@ Internal:WP-HX:
     CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-internal
   environment:
     name : wp-hx-internal
+
+  only:
+  - dev
+
+# Deploy internal to WP-HH cluster
+Internal:WP-HH:
+  extends: .deploy-wp
+  variables:
+    CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-internal
+  environment:
+    name : wp-hh-internal
 
   only:
   - dev
