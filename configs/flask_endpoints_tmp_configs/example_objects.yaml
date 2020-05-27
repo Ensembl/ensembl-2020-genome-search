@@ -12,7 +12,7 @@ homo_sapiens_GCA_000001405_27:
         end: 32400266
       child_objects:
         Transcript:
-            ENST00000380152.7:
+            ENST00000380152:
               additional_info: 'Protein coding'
               description: 'BRCA2, DNA repair associated'
               colour: 'BLUE'
@@ -32,7 +32,7 @@ triticum_aestivum_GCA_900519105_1:
         end: 379539827
       child_objects:
         Transcript:
-            TraesCS3D02G273600.1:
+            TraesCS3D02G273600:
               additional_info: 'Protein coding'
               description: 'Heat shock protein 101 '
               colour: 'BLUE'
@@ -52,7 +52,7 @@ homo_sapiens_GCA_000001405_14:
         end: 32973805
       child_objects:
         Transcript:
-            ENST00000544455.1:
+            ENST00000544455:
               additional_info: 'Protein coding'
               description: 'breast cancer 2, early onset'
               colour: 'BLUE'
@@ -112,7 +112,7 @@ caenorhabditis_elegans_GCA_000002985_3:
         end: 948883
       child_objects:
         Transcript:
-            F53H8.4:
+            F53H8:
               additional_info: 'Protein coding'
               description: 'Phosphatidylcholine:ceramide cholinephosphotransferase 2'
               colour: 'BLUE'

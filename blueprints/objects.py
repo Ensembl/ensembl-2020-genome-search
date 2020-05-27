@@ -13,14 +13,22 @@ class ObjectInfo(Resource):
     def get(self, **kwargs):
 
         parser = reqparse.RequestParser(bundle_errors=True)
-        parser.add_argument('object_id',  type=str, required=True, help="Missing object_id param in the request.", location='args')
+        parser.add_argument('genome_id',  type=str, required=True, help="Missing genome_id param in the request.", location='args')
+        parser.add_argument('type',  type=str, required=True, help="Missing type param in the request.", location='args')
+        parser.add_argument('stable_id',  type=str, required=True, help="Missing stable_id param in the request.", location='args')
         self.args = parser.parse_args()
 
-        try:
-            genome_id, object_type, object_value = self.args.object_id.split(':', 2)
-        except:
-            return abort(400, {'error': 'Problem parsing object_id'})
+        if not self.args.genome_id:
+            return abort(400, {'error': 'No value for genome_id'})
+        if not self.args.type:
+            return abort(400, {'error': 'No value for type'})
+        if not self.args.stable_id:
+            return abort(400, {'error': 'No value for stable_id'})
 
+        genome_id = self.args.genome_id
+        object_type = self.args.type
+        object_value = self.args.stable_id
+        
         genome_key = app.genome_store.check_if_genome_exists('genome_id', genome_id)
 
         if genome_key is None:
@@ -104,9 +112,8 @@ class ObjectInfo(Resource):
             strand='forward' if response.get('strand') == 1 else 'reverse',
             description=re.sub(r'\[.*?\]', '', response.get('description')).rstrip() if response.get('description') is not None else None,
             versioned_stable_id="{}.{}".format(object_value, response.get('version')) if response.get('version') is not None else None,
-            object_id=self.args.object_id,
             genome_id=genome_id,
-            object_type=object_type,
+            type=object_type,
             stable_id=object_value
         )
 
@@ -127,14 +134,21 @@ class ObjectTrack(Resource):
     def get(self, **kwargs):
 
         parser = reqparse.RequestParser(bundle_errors=True)
-        parser.add_argument('object_id', type=str, required=True, help="Missing object_id param in the request.",
-                            location='args')
+        parser.add_argument('genome_id',  type=str, required=True, help="Missing genome_id param in the request.", location='args')
+        parser.add_argument('type',  type=str, required=True, help="Missing type param in the request.", location='args')
+        parser.add_argument('stable_id',  type=str, required=True, help="Missing stable_id param in the request.", location='args')
+        
         self.args = parser.parse_args()
+        if not self.args.genome_id:
+            return abort(400, {'error': 'No value for genome_id'})
+        if not self.args.type:
+            return abort(400, {'error': 'No value for type'})
+        if not self.args.stable_id:
+            return abort(400, {'error': 'No value for stable_id'})
 
-        try:
-            genome_id, object_type, object_value = self.args.object_id.split(':')
-        except:
-            return abort(400, {'error': 'Problem parsing object_id'})
+        genome_id = self.args.genome_id
+        object_type = self.args.type
+        object_value = self.args.stable_id
 
         with open('configs/flask_endpoints_tmp_configs/example_objects.yaml') as f:
             data = yaml.load(f)
@@ -154,7 +168,8 @@ class ObjectTrack(Resource):
         response_data = dict(
             additional_info=full_data.get('bio_type'),
             label=full_data.get('label'),
-            ensembl_object_id=self.args.object_id,
+            stable_id=object_value,
+            type=object_type,
             track_id='track:gene-feat',
             description=full_data.get('description')
         )
@@ -166,7 +181,8 @@ class ObjectTrack(Resource):
                         additional_info=child_object.get('additional_info'),
                         colour=child_object.get('colour'),
                         label=child_object_id,
-                        ensembl_object_id='{}:{}:{}'.format(genome_id, child_object_type, child_object_id),
+                        stable_id=child_object_id,
+                        type=child_object_type.lower(),
                         support_level=child_object.get('support_level'),
                         track_id='track:{}'.format(child_object.get('track_id')),
                         description=child_object.get('description')
