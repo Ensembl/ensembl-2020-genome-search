@@ -4,7 +4,7 @@ Date: 2019-06-11
 
 ## Status
 
-Agreed but will be superseeded
+Superseded by [0003-genome-identifiers](0003-genome-identifiers.md)
 
 ## Context
 
