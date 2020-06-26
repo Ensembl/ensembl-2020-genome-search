@@ -18,6 +18,9 @@
 # dev branch -> staging
 # master branch -> internal ( all 45000 species)
 # master branch -> live
+include:
+  - template: Container-Scanning.gitlab-ci.yml
+
 
 # Define stages for the CI/CD pipeline
 stages:
@@ -124,10 +127,6 @@ Docker-IMG:feature:
   variables:
     CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
     DOCKERFILE: Dockerfile.feature
-
-  only:
-  - /^feature\/.*$/
-  - /^refactor\/.*$/
 
   when: manual
 
