@@ -124,6 +124,8 @@ Docker-IMG:review:
     DOCKERFILE: Dockerfile.feature
 
   except:
+  - dev
+  - master  
   - /^nodeploy\/.*$/
 
   when: manual
@@ -235,7 +237,7 @@ Feature:EHK-HH:
 
 # Deploy Feature to EHK k8s cluster
 Review:WP-HX:
-  extends: .deploy-wp-feature
+  extends: .deploy-wp-review
   environment:
     name : wp-hx-dev
   variables:
@@ -243,6 +245,8 @@ Review:WP-HX:
     CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
 
   except:
+  - dev
+  - master  
   - /^nodeploy\/.*$/
 
   when: manual
