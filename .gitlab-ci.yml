@@ -56,7 +56,7 @@ stages:
   image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
 
   script:
-  - git clone https://gitlab.ebi.ac.uk/web/ensembl-k8s-manifests.git
+  - git clone https://gitlab.ebi.ac.uk/ensembl-web/ensembl-k8s-manifests.git
   - git -C ensembl-k8s-manifests/ checkout wp-k8s-review
   - sed -i "s#<DOCKER_IMAGE>#${CONTAINER_IMAGE}#g" ensembl-k8s-manifests/ensembl_genome_search_deployment.yaml
   - sed -i "s#<DEPLOYMENT_ENV>#${CI_COMMIT_REF_SLUG}#g" ensembl-k8s-manifests/ensembl_genome_search_deployment.yaml
