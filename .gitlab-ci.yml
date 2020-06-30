@@ -51,7 +51,7 @@ stages:
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
 
-.deploy-wp-feature:
+.deploy-wp-review:
   stage: deploy
   image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
 
@@ -60,8 +60,6 @@ stages:
   - git -C ensembl-client-caas-deploy/ checkout deployfeature
   - sed -i "s#<DOCKER_IMAGE>#${CONTAINER_IMAGE}#g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
   - sed -i "s#<DEPLOYMENT_ENV>#${CI_COMMIT_REF_SLUG}#g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s#<DEPLOYMENT_ENV>#${CI_COMMIT_REF_SLUG}#g" ensembl-client-caas-deploy/ensembl_genome_search_service_node.yaml
-  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service_node.yaml
   - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
 
 # Template to deploy to EHK k8s cluster
@@ -119,15 +117,14 @@ Docker-IMG:internal:
   - dev
 
 # Build docker image for feature_branch environment
-Docker-IMG:feature:
+Docker-IMG:review:
   extends: .build
   variables:
     CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
     DOCKERFILE: Dockerfile.feature
 
-  only:
-  - /^feature\/.*$/
-  - /^refactor\/.*$/
+  except:
+  - /^nodeploy\/.*$/
 
   when: manual
 
@@ -237,7 +234,7 @@ Feature:EHK-HH:
   when: manual
 
 # Deploy Feature to EHK k8s cluster
-Feature:WP-HX:
+Review:WP-HX:
   extends: .deploy-wp-feature
   environment:
     name : wp-hx-dev
@@ -245,8 +242,7 @@ Feature:WP-HX:
     DEPLOYENV: ${CI_COMMIT_REF_SLUG}
     CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
 
-  only:
-  - /^feature\/.*$/
-  - /^refactor\/.*$/
+  except:
+  - /^nodeploy\/.*$/
 
   when: manual
