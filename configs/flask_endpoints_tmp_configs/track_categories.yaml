@@ -1,5 +1,5 @@
 genome_track_categories:
-  homo_sapiens_GCA_000001405_27:
+  homo_sapiens_GCA_000001405_28:
     - label: 'Genes & transcripts'
       track_category_id: 'genes-transcripts'
       track_list:
