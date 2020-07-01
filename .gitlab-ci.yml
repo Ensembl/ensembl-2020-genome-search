@@ -147,19 +147,6 @@ Live:WP-HH:
   only:
   - master
 
-# Deploy internal to EHK k8s cluster
-Internal:EHK-HH:
-  extends: .deploy-ehk
-  variables:
-    DEPLOYENV: internal
-    CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-internal
-    KUBE_CONTEXT: ens-dev-ctx
-
-  only:
-  - master
-
-  when: manual
-
 # Deploy internal to WP-HX cluster
 Internal:WP-HX:
   extends: .deploy-wp
@@ -191,7 +178,7 @@ Dev:WP-HX:
   only:
   - dev
 
-# Deploy Feature to EHK k8s cluster
+# Deploy Review apps to WP-HX k8s cluster
 Review:WP-HX:
   extends: .deploy-wp-review
   environment:
