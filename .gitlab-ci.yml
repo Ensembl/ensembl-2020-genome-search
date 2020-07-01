@@ -221,6 +221,15 @@ Internal:WP-HH:
   only:
   - dev
 
+# Deploy dev to WP-HX cluster
+Dev:WP-HX:
+  extends: .deploy-wp
+  environment:
+    name : wp-hx-dev
+
+  only:
+  - dev
+
 # Deploy Feature to EHK k8s cluster
 Feature:EHK-HH:
   extends: .deploy-ehk
