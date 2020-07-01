@@ -61,24 +61,6 @@ stages:
   - sed -i "s#<DEPLOYMENT_ENV>#${CI_COMMIT_REF_SLUG}#g" ensembl-k8s-manifests/ensembl_genome_search_deployment.yaml
   - kubectl apply -f ensembl-k8s-manifests/ensembl_genome_search_deployment.yaml
 
-# Template to deploy to EHK k8s cluster
-.deploy-ehk:
-  stage: deploy
-  image: dockerhub.ebi.ac.uk/kamal/deploy-tools:0.1
-  before_script:
-  - export KUBECONFIG=/etc/deploy/config
-  - mkdir -p /etc/deploy
-  - echo ${EMBASSY_KUBECONFIG} | base64 -d > ${KUBECONFIG}
-
-  script:
-  - git clone https://gitlab.ebi.ac.uk/kamal/ensembl-client-caas-deploy.git
-  - sed -i "s#<DOCKER_IMAGE>#${CONTAINER_IMAGE}#g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s#<DEPLOYMENT_ENV>#${DEPLOYENV}#g" ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-  - sed -i "s#<DEPLOYMENT_ENV>#${DEPLOYENV}#g" ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
-  - kubectl config use-context $KUBE_CONTEXT
-  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_service.yaml
-  - kubectl apply -f ensembl-client-caas-deploy/ensembl_genome_search_deployment.yaml
-
 variables:
   CONTAINER_IMAGE: $GITLAB_REGISTRY_URL/$GITLAB_REGISTRY_NAMESPACE/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
   DOCKERFILE: Dockerfile.prod
@@ -129,15 +111,6 @@ Docker-IMG:review:
 
   when: manual
 
-# Deploy staging to EHK-HH cluster
-Staging:EHK-HH:
-  extends: .deploy-ehk
-  variables:
-    DEPLOYENV: staging
-    KUBE_CONTEXT: ens-stage-ctx
-  only:
-  - dev
-
 # Deploy staging to WP-HX cluster
 Staging:WP-HX:
   extends: .deploy-wp
@@ -155,18 +128,6 @@ Staging:WP-HH:
 
   only:
   - dev
-
-# Deploy Live to EHK-HH cluster
-Live:EHK-HH:
-  extends: .deploy-ehk
-  variables:
-    DEPLOYENV: prod
-    KUBE_CONTEXT: ens-prod-ctx
-
-  only:
-  - master
-
-  when: manual
 
 # Deploy live to WP-HH cluster
 Live:WP-HX:
@@ -229,19 +190,6 @@ Dev:WP-HX:
 
   only:
   - dev
-
-# Deploy Feature to EHK k8s cluster
-Feature:EHK-HH:
-  extends: .deploy-ehk
-  variables:
-    DEPLOYENV: ${CI_COMMIT_REF_SLUG}
-    KUBE_CONTEXT: ens-dev-ctx
-    CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
-
-  only:
-  - /^feature\/.*$/
-
-  when: manual
 
 # Deploy Feature to EHK k8s cluster
 Review:WP-HX:
