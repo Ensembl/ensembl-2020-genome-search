@@ -1,6 +1,6 @@
 ASSOCIATED_ASSEMBLIES:
       human:
-          - 'homo_sapiens_GCA_000001405_27'
+          - 'homo_sapiens_GCA_000001405_28'
           - 'homo_sapiens_GCA_000001405_14'
       test:
           - 'wheat_test1'
@@ -10,7 +10,7 @@ ASSOCIATED_ASSEMBLIES:
           - 'wheat_test5'
           - 'wheat_test6'
 POPULAR_GENOMES:
-      - 'homo_sapiens_GCA_000001405_27'
+      - 'homo_sapiens_GCA_000001405_28'
       - 'mus_musculus_GCA_000001635_8'
       - 'triticum_aestivum_GCA_900519105_1'
       - 'homo_sapiens_GCA_000001405_14'
@@ -53,7 +53,7 @@ POPULAR_GENOMES:
       - 'salpingoeca_rosetta_GCA_000188695_1'
       - 'plasmodium_falciparum_GCA_000002765_2'
 AVAILABLE_GENOMES:
-      'homo_sapiens_GCA_000001405_27':
+      'homo_sapiens_GCA_000001405_28':
               Gene: 'ENSG00000139618'
               Region: '17:63992802-64038237'
       'homo_sapiens_GCA_000001405_14':

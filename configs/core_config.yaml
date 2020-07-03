@@ -45,7 +45,7 @@ GENOME_ID_VALID_CHARS: 'A-Za-z0-9'
 
 
 
-V_VERSION: 96
+V_VERSION: 98
 
 METADATA_REGISTRY_URL: 'http://test-metadata.ensembl.org/genome'
 

@@ -55,7 +55,7 @@ if __name__ == "__main__":
             json.dump(regions_info,kf)
 
     """
-    genomes = {'homo_sapiens':'homo_sapiens_GCA_000001405_27', \
+    genomes = {'homo_sapiens':'homo_sapiens_GCA_000001405_28', \
                 'triticum_aestivum':'triticum_aestivum_GCA_900519105_1', \
                 'plasmodium_falciparum':'plasmodium_falciparum_GCA_000002765_2', \
                 'escherichia_coli':'escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2', \

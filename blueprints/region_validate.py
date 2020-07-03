@@ -272,13 +272,13 @@ class RegionValidate(Resource):
 
 # Tests
 # Valid
-# /api/genome/region/validate?genome_id=homo_sapiens_GCA_000001405_27&region=chromosome%201:123-26365343
+# /api/genome/region/validate?genome_id=homo_sapiens_GCA_000001405_28&region=chromosome%201:123-26365343
 
 # Valid
-# /api/genome/region/validate?genome_id=homo_sapiens_GCA_000001405_27&region=1:123-26365343
+# /api/genome/region/validate?genome_id=homo_sapiens_GCA_000001405_28&region=1:123-26365343
 
 # Valid
-# /api/genome/region/validate?genome_id=homo_sapiens_GCA_000001405_27&region=chromosome%201:123-26365343
+# /api/genome/region/validate?genome_id=homo_sapiens_GCA_000001405_28&region=chromosome%201:123-26365343
 
 
 api.add_resource(RegionValidate, '/validate')
