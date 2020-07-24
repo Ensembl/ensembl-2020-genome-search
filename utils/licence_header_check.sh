@@ -20,7 +20,10 @@ if [ -n "$newly_added_files" ]
 then
     # Check for Copyright statement
     for newly_added_file in $newly_added_files; do
-        files_without_header+=($(grep -L "Licensed under the Apache License" $newly_added_file))
+        if [[ $newly_added_file =~ \.py$ ]];
+        then
+            files_without_header+=($(grep -L "Licensed under the Apache License" $newly_added_file))
+        fi
     done
 
     if [ -n "$files_without_header" ]
