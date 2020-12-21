@@ -31,7 +31,14 @@ class Genome(object):
     def create_genome_from_mr_format(self):
 
         # Use dict get method so that we get None value instead of KeyError when a key is not found
-        self.common_name = self.genome_info.get('organism', {}).get('display_name')
+        mr_display_name = self.genome_info.get('organism', {}).get('display_name')
+        mr_scientific_name = self.genome_info.get('organism', {}).get('scientific_name')
+
+        if mr_display_name == mr_scientific_name:
+            self.common_name = None
+        else:
+            self.common_name = mr_display_name
+
         self.scientific_name = self.genome_info.get('organism', {}).get('scientific_name')
         self.production_name = self.genome_info.get('organism', {}).get('name')
 
