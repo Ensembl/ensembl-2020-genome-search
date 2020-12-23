@@ -112,26 +112,26 @@ class Search(Resource):
         genome_with_matched_positions = {}
 
         for genome_key_to_index in app.config['KEYS_TO_INDEX']:
-            genome_name_words = genome[genome_key_to_index].split()
-            match_positions = {}
-            for query_word in self.query_words:
-                current_location = 0
-                for nth_word in range(len(genome_name_words)):
-                    if query_word.lower() == genome_name_words[nth_word][:len(query_word)].lower():
-                        # print('******Match*******')
-                        match_positions.setdefault('match_in_nth_word', set()).add(nth_word + 1)
-                        match_positions.setdefault('offsets', {})
-                        if current_location not in match_positions['offsets'].keys() or \
-                                match_positions['offsets'][current_location] < len(query_word):
-                            match_positions['offsets'].update({current_location: len(query_word)})
+            if genome[genome_key_to_index] is not None:
+                genome_name_words = genome[genome_key_to_index].split()
+                match_positions = {}
+                for query_word in self.query_words:
+                    current_location = 0
+                    for nth_word in range(len(genome_name_words)):
+                        if query_word.lower() == genome_name_words[nth_word][:len(query_word)].lower():
+                            # print('******Match*******')
+                            match_positions.setdefault('match_in_nth_word', set()).add(nth_word + 1)
+                            match_positions.setdefault('offsets', {})
+                            if current_location not in match_positions['offsets'].keys() or \
+                                    match_positions['offsets'][current_location] < len(query_word):
+                                match_positions['offsets'].update({current_location: len(query_word)})
 
-                    # +1 for white space
-                    current_location = current_location + len(genome_name_words[nth_word]) + 1
+                        # +1 for white space
+                        current_location = current_location + len(genome_name_words[nth_word]) + 1
 
-            if any(match_positions):
-                genome_with_matched_positions.setdefault('matches_info', {}).update({genome_key_to_index: match_positions})
-                genome_with_matched_positions['genome_info'] = genome
-
+                if any(match_positions):
+                    genome_with_matched_positions.setdefault('matches_info', {}).update({genome_key_to_index: match_positions})
+                    genome_with_matched_positions['genome_info'] = genome
         return genome_with_matched_positions
 
     def _group_by_match_position(self, grouped_by_match_position, genome_with_matched_positions):
