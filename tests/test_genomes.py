@@ -58,7 +58,7 @@ class MyTestCase(unittest.TestCase):
 
         response_data = json.loads(response.data)
 
-        self.assertEqual(len(response_data['genome_info']), 4)
+        self.assertEqual(len(response_data['genome_info']), 3)
 
         print("\t*** Response code: {} ***".format(response.status_code))
 
