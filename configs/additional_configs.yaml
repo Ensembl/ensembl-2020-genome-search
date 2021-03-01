@@ -65,7 +65,7 @@ AVAILABLE_GENOMES:
       'saccharomyces_cerevisiae_GCA_000146045_2':
               Gene: 'YDL168W'
               Region: 'VII:786054-786920'
-      'escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2':
+      'escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2':
               Gene: 'b2614'
               Region: 'Chromosome:2750115-2750708'
       'caenorhabditis_elegans_GCA_000002985_3':
