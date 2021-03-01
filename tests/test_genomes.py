@@ -49,7 +49,7 @@ class MyTestCase(unittest.TestCase):
 
         print("\n\t*** Testing if genome/info endpoint works with multiple genome ids ***")
 
-        query = '?genome_id=homo_sapiens_GCA_000001405_28&genome_id=triticum_aestivum_GCA_900519105_1&genome_id=homo_sapiens_GCA_000001405_14&genome_id=escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2'
+        query = '?genome_id=homo_sapiens_GCA_000001405_28&genome_id=triticum_aestivum_GCA_900519105_1&genome_id=homo_sapiens_GCA_000001405_14'
         response = self.app.get(self.base_url + query)
 
         print('\t*** Request: {} ***'.format(self.base_url + query))
