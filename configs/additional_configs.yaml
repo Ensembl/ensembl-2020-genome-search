@@ -29,7 +29,7 @@ POPULAR_GENOMES:
       - 'schizosaccharomyces_pombe_GCA_000002945_2'
       - 'phaeodactylum_tricornutum_GCA_000150955_2'
       - 'drosophila_melanogaster_GCA_000001215_4'
-      - 'escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2'
+      - 'escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2'
       - 'fusarium_graminearum_GCA_900044135_1'
       - 'ovis_aries_GCA_000298735_1'
       - 'oryzias_latipes_GCA_002234675_1'
@@ -65,7 +65,7 @@ AVAILABLE_GENOMES:
       'saccharomyces_cerevisiae_GCA_000146045_2':
               Gene: 'YDL168W'
               Region: 'VII:786054-786920'
-      'escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2':
+      'escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2':
               Gene: 'b2614'
               Region: 'Chromosome:2750115-2750708'
       'caenorhabditis_elegans_GCA_000002985_3':

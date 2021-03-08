@@ -72,12 +72,12 @@ def prepare_gs_from_mr_format(metadata_registry_data):
         raise Exception('Cannot parse data. Invalid format')
 
     for metadata_genome in metadata_registry_data['results']:
+        if metadata_genome['organism']['name'] == 'escherichia_coli_str_k_12_substr_mg1655':
+            metadata_genome['organism']['name'] = 'escherichia_coli_str_k_12_substr_mg1655_gca_000005845'
         genome = Genome(metadata_genome)
         genome.create_genome_from_mr_format()
         genome.sanitize()
-
         genome_store.add_to_genome_store(genome)
-
     if 'next' in metadata_registry_data and metadata_registry_data['next'] is not None:
         response_from_metadata = do_rest_request(full_url=metadata_registry_data['next'])
         prepare_gs_from_mr_format(response_from_metadata)

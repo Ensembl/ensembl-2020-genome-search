@@ -355,7 +355,7 @@ genome_track_categories:
       track_list: []
       types:
         - 'Expression'
-  escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2:
+  escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2:
     - label: 'Genes & transcripts'
       track_category_id: 'genes-transcripts'
       track_list:
