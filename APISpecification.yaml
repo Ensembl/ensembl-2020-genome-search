@@ -339,7 +339,7 @@ components:
           example: homo_sapiens_GCA_000001405_28
         image:
           type: string
-          example: http://2020.ensembl.org/static/genome_images/homo_sapiens_GCA_000001405_28.svg
+          example: http://2020.ensembl.org/static/genome_images/homo_sapiens_38.svg
         is_available:
           type: boolean
           example: true

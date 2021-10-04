@@ -46,6 +46,9 @@ class PopularGenomes(Resource):
                 popular_genome['popular_order'] = data['POPULAR_GENOMES'].index(genome_id)
                 popular_genome['is_available'] = False
 
+            popular_genome['svg_name'] = popular_genome.get('production_name', '_'.join(genome_id.split('_')[:2]))
+            if popular_genome['svg_name'] == 'homo_sapiens':
+                popular_genome['svg_name'] += '_37' if popular_genome['assembly_name'].startswith('GRCh37') else '_38'
 
             popular_genomes_response = self._prepare_response(popular_genomes_response, popular_genome)
 
@@ -60,7 +63,7 @@ class PopularGenomes(Resource):
             genome_id=popular_genome['genome_id'],
             popular_order=popular_genome.get('popular_order'),
             is_available=popular_genome.get('is_available'),
-            image=url_for('temp_static_blueprint.static', filename="{}.svg".format(popular_genome['genome_id']),
+            image=url_for('temp_static_blueprint.static', filename="{}.svg".format(popular_genome['svg_name']),
                           _external=True,
                           _scheme=os.environ.get('DEPLOYMENT_SCHEME') if 'DEPLOYMENT_SCHEME' in os.environ else 'http'),
             reference_genome_id=popular_genome['reference_genome_id'] if 'reference_genome_id' in popular_genome else '',
