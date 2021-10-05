@@ -46,7 +46,7 @@ class PopularGenomes(Resource):
                 popular_genome['popular_order'] = data['POPULAR_GENOMES'].index(genome_id)
                 popular_genome['is_available'] = False
 
-            popular_genome['svg_name'] = popular_genome.get('production_name', '_'.join(genome_id.split('_')[:2]))
+            popular_genome['svg_name'] = '_'.join(genome_id.split('_')[:2])
             if popular_genome['svg_name'] == 'homo_sapiens':
                 popular_genome['svg_name'] += '_37' if popular_genome['assembly_name'].startswith('GRCh37') else '_38'
 
