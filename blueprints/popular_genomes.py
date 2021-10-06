@@ -36,6 +36,7 @@ class PopularGenomes(Resource):
         for genome_id in data['POPULAR_GENOMES']:
 
             popular_genome = {}
+            genome_data = data['POPULAR_GENOMES'][genome_id]
 
             genome_key = app.genome_store.check_if_genome_exists('genome_id', genome_id)
 
@@ -43,9 +44,10 @@ class PopularGenomes(Resource):
                 popular_genome = app.genome_store.get_genome(genome_key)
             else:
                 popular_genome['genome_id'] = genome_id
-                popular_genome['popular_order'] = data['POPULAR_GENOMES'].index(genome_id)
+                popular_genome['popular_order'] = genome_data['Order']
                 popular_genome['is_available'] = False
 
+            popular_genome['svg_file'] = genome_data['Icon']
 
             popular_genomes_response = self._prepare_response(popular_genomes_response, popular_genome)
 
@@ -60,7 +62,8 @@ class PopularGenomes(Resource):
             genome_id=popular_genome['genome_id'],
             popular_order=popular_genome.get('popular_order'),
             is_available=popular_genome.get('is_available'),
-            image=url_for('temp_static_blueprint.static', filename="{}.svg".format(popular_genome['genome_id']),
+            image=url_for('temp_static_blueprint.static', 
+                          filename=popular_genome.get('svg_file'),
                           _external=True,
                           _scheme=os.environ.get('DEPLOYMENT_SCHEME') if 'DEPLOYMENT_SCHEME' in os.environ else 'http'),
             reference_genome_id=popular_genome['reference_genome_id'] if 'reference_genome_id' in popular_genome else '',
