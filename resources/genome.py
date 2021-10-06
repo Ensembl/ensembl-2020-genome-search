@@ -118,7 +118,7 @@ class Genome(object):
 
     def __get_popular_order(self):
 
-        return self.config['POPULAR_GENOMES'].index(self.genome_id)
+        return self.config['POPULAR_GENOMES'][self.genome_id]['Order']
 
     def __check_if_is_available(self):
 

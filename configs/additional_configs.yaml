@@ -10,48 +10,132 @@ ASSOCIATED_ASSEMBLIES:
           - 'wheat_test5'
           - 'wheat_test6'
 POPULAR_GENOMES:
-      - 'homo_sapiens_GCA_000001405_28'
-      - 'mus_musculus_GCA_000001635_9'
-      - 'danio_rerio_GCA_000002035_4'
-      - 'triticum_aestivum_GCA_900519105_1'
-      - 'oryza_sativa_GCA_001433935_1'
-      - 'arabidopsis_thaliana_GCA_000001735_1'
-      - 'homo_sapiens_GCA_000001405_14'
-      - 'bos_taurus_GCA_002263795_2'
-      - 'rattus_norvegicus_GCA_000001895_4'
-      - 'sus_scrofa_GCA_000003025_6'
-      - 'zea_mays_GCA_902167145_1'
-      - 'gallus_gallus_GCA_000002315_5'
-      - 'canis_familiaris_GCA_000002285_2'
-      - 'hordeum_vulgare_GCA_901482405_1'
-      - 'drosophila_melanogaster_GCA_000001215_4'
-      - 'oryzias_latipes_GCA_002234675_1'
-      - 'ovis_aries_GCA_000298735_1'
-      - 'vitis_vinifera_GCA_000003745_2'
-      - 'solanum_lycopersicum_GCA_000188115_3'
-      - 'caenorhabditis_elegans_GCA_000002985_3'
-      - 'equus_caballus_GCA_002863925_1'
-      - 'brassica_napus_GCA_000751015_1'
-      - 'solanum_tuberosum_GCA_000226075_1'
-      - 'oryctolagus_cuniculus_GCA_000003625_1'
-      - 'saccharomyces_cerevisiae_GCA_000146045_2'
-      - 'felis_catus_GCA_000181335_4'
-      - 'macaca_mulatta_GCA_003339765_3'
-      - 'astyanax_mexicanus_GCA_000372685_2'
-      - 'pan_troglodytes_GCA_000001515_5'
-      - 'oreochromis_niloticus_GCA_001858045_3'
-      - 'capra_hircus_GCA_001704415_1'
-      - 'brassica_oleracea_GCA_000695525_1'
-      - 'xenopus_tropicalis_GCA_000004195_3'
-      - 'glycine_max_GCA_000004515_4'
-      - 'cricetulus_griseus_GCA_003668045_1'
-      - 'medicago_truncatula_GCA_000219495_2'
-      - 'brassica_rapa_GCA_000309985_1'
-      - 'sorghum_bicolor_GCA_000003195_3'
-      - 'salmo_salar_GCA_000233375_4'
-      - 'aegilops_tauschii_GCA_002575655_1'
-      - 'escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2'
-      - 'plasmodium_falciparum_GCA_000002765_2'
+      'homo_sapiens_GCA_000001405_28':
+              Order: 0
+              Icon: 'homo_sapiens_38.svg'
+      'mus_musculus_GCA_000001635_9':
+              Order: 1
+              Icon: 'mus_musculus.svg'
+      'danio_rerio_GCA_000002035_4':
+              Order: 2
+              Icon: 'danio_rerio.svg'
+      'triticum_aestivum_GCA_900519105_1':
+              Order: 3
+              Icon: 'triticum_aestivum.svg'
+      'oryza_sativa_GCA_001433935_1':
+              Order: 4
+              Icon: 'oryza_sativa.svg'
+      'arabidopsis_thaliana_GCA_000001735_1':
+              Order: 5
+              Icon: 'arabidopsis_thaliana.svg'
+      'homo_sapiens_GCA_000001405_14':
+              Order: 6
+              Icon: 'homo_sapiens_37.svg'
+      'bos_taurus_GCA_002263795_2':
+              Order: 7
+              Icon: 'bos_taurus.svg'
+      'rattus_norvegicus_GCA_000001895_4':
+              Order: 8
+              Icon: 'rattus_norvegicus.svg'
+      'sus_scrofa_GCA_000003025_6':
+              Order: 9
+              Icon: 'sus_scrofa.svg'
+      'zea_mays_GCA_902167145_1':
+              Order: 10
+              Icon: 'zea_mays.svg'
+      'gallus_gallus_GCA_000002315_5':
+              Order: 11
+              Icon: 'gallus_gallus.svg'
+      'canis_familiaris_GCA_000002285_2':
+              Order: 12
+              Icon: 'canis_familiaris.svg'
+      'hordeum_vulgare_GCA_901482405_1':
+              Order: 13
+              Icon: 'hordeum_vulgare.svg'
+      'drosophila_melanogaster_GCA_000001215_4':
+              Order: 14
+              Icon: 'drosophila_melanogaster.svg'
+      'oryzias_latipes_GCA_002234675_1':
+              Order: 15
+              Icon: 'oryzias_latipes.svg'
+      'ovis_aries_GCA_000298735_1':
+              Order: 16
+              Icon: 'ovis_aries.svg'
+      'vitis_vinifera_GCA_000003745_2':
+              Order: 17
+              Icon: 'vitis_vinifera.svg'
+      'solanum_lycopersicum_GCA_000188115_3':
+              Order: 18
+              Icon: 'solanum_lycopersicum.svg'
+      'caenorhabditis_elegans_GCA_000002985_3':
+              Order: 19
+              Icon: 'caenorhabditis_elegans.svg'
+      'equus_caballus_GCA_002863925_1':
+              Order: 20
+              Icon: 'equus_caballus.svg'
+      'brassica_napus_GCA_000751015_1':
+              Order: 21
+              Icon: 'brassica_napus.svg'
+      'solanum_tuberosum_GCA_000226075_1':
+              Order: 22
+              Icon: 'solanum_tuberosum.svg'
+      'oryctolagus_cuniculus_GCA_000003625_1':
+              Order: 23
+              Icon: 'oryctolagus_cuniculus.svg'
+      'saccharomyces_cerevisiae_GCA_000146045_2':
+              Order: 24
+              Icon: 'saccharomyces_cerevisiae.svg'
+      'felis_catus_GCA_000181335_4':
+              Order: 25
+              Icon: 'felis_catus.svg'
+      'macaca_mulatta_GCA_003339765_3':
+              Order: 26
+              Icon: 'macaca_mulatta.svg'
+      'astyanax_mexicanus_GCA_000372685_2':
+              Order: 27
+              Icon: 'astyanax_mexicanus.svg'
+      'pan_troglodytes_GCA_000001515_5':
+              Order: 28
+              Icon: 'pan_troglodytes.svg'
+      'oreochromis_niloticus_GCA_001858045_3':
+              Order: 29
+              Icon: 'oreochromis_niloticus.svg'
+      'capra_hircus_GCA_001704415_1':
+              Order: 30
+              Icon: 'capra_hircus.svg'
+      'brassica_oleracea_GCA_000695525_1':
+              Order: 31
+              Icon: 'brassica_oleracea.svg'
+      'xenopus_tropicalis_GCA_000004195_3':
+              Order: 32
+              Icon: 'xenopus_tropicalis.svg'
+      'glycine_max_GCA_000004515_4':
+              Order: 33
+              Icon: 'glycine_max.svg'
+      'cricetulus_griseus_GCA_003668045_1':
+              Order: 34
+              Icon: 'cricetulus_griseus.svg'
+      'medicago_truncatula_GCA_000219495_2':
+              Order: 35
+              Icon: 'medicago_truncatula.svg'
+      'brassica_rapa_GCA_000309985_1':
+              Order: 36
+              Icon: 'brassica_rapa.svg'
+      'sorghum_bicolor_GCA_000003195_3':
+              Order: 37
+              Icon: 'sorghum_bicolor.svg'
+      'salmo_salar_GCA_000233375_4':
+              Order: 38
+              Icon: 'salmo_salar.svg'
+      'aegilops_tauschii_GCA_002575655_1':
+              Order: 39
+              Icon: 'aegilops_tauschii.svg'
+      'escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2':
+              Order: 40
+              Icon: 'escherichia_coli.svg'
+      'plasmodium_falciparum_GCA_000002765_2':
+              Order: 41
+              Icon: 'plasmodium_falciparum.svg'
 AVAILABLE_GENOMES:
       'homo_sapiens_GCA_000001405_28':
               Gene: 'ENSG00000139618'
