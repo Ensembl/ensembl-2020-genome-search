@@ -19,6 +19,9 @@ from flask import Blueprint, jsonify, make_response, abort, url_for
 from flask import current_app as app
 from flask_restful import Resource, Api, reqparse
 import os, yaml
+from prometheus_client import Counter, generate_latest
+
+pg_metric = Counter('popular_genomes', 'Popular Genomes')
 
 popular_genomes_bp = Blueprint('popular_genomes', __name__)
 api = Api(popular_genomes_bp)
@@ -27,7 +30,7 @@ api = Api(popular_genomes_bp)
 class PopularGenomes(Resource):
     def get(self, **kwargs):
 
-
+        pg_metric.inc()
         with open('configs/additional_configs.yaml') as f:
             data = yaml.load(f)
 

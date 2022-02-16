@@ -22,6 +22,10 @@ from resources.genome_store import GenomeStore
 from resources.ensembl_indexer import Indexer
 from configs.config import get_config
 
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from prometheus_client import make_wsgi_app
+from prometheus_client import Counter, generate_latest
+
 
 def create_app():
     application = Flask(__name__)
@@ -65,7 +69,10 @@ def create_app():
         application.register_blueprint(Blueprint('temp_static_blueprint', __name__, static_folder='static', static_url_path='/static/genome_images'))
 
         # print(application.url_map.iter_rules)
-
+    # Promethes Metrics
+    application.wsgi_app = DispatcherMiddleware(application.wsgi_app, {
+        '/metrics': make_wsgi_app()
+        })
     # TODO: errorhandlers listening to only 404 errors at the moment. Needs investigating.
     register_generic_error_handlers(application)
 
