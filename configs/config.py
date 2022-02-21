@@ -23,11 +23,11 @@ def get_config():
 
     config_fn = os.path.join(self_dir, 'core_config.yaml')
     with open(config_fn) as config_f:
-        config = yaml.load(config_f)
+        config = yaml.safe_load(config_f)
 
     alt_conf_fn = os.path.join(self_dir, 'additional_configs.yaml')
     with open(alt_conf_fn) as alt_config_f:
-        assemblies_conf = yaml.load(alt_config_f)
+        assemblies_conf = yaml.safe_load(alt_config_f)
 
     # TODO: Loop through all the key: value pairs and resolve the paths instead of doing it manually as follows
 
