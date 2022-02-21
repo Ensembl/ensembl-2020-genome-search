@@ -23,6 +23,44 @@ from resources.ensembl_indexer import Indexer
 from configs.config import get_config
 
 
+from opentelemetry import trace
+from opentelemetry.instrumentation.flask import FlaskInstrumentor
+from opentelemetry.instrumentation.requests import RequestsInstrumentor
+from opentelemetry.exporter.jaeger.thrift import JaegerExporter
+from opentelemetry.sdk.resources import SERVICE_NAME, Resource
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+
+# Uncomment following while running with developement server
+# run python app.py
+"""
+trace.set_tracer_provider(
+TracerProvider(
+        resource=Resource.create({SERVICE_NAME: "gss-dev"})
+    )
+)
+
+tracer = trace.get_tracer(__name__)
+
+# create a JaegerExporter
+jaeger_exporter = JaegerExporter(
+    # configure agent
+    agent_host_name='localhost',
+    agent_port=6831,
+    # optional: configure also collector
+    #collector_endpoint='http://localhost:16686/api/traces?format=jaeger.thrift',
+    # username=xxxx, # optional
+    # password=xxxx, # optional
+    # max_tag_value_length=None # optional
+)
+
+# Create a BatchSpanProcessor and add the exporter to it
+span_processor = BatchSpanProcessor(jaeger_exporter, max_export_batch_size=10)
+
+# add to the tracer
+trace.get_tracer_provider().add_span_processor(span_processor)
+"""
+
 def create_app():
     application = Flask(__name__)
     CORS(application)
@@ -111,6 +149,10 @@ print("Starting the server...")
 #### use gunicorn app:app --workers 2 --preload
 
 app = create_app()
+
+FlaskInstrumentor.instrument_app(app)
+RequestsInstrumentor().instrument()
+
 
 if __name__ == "__main__":
    #print(app.error_handler_spec)
