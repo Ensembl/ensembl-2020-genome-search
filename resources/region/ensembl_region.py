@@ -77,7 +77,7 @@ class EnsemblRegion:
 					}
 
 	def generate_region_id(self):
-		# homo_sapiens_GCA_000001405_14:region:17:64155265-64255266
+		# 3704ceb1-948d-11ec-a39d-005056b38ce3:region:17:64155265-64255266
 		# <genome_id>:region:<region_name<:<start>-<end>
 		self.region_id = "{}:{}-{}".format(self.region_name,self.start,self.end)
 		return self.region_id

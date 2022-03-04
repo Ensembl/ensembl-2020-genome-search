@@ -24,6 +24,15 @@ class Genome(object):
 
     # Allow only alpha numeric in genome_id
     genome_id_regex = re.compile('[^{}+]'.format(config['GENOME_ID_VALID_CHARS']))
+ 
+    genome_uuids = {} 
+    genome_uuids['escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2'] = 'a73351f7-93e7-11ec-a39d-005056b38ce3'
+    genome_uuids['caenorhabditis_elegans_GCA_000002985_3'] = 'a733550b-93e7-11ec-a39d-005056b38ce3'
+    genome_uuids['homo_sapiens_GCA_000001405_28'] = 'a7335667-93e7-11ec-a39d-005056b38ce3'
+    genome_uuids['plasmodium_falciparum_GCA_000002765_2'] = 'a73356e1-93e7-11ec-a39d-005056b38ce3'
+    genome_uuids['saccharomyces_cerevisiae_GCA_000146045_2'] = 'a733574a-93e7-11ec-a39d-005056b38ce3'
+    genome_uuids['triticum_aestivum_GCA_900519105_1'] = 'a73357ab-93e7-11ec-a39d-005056b38ce3'
+    genome_uuids['homo_sapiens_GCA_000001405_14'] = '3704ceb1-948d-11ec-a39d-005056b38ce3'
 
     def __init__(self, genome_info):
         self.genome_info = genome_info
@@ -85,7 +94,8 @@ class Genome(object):
 
         # Tmp hack until GCA value is loaded into Metadata registry
         if self.production_name == 'plasmodium_falciparum':
-            return 'plasmodium_falciparum_GCA_000002765_2'
+            genome_id_key = 'plasmodium_falciparum_GCA_000002765_2'
+            return self.genome_uuids[genome_id_key]
 
         if self.assembly_accession is None and \
                 self.assembly_name is None:
@@ -94,11 +104,11 @@ class Genome(object):
                 'Assembly name: {}, \n'
                 'Assembly accession: {}'.format(self.common_name, self.assembly_name, self.assembly_accession))
         else:
-                genome_id = '{}_{}'.format(
+                genome_id_key = '{}_{}'.format(
                     Genome.genome_id_regex.sub('_', self.production_name),
                     Genome.genome_id_regex.sub('_', self.assembly_accession if self.assembly_accession else self.assembly_name))
 
-                return genome_id
+                return self.genome_uuids[genome_id_key]
 
     def __find_alternative_assemblies(self):
 

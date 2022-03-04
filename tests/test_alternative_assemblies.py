@@ -30,7 +30,7 @@ class MyTestCase(unittest.TestCase):
 
         print("\n\t*** Testing if alternative assemblies endpoint works ***")
 
-        query = '?genome_id=homo_sapiens_GCA_000001405_28'
+        query = '?genome_id=3704ceb1-948d-11ec-a39d-005056b38ce3'
         response = self.app.get(self.base_url + query)
 
         print('\t*** Request: {} ***'.format(self.base_url + query))

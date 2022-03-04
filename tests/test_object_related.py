@@ -33,7 +33,7 @@ class MyTestCase(unittest.TestCase):
 
         print("\n\t*** Testing if object/info endpoint works ***")
 
-        query = '?genome_id=homo_sapiens_GCA_000001405_28&type=gene&stable_id=ENSG00000139618'
+        query = '?genome_id=3704ceb1-948d-11ec-a39d-005056b38ce3&type=gene&stable_id=ENSG00000139618'
         response = self.app.get(self.base_url + query)
 
         print('\t*** Request: {} ***'.format(self.base_url + query))
@@ -49,7 +49,7 @@ class MyTestCase(unittest.TestCase):
 
         print("\n\t*** Testing if object/track_list endpoint works ***")
 
-        query = '?genome_id=homo_sapiens_GCA_000001405_28&type=gene&stable_id=ENSG00000139618'
+        query = '?genome_id=3704ceb1-948d-11ec-a39d-005056b38ce3&type=gene&stable_id=ENSG00000139618'
 
         response = self.app.get(self.base_url + query)
 

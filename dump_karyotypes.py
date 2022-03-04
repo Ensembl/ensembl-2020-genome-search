@@ -55,13 +55,13 @@ if __name__ == "__main__":
             json.dump(regions_info,kf)
 
     """
-    genomes = {'homo_sapiens':'homo_sapiens_GCA_000001405_28', \
-                'triticum_aestivum':'triticum_aestivum_GCA_900519105_1', \
-                'plasmodium_falciparum':'plasmodium_falciparum_GCA_000002765_2', \
+    genomes = {'homo_sapiens':'3704ceb1-948d-11ec-a39d-005056b38ce3', \
+                'triticum_aestivum':'a73357ab-93e7-11ec-a39d-005056b38ce3', \
+                'plasmodium_falciparum':'a73356e1-93e7-11ec-a39d-005056b38ce3', \
                 'escherichia_coli':'escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2', \
-                'saccharomyces_cerevisiae':'saccharomyces_cerevisiae_GCA_000146045_2', \
-                'caenorhabditis_elegans':'caenorhabditis_elegans_GCA_000002985_3'}
-    grch37_genomes = {'homo_sapiens':'homo_sapiens_GCA_000001405_14'}
+                'saccharomyces_cerevisiae':'a733574a-93e7-11ec-a39d-005056b38ce3_2', \
+                'caenorhabditis_elegans':'a733550b-93e7-11ec-a39d-005056b38ce3'}
+    grch37_genomes = {'homo_sapiens':'3704ceb1-948d-11ec-a39d-005056b38ce3'}
     rest_client = EnsemblREST()
     grch37_rest_client = EnsemblGRCH37REST()
     with open('karyotype_data.json','w') as kf:

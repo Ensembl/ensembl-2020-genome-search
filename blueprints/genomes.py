@@ -78,7 +78,7 @@ class GenomeTracks(Resource):
         track_cat_response_data = {}
         track_cat_response_data['track_categories'] = []
         with open('configs/flask_endpoints_tmp_configs/track_categories.yaml') as f:
-            data = yaml.load(f)
+            data = yaml.safe_load(f)
             track_cats = data['genome_track_categories']
             if genome_id in track_cats.keys():
                 track_cat_response_data['track_categories'] = track_cats[genome_id]

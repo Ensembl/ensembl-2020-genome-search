@@ -33,7 +33,7 @@ class MyTestCase(unittest.TestCase):
 
         print("\n\t*** Testing if genome/info endpoint works ***")
 
-        query = '?genome_id=homo_sapiens_GCA_000001405_28'
+        query = '?genome_id=3704ceb1-948d-11ec-a39d-005056b38ce3'
         response = self.app.get(self.base_url + query)
 
         print('\t*** Request: {} ***'.format(self.base_url + query))
@@ -49,7 +49,7 @@ class MyTestCase(unittest.TestCase):
 
         print("\n\t*** Testing if genome/info endpoint works with multiple genome ids ***")
 
-        query = '?genome_id=homo_sapiens_GCA_000001405_28&genome_id=triticum_aestivum_GCA_900519105_1&genome_id=homo_sapiens_GCA_000001405_14'
+        query = '?genome_id=3704ceb1-948d-11ec-a39d-005056b38ce3&genome_id=a73357ab-93e7-11ec-a39d-005056b38ce3&genome_id=3704ceb1-948d-11ec-a39d-005056b38ce3'
         response = self.app.get(self.base_url + query)
 
         print('\t*** Request: {} ***'.format(self.base_url + query))
@@ -70,7 +70,7 @@ class MyTestCase(unittest.TestCase):
 
         print("\n\t*** Testing if genome/track_categories endpoint works ***")
 
-        query = '?genome_id=homo_sapiens_GCA_000001405_28'
+        query = '?genome_id=3704ceb1-948d-11ec-a39d-005056b38ce3'
 
         response = self.app.get(self.base_url + query)
 

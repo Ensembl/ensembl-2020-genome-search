@@ -53,5 +53,5 @@ METADATA_REGISTRY_URL: 'http://test-metadata.ensembl.org/genome'
 # Update the following path accordingly
 ###################################################################################################################
 
-DATA_FILE_PATH: '/usr/src/genome-search'
+DATA_FILE_PATH: '/Users/kamal/Development/e2020/cicd/ensembl-2020-genome-search/refactor-genomeid'
 
