@@ -53,9 +53,6 @@ def create_app():
         from blueprints import genomes
         application.register_blueprint(genomes.genomes_bp, url_prefix='/api/genome/')
 
-        from blueprints import objects
-        application.register_blueprint(objects.objects_bp, url_prefix='/api/object/')
-
         from blueprints import region_info
         application.register_blueprint(region_info.region_info_bp, url_prefix='/api/genome/karyotype/')
 
