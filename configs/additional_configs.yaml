@@ -130,17 +130,17 @@ POPULAR_GENOMES:
       'aegilops_tauschii_GCA_002575655_1':
               Order: 39
               Icon: 'aegilops_tauschii.svg'
-      'escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2':
+      'a733574a-93e7-11ec-a39d-005056b38ce3':
               Order: 40
               Icon: 'escherichia_coli.svg'
       'a73356e1-93e7-11ec-a39d-005056b38ce3':
               Order: 41
               Icon: 'plasmodium_falciparum.svg'
 AVAILABLE_GENOMES:
-      'homo_sapiens_GCA_000001405_28':
+      'a7335667-93e7-11ec-a39d-005056b38ce3':
               Gene: 'ENSG00000139618'
               Region: '17:63992802-64038237'
-      'homo_sapiens_GCA_000001405_14':
+      '3704ceb1-948d-11ec-a39d-005056b38ce3':
               Gene: 'ENSG00000139618'
               Region: '17:64155265-64255266'
       'a73357ab-93e7-11ec-a39d-005056b38ce3':
@@ -149,7 +149,7 @@ AVAILABLE_GENOMES:
       'a733574a-93e7-11ec-a39d-005056b38ce3_2':
               Gene: 'YDL168W'
               Region: 'VII:786054-786920'
-      'escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2':
+      'a733574a-93e7-11ec-a39d-005056b38ce3':
               Gene: 'b2614'
               Region: 'Chromosome:2750115-2750708'
       'a733550b-93e7-11ec-a39d-005056b38ce3':
