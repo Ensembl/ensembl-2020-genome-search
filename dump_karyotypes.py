@@ -58,7 +58,7 @@ if __name__ == "__main__":
     genomes = {'homo_sapiens':'3704ceb1-948d-11ec-a39d-005056b38ce3', \
                 'triticum_aestivum':'a73357ab-93e7-11ec-a39d-005056b38ce3', \
                 'plasmodium_falciparum':'a73356e1-93e7-11ec-a39d-005056b38ce3', \
-                'escherichia_coli':'escherichia_coli_str_k_12_substr_mg1655_GCA_000005845_2', \
+                'escherichia_coli':'a73351f7-93e7-11ec-a39d-005056b38ce3', \
                 'saccharomyces_cerevisiae':'a733574a-93e7-11ec-a39d-005056b38ce3_2', \
                 'caenorhabditis_elegans':'a733550b-93e7-11ec-a39d-005056b38ce3'}
     grch37_genomes = {'homo_sapiens':'3704ceb1-948d-11ec-a39d-005056b38ce3'}

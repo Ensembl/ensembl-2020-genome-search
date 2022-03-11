@@ -1,4 +1,4 @@
-3704ceb1-948d-11ec-a39d-005056b38ce3:
+a7335667-93e7-11ec-a39d-005056b38ce3:
   Gene:
     ENSG00000139618:
       label: 'BRCA2'
@@ -58,7 +58,7 @@ a73357ab-93e7-11ec-a39d-005056b38ce3:
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'
-escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2:
+a73351f7-93e7-11ec-a39d-005056b38ce3:
   Gene:
     b2614:
       label: 'grpE'
@@ -78,7 +78,7 @@ escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2:
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'
-a733574a-93e7-11ec-a39d-005056b38ce3_2:
+a733574a-93e7-11ec-a39d-005056b38ce3:
   Gene:
     YDL168W:
       label: 'SFA1'
