@@ -82,7 +82,7 @@ POPULAR_GENOMES:
       'oryctolagus_cuniculus_GCA_000003625_1':
               Order: 23
               Icon: 'oryctolagus_cuniculus.svg'
-      'a733574a-93e7-11ec-a39d-005056b38ce3_2':
+      'a733574a-93e7-11ec-a39d-005056b38ce3':
               Order: 24
               Icon: 'saccharomyces_cerevisiae.svg'
       'felis_catus_GCA_000181335_4':
