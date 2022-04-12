@@ -66,10 +66,6 @@ class GenomeStore(object):
 
             existing_genome = Genome(self.get_genome(existing_genome_key))
             existing_genome.create_genome_from_gs_format()
-            existing_genome.division.extend(genome.division)
-
-            existing_genome.division = list(set(existing_genome.division))
-
             self.genome_store[existing_genome_key] = existing_genome.convert_to_dict()
 
             self.processed_genomes_list.add(existing_genome_key)
