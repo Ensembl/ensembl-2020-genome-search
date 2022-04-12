@@ -168,7 +168,7 @@ class ObjectTrack(Resource):
         object_value = self.args.stable_id
 
         with open('configs/flask_endpoints_tmp_configs/example_objects.yaml') as f:
-            data = yaml.load(f)
+            data = yaml.safe_load(f)
 
         if genome_id not in data.keys():
             return abort(400, {'error': 'No data available for genome: {}'.format(genome_id)})

@@ -29,7 +29,7 @@ class PopularGenomes(Resource):
 
 
         with open('configs/additional_configs.yaml') as f:
-            data = yaml.load(f)
+            data = yaml.safe_load(f)
 
         popular_genomes_response = {}
 
