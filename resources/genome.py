@@ -28,31 +28,31 @@ class Genome(object):
     genome_ids = {} 
     genome_ids['escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2'] = {  
         'uuid' : 'a73351f7-93e7-11ec-a39d-005056b38ce3',
-        'best' : 'asm584v2'
+        'url_slug' : 'asm584v2'
         }
     genome_ids['caenorhabditis_elegans_GCA_000002985_3'] = {
         'uuid' : 'a733550b-93e7-11ec-a39d-005056b38ce3',
-        'best' : 'wbcel235'
+        'url_slug' : 'wbcel235'
         }
     genome_ids['homo_sapiens_GCA_000001405_28'] = {
         'uuid' : 'a7335667-93e7-11ec-a39d-005056b38ce3',
-        'best' : 'grch38'
+        'url_slug' : 'grch38'
         }
     genome_ids['plasmodium_falciparum_GCA_000002765_2'] = {
         'uuid' : 'a73356e1-93e7-11ec-a39d-005056b38ce3',
-        'best' : 'asm276v2'
+        'url_slug' : 'asm276v2'
         }
     genome_ids['saccharomyces_cerevisiae_GCA_000146045_2'] = {
         'uuid' : 'a733574a-93e7-11ec-a39d-005056b38ce3',
-        'best' : 'r64-1-1'
+        'url_slug' : 'r64-1-1'
         }
     genome_ids['triticum_aestivum_GCA_900519105_1'] = {
         'uuid' : 'a73357ab-93e7-11ec-a39d-005056b38ce3',
-        'best' : 'iwgsc'
+        'url_slug' : 'iwgsc'
         }
     genome_ids['homo_sapiens_GCA_000001405_14'] = {
         'uuid' : '3704ceb1-948d-11ec-a39d-005056b38ce3',
-        'best' : 'grch37'
+        'url_slug' : 'grch37'
         }
 
     def __init__(self, genome_info):
@@ -76,7 +76,7 @@ class Genome(object):
         self.assembly_accession = self.genome_info.get('assembly', {}).get('assembly_accession')
 
         self.genome_id = self.__assign_genome_id()
-        self.best_id = self.genome_ids[self.genome_id]['best']
+        self.url_slug = self.genome_ids[self.genome_id]['url_slug']
 
         self.alternative_assemblies = self.__find_alternative_assemblies()
 
