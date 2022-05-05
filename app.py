@@ -44,17 +44,11 @@ def create_app():
 
         application.register_blueprint(genome_search.search_bp, url_prefix='/api/genome_search')
 
-        from blueprints import alternative_assemblies
-        application.register_blueprint(alternative_assemblies.alt_assemblies_bp, url_prefix='/api/alternative_assemblies')
-
         from blueprints import popular_genomes
         application.register_blueprint(popular_genomes.popular_genomes_bp, url_prefix='/api/popular_genomes')
 
         from blueprints import genomes
         application.register_blueprint(genomes.genomes_bp, url_prefix='/api/genome/')
-
-        from blueprints import objects
-        application.register_blueprint(objects.objects_bp, url_prefix='/api/object/')
 
         from blueprints import region_info
         application.register_blueprint(region_info.region_info_bp, url_prefix='/api/genome/karyotype/')

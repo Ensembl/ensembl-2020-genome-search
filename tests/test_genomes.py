@@ -63,23 +63,5 @@ class MyTestCase(unittest.TestCase):
         print("\t*** Response code: {} ***".format(response.status_code))
 
 
-
-    def test_if_track_categories_work(self):
-
-        self.base_url += 'track_categories/'
-
-        print("\n\t*** Testing if genome/track_categories endpoint works ***")
-
-        query = '?genome_id=homo_sapiens_GCA_000001405_28'
-
-        response = self.app.get(self.base_url + query)
-
-        print('\t*** Request: {} ***'.format(self.base_url + query))
-
-        self.assertEqual(response.status_code, 200)
-
-        print("\t*** Response code: {} ***".format(response.status_code))
-
-
 if __name__ == '__main__':
     unittest.main()
