@@ -160,6 +160,7 @@ class Search(Resource):
                     common_name=genome['genome_info']['common_name'],
                     scientific_name=genome['genome_info']['scientific_name'],
                     assembly_name=genome['genome_info']['assembly_name'],
+                    url_slug=genome['genome_info']['url_slug'],
                 )
 
                 for match_in_genome_name_type, match_info in genome['matches_info'].items():
