@@ -19,9 +19,24 @@ from resources.genome import Genome
 
 
 class GenomeStore(object):
+    slug_genome_id_mapping = {
+        "grch38"   : "homo_sapiens_GCA_000001405_28",
+        "grch37"   : "homo_sapiens_GCA_000001405_14",
+        "iwgsc"    : "triticum_aestivum_GCA_900519105_1",
+        "r64-1-1"  : "saccharomyces_cerevisiae_GCA_000146045_2",
+        "asm276v2" : "plasmodium_falciparum_GCA_000002765_2",
+        "asm584v2" : "escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2",
+        "wbcel235" : "caenorhabditis_elegans_GCA_000002985_3"
+        }
+
     def __init__(self, genome_store={}):
         self.genome_store = genome_store
         self.processed_genomes_list = set()
+
+    def get_genomeid_from_slug(self, url_slug):
+        if url_slug in self.slug_genome_id_mapping:
+            return self.slug_genome_id_mapping[url_slug]
+        return url_slug
 
     def get_genome_store(self):
         return self.genome_store
@@ -43,6 +58,7 @@ class GenomeStore(object):
 
     def check_if_genome_exists(self, genome_sub_key, genome_sub_value):
         for genome_key, genome in self.genome_store.items():
+            genome_sub_value = self.get_genomeid_from_slug(genome_sub_value)
             if genome_sub_key in genome and genome[genome_sub_key] == genome_sub_value:
                 return genome_key
 
