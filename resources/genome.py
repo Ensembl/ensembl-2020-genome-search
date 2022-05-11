@@ -76,8 +76,10 @@ class Genome(object):
         self.assembly_accession = self.genome_info.get('assembly', {}).get('assembly_accession')
 
         self.genome_id = self.__assign_genome_id()
-        self.url_slug = self.genome_ids[self.genome_id]['url_slug']
-
+        try:
+            self.url_slug = self.genome_ids[self.genome_id]['url_slug']
+        except KeyError as ke:
+            self.url_slug = self.genome_id
         self.alternative_assemblies = self.__find_alternative_assemblies()
 
         self.is_popular = self.__check_if_is_popular()
