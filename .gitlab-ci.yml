@@ -85,7 +85,7 @@ Docker-IMG:
 
   only:
   - dev
-  - master
+  - main
 
 # Build docker image for internal environment
 Docker-IMG:internal:
@@ -106,7 +106,7 @@ Docker-IMG:review:
 
   except:
   - dev
-  - master  
+  - main  
   - /^nodeploy\/.*$/
 
   when: manual
@@ -136,7 +136,7 @@ Live:WP-HX:
     name : wp-hx-live
 
   only:
-  - master
+  - main
 
 # Deploy live to WP-HH cluster
 Live:WP-HH:
@@ -145,7 +145,7 @@ Live:WP-HH:
     name : wp-hh-live
 
   only:
-  - master
+  - main
 
 # Deploy internal to WP-HX cluster
 Internal:WP-HX:
@@ -189,7 +189,7 @@ Review:WP-HX:
 
   except:
   - dev
-  - master  
+  - main  
   - /^nodeploy\/.*$/
 
   when: manual
