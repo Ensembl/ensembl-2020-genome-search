@@ -187,5 +187,3 @@ Review:WP-HX:
   - dev
   - master  
   - /^nodeploy\/.*$/
-
-  when: manual
