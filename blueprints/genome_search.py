@@ -52,11 +52,6 @@ class Search(Resource):
         for genome_key in genome_keys:
             genome = self._get_genome(genome_key)
 
-            # Skip if genome search hit does not belong to user supplied division
-            if self.args.division is not None:
-                if not self._check_if_belongs_to_division(genome):
-                    continue
-
             # Skip if search hit is for a genome which is in exclusion list
             if self.args.exclude is not None:
                 if self._check_if_in_exclude_list(genome):
@@ -91,15 +86,6 @@ class Search(Resource):
 
     def _get_genome(self, genome_key):
         return app.genome_store.get_genome(genome_key)
-
-    def _check_if_belongs_to_division(self, genome):
-        if self.args.division in [*app.config['VALID_DIVISIONS'].values()]:
-            if self.args.division in genome['division']:
-                return True
-            else:
-                return False
-        else:
-            return abort(400, {'error': 'Invalid division filter. Use values from {}'.format(', '.join([*app.config['VALID_DIVISIONS'].values()]))})
 
     def _check_if_in_exclude_list(self, genome):
         if genome.get('genome_id') in self.args.exclude:
@@ -153,26 +139,30 @@ class Search(Resource):
                 genome_hit_count += 1
                 if self.args.limit is not None and genome_hit_count > self.args.limit:
                     continue
+                try:
+                    genome_hit = dict(
+                        genome_id=genome['genome_info']['genome_id'],
+                        reference_genome_id=genome['genome_info']['reference_genome_id'],
+                        common_name=genome['genome_info']['common_name'],
+                        scientific_name=genome['genome_info']['scientific_name'],
+                        assembly_name=genome['genome_info']['assembly_name'],
+                        url_slug=genome['genome_info']['url_slug'],
+                    )
 
-                genome_hit = dict(
-                    genome_id=genome['genome_info']['genome_id'],
-                    reference_genome_id=genome['genome_info']['reference_genome_id'],
-                    common_name=genome['genome_info']['common_name'],
-                    scientific_name=genome['genome_info']['scientific_name'],
-                    assembly_name=genome['genome_info']['assembly_name'],
-                )
+                    for match_in_genome_name_type, match_info in genome['matches_info'].items():
+                        for offset, length in match_info['offsets'].items():
+                                matched_substring = dict(
+                                    length=length,
+                                    offset=offset,
+                                    match=match_in_genome_name_type,
+                                )
+                                genome_hit.setdefault('matched_substrings', []).append(matched_substring)
 
-                for match_in_genome_name_type, match_info in genome['matches_info'].items():
-                    for offset, length in match_info['offsets'].items():
-                            matched_substring = dict(
-                                length=length,
-                                offset=offset,
-                                match=match_in_genome_name_type,
-                            )
-                            genome_hit.setdefault('matched_substrings', []).append(matched_substring)
-
-                group.append(genome_hit)
-
+                    group.append(genome_hit)
+                except KeyError as ke:
+                    print ("one or more fields could not be found check the genome_store JSON\n")
+                except Exception as ex:
+                    print (ex)
             if group:
                 response.setdefault('genome_matches', []).append(group)
 

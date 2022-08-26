@@ -44,9 +44,6 @@ def create_app():
 
         application.register_blueprint(genome_search.search_bp, url_prefix='/api/genome_search')
 
-        from blueprints import alternative_assemblies
-        application.register_blueprint(alternative_assemblies.alt_assemblies_bp, url_prefix='/api/alternative_assemblies')
-
         from blueprints import popular_genomes
         application.register_blueprint(popular_genomes.popular_genomes_bp, url_prefix='/api/popular_genomes')
 

@@ -14,7 +14,7 @@
 #    limitations under the License.
 #
 
-FROM python:3.7.2
+FROM python:3.9.6
 
 # maintainer of the image
 LABEL maintainer="sboddu@ebi.ac.uk"

@@ -23,16 +23,37 @@ class Genome(object):
     config = get_config()
 
     # Allow only alpha numeric in genome_id
-    genome_id_regex = re.compile('[^{}+]'.format(config['GENOME_ID_VALID_CHARS']))
- 
-    genome_uuids = {} 
-    genome_uuids['escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2'] = 'a73351f7-93e7-11ec-a39d-005056b38ce3'
-    genome_uuids['caenorhabditis_elegans_GCA_000002985_3'] = 'a733550b-93e7-11ec-a39d-005056b38ce3'
-    genome_uuids['homo_sapiens_GCA_000001405_28'] = 'a7335667-93e7-11ec-a39d-005056b38ce3'
-    genome_uuids['plasmodium_falciparum_GCA_000002765_2'] = 'a73356e1-93e7-11ec-a39d-005056b38ce3'
-    genome_uuids['saccharomyces_cerevisiae_GCA_000146045_2'] = 'a733574a-93e7-11ec-a39d-005056b38ce3'
-    genome_uuids['triticum_aestivum_GCA_900519105_1'] = 'a73357ab-93e7-11ec-a39d-005056b38ce3'
-    genome_uuids['homo_sapiens_GCA_000001405_14'] = '3704ceb1-948d-11ec-a39d-005056b38ce3'
+    genome_id_regex = re.compile('[^{}+]'.format(config['GENOME_ID_VALID_CHARS']))  
+
+    genome_ids = {} 
+    genome_ids['escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2'] = {  
+        'uuid' : 'a73351f7-93e7-11ec-a39d-005056b38ce3',
+        'url_slug' : 'asm584v2'
+        }
+    genome_ids['caenorhabditis_elegans_GCA_000002985_3'] = {
+        'uuid' : 'a733550b-93e7-11ec-a39d-005056b38ce3',
+        'url_slug' : 'wbcel235'
+        }
+    genome_ids['homo_sapiens_GCA_000001405_28'] = {
+        'uuid' : 'a7335667-93e7-11ec-a39d-005056b38ce3',
+        'url_slug' : 'grch38'
+        }
+    genome_ids['plasmodium_falciparum_GCA_000002765_2'] = {
+        'uuid' : 'a73356e1-93e7-11ec-a39d-005056b38ce3',
+        'url_slug' : 'asm276v2'
+        }
+    genome_ids['saccharomyces_cerevisiae_GCA_000146045_2'] = {
+        'uuid' : 'a733574a-93e7-11ec-a39d-005056b38ce3',
+        'url_slug' : 'r64-1-1'
+        }
+    genome_ids['triticum_aestivum_GCA_900519105_1'] = {
+        'uuid' : 'a73357ab-93e7-11ec-a39d-005056b38ce3',
+        'url_slug' : 'iwgsc'
+        }
+    genome_ids['homo_sapiens_GCA_000001405_14'] = {
+        'uuid' : '3704ceb1-948d-11ec-a39d-005056b38ce3',
+        'url_slug' : 'grch37'
+        }
 
     def __init__(self, genome_info):
         self.genome_info = genome_info
@@ -54,9 +75,11 @@ class Genome(object):
         self.assembly_name = self.genome_info.get('assembly', {}).get('assembly_name')
         self.assembly_accession = self.genome_info.get('assembly', {}).get('assembly_accession')
 
-        self.division = [self.genome_info.get('division', {}).get('name')]
-
         self.genome_id = self.__assign_genome_id()
+        try:
+            self.url_slug = self.genome_ids[self.genome_id]['url_slug']
+        except KeyError as ke:
+            self.url_slug = self.genome_id
         self.alternative_assemblies = self.__find_alternative_assemblies()
 
         self.is_popular = self.__check_if_is_popular()
