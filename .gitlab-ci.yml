@@ -73,7 +73,9 @@ Test:
   image: docker
   services:
     - docker:dind
-
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker pull ${CONTAINER_IMAGE}
   script:
     - docker run ${CONTAINER_IMAGE} python -m unittest discover -s tests
 
