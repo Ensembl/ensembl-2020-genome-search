@@ -22,7 +22,7 @@
 # Define stages for the CI/CD pipeline
 stages:
   - build_docker_image
-  - test
+#  - test
   - deploy
 
 # Template to build to docker image
