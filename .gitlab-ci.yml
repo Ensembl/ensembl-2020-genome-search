@@ -36,7 +36,7 @@ stages:
   script:
   - docker build -t ${CONTAINER_IMAGE} --no-cache -f docker/${DOCKERFILE} .
   - docker push ${CONTAINER_IMAGE}
-  - docker rmi ${CONTAINER_IMAGE}
+  #- docker rmi ${CONTAINER_IMAGE}
   - docker logout $CI_REGISTRY
 
 # Template to deploy to WP k8s cluster
@@ -76,6 +76,9 @@ Test:
 
   script:
     - docker run ${CONTAINER_IMAGE} python -m unittest discover -s tests
+
+  after_script:
+    - docker rmi ${CONTAINER_IMAGE}
 
 # Build docker image for live/Stage environment
 Docker-IMG:
