@@ -21,8 +21,8 @@
 
 # Define stages for the CI/CD pipeline
 stages:
-  - test
   - build_docker_image
+  - test
   - deploy
 
 # Template to build to docker image
@@ -70,12 +70,12 @@ variables:
 Test:
   stage: test
 
-  image: python:3.9.6
+  image: docker
+  services:
+    - docker:dind
 
   script:
-    - pip3 install --no-cache-dir -r requirements.txt
-    - python index_species.py
-    - python -m unittest discover -s tests
+    - docker run ${CONTAINER_IMAGE} python -m unittest discover -s tests
 
 # Build docker image for live/Stage environment
 Docker-IMG:
