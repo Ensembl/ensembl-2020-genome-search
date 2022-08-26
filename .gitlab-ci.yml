@@ -105,8 +105,6 @@ Docker-IMG:review:
   - master  
   - /^nodeploy\/.*$/
 
-  when: manual
-
 # Deploy staging to WP-HX cluster
 Staging:WP-HX:
   extends: .deploy-wp
