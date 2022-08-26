@@ -18,7 +18,7 @@
         "production_name": "homo_sapiens",
         "reference_genome_id": null,
         "scientific_name": "Homo sapiens",
-        "genome_id_for_url": "grch38"
+        "genome_tag": "grch38"
     },
     "2": {
         "alternative_assemblies": null,
@@ -40,7 +40,7 @@
         "production_name": "triticum_aestivum",
         "reference_genome_id": "triticum_aestivum",
         "scientific_name": "Triticum aestivum",
-        "genome_id_for_url": "iwgsc"
+        "genome_tag": "iwgsc"
     },
     "3": {
         "alternative_assemblies": null,
@@ -63,7 +63,7 @@
         "production_name": "caenorhabditis_elegans",
         "reference_genome_id": "caenorhabditis_elegans",
         "scientific_name": "Caenorhabditis elegans",
-        "genome_id_for_url": "wbcel235"
+        "genome_tag": "wbcel235"
     },
     "4": {
         "alternative_assemblies": null,
@@ -81,7 +81,7 @@
         "production_name": "escherichia_coli_str_k_12_substr_mg1655_gca_000005845",
         "reference_genome_id": "escherichia_coli_str_k_12_substr_mg1655_gca_000005845",
         "scientific_name": "Escherichia coli str. K-12 substr. MG1655",
-        "genome_id_for_url": "asm584v2"
+        "genome_tag": "asm584v2"
     },
     "5": {
         "alternative_assemblies": null,
@@ -104,7 +104,7 @@
         "production_name": "saccharomyces_cerevisiae",
         "reference_genome_id": "saccharomyces_cerevisiae",
         "scientific_name": "Saccharomyces cerevisiae",
-        "genome_id_for_url": "r64-1-1"
+        "genome_tag": "r64-1-1"
     },
     "6": {
         "alternative_assemblies": null,
@@ -126,7 +126,7 @@
         "production_name": "plasmodium_falciparum",
         "reference_genome_id": null,
         "scientific_name": "Plasmodium falciparum 3D7",
-        "genome_id_for_url": "asm276v2"
+        "genome_tag": "asm276v2"
     },
     "7": {
         "alternative_assemblies": [
@@ -147,6 +147,6 @@
         "production_name": "homo_sapiens",
         "reference_genome_id": null,
         "scientific_name": "Homo sapiens",
-        "genome_id_for_url": "grch37"
+        "genome_tag": "grch37"
     }
 }
