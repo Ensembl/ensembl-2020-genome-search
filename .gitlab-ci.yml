@@ -70,17 +70,10 @@ variables:
 Test:
   stage: test
 
-  image: docker
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker pull ${CONTAINER_IMAGE}
-  script:
-    - docker run ${CONTAINER_IMAGE} python -m unittest discover -s tests
+  image: ${CONTAINER_IMAGE}
 
-  after_script:
-    - docker rmi ${CONTAINER_IMAGE}
+  script:
+    - python -m unittest discover -s tests
 
 # Build docker image for live/Stage environment
 Docker-IMG:
