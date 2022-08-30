@@ -20,13 +20,13 @@ from resources.genome import Genome
 
 class GenomeStore(object):
     slug_genome_id_mapping = {
-        "grch38"   : "homo_sapiens_GCA_000001405_28",
-        "grch37"   : "homo_sapiens_GCA_000001405_14",
-        "iwgsc"    : "triticum_aestivum_GCA_900519105_1",
-        "r64-1-1"  : "saccharomyces_cerevisiae_GCA_000146045_2",
-        "asm276v2" : "plasmodium_falciparum_GCA_000002765_2",
-        "asm584v2" : "escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2",
-        "wbcel235" : "caenorhabditis_elegans_GCA_000002985_3"
+        "grch38"   : "a7335667-93e7-11ec-a39d-005056b38ce3",
+        "grch37"   : "3704ceb1-948d-11ec-a39d-005056b38ce3",
+        "iwgsc"    : "a73357ab-93e7-11ec-a39d-005056b38ce3",
+        "r64-1-1"  : "a733574a-93e7-11ec-a39d-005056b38ce3",
+        "asm276v2" : "a73356e1-93e7-11ec-a39d-005056b38ce3",
+        "asm584v2" : "a73351f7-93e7-11ec-a39d-005056b38ce3",
+        "wbcel235" : "a733550b-93e7-11ec-a39d-005056b38ce3"
         }
 
     def __init__(self, genome_store={}):
