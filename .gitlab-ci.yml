@@ -101,6 +101,8 @@ Docker-IMG:review:
 Test:
   stage: test
   image: docker
+  variables:
+    CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
   services:
     - docker:dind
   before_script:
