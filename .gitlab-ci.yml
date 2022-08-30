@@ -22,7 +22,7 @@
 # Define stages for the CI/CD pipeline
 stages:
   - build_docker_image
-#  - test
+  - test
   - deploy
 
 # Template to build to docker image
@@ -66,15 +66,6 @@ variables:
   DOCKERFILE: Dockerfile.prod
   DOCKER_TLS_CERTDIR: ""
 
-# Run Tests
-#Test:
-#  stage: test
-
-#  image: ${CONTAINER_IMAGE}
-
-#  script:
-#    - python -m unittest discover -s tests
-
 # Build docker image for live/Stage environment
 Docker-IMG:
   extends: .build
@@ -104,6 +95,18 @@ Docker-IMG:review:
   - dev
   - master  
   - /^nodeploy\/.*$/
+
+
+# Run Tests
+Test:
+  stage: test
+  image: docker
+
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker pull ${CONTAINER_IMAGE}
+  script:
+    - docker run ${CONTAINER_IMAGE} python3 -m unittest discover -s tests
 
 # Deploy staging to WP-HX cluster
 Staging:WP-HX:
