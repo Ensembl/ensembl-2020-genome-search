@@ -101,14 +101,17 @@ Docker-IMG:review:
 Test:
   stage: test
   image: docker
-
+  services:
+    - docker:dind
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker pull ${CONTAINER_IMAGE}
   script:
     - docker run ${CONTAINER_IMAGE} python3 -m unittest discover -s tests
+  after_script:
+    - docker rmi ${CONTAINER_IMAGE}
 
-# Deploy staging to WP-HX cluster
+ # Deploy staging to WP-HX cluster
 Staging:WP-HX:
   extends: .deploy-wp
   environment:
