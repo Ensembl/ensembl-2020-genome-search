@@ -100,18 +100,11 @@ Docker-IMG:review:
 # Run Tests
 Test:
   stage: test
-  image: docker
+  image: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
   variables:
     CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker pull ${CONTAINER_IMAGE}
   script:
-    - docker run ${CONTAINER_IMAGE} python3 -m unittest discover -s tests
-  after_script:
-    - docker rmi ${CONTAINER_IMAGE}
+    - python3 -m unittest discover -s tests
 
  # Deploy staging to WP-HX cluster
 Staging:WP-HX:
