@@ -74,7 +74,7 @@
             "EnsemblBacteria"
         ],
         "genome_id": "a73351f7-93e7-11ec-a39d-005056b38ce3",
-        "is_available": false,
+        "is_available": true,
         "is_popular": true,
         "is_strain": true,
         "popular_order": 19,
