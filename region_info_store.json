@@ -1,5 +1,5 @@
 {
-    "caenorhabditis_elegans_GCA_000002985_3": {
+    "a733550b-93e7-11ec-a39d-005056b38ce3": {
         "chromosome": {
             "i": {
                 "is_chromosome": true,
@@ -52,7 +52,7 @@
             }
         }
     },
-    "escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2": {
+    "a73351f7-93e7-11ec-a39d-005056b38ce3": {
         "chromosome": {
             "chromosome": {
                 "is_chromosome": true,
@@ -63,7 +63,7 @@
             }
         }
     },
-    "homo_sapiens_GCA_000001405_14": {
+    "3704ceb1-948d-11ec-a39d-005056b38ce3": {
         "chromosome": {
             "1": {
                 "is_chromosome": true,
@@ -242,7 +242,7 @@
             }
         }
     },
-    "homo_sapiens_GCA_000001405_28": {
+    "a7335667-93e7-11ec-a39d-005056b38ce3": {
         "chromosome": {
             "1": {
                 "is_chromosome": true,
@@ -421,7 +421,7 @@
             }
         }
     },
-    "plasmodium_falciparum_GCA_000002765_2": {
+    "a73356e1-93e7-11ec-a39d-005056b38ce3": {
         "chromosome": {
             "1": {
                 "is_chromosome": true,
@@ -523,7 +523,7 @@
             }
         }
     },
-    "saccharomyces_cerevisiae_GCA_000146045_2": {
+    "a733574a-93e7-11ec-a39d-005056b38ce3": {
         "chromosome": {
             "i": {
                 "is_chromosome": true,
@@ -646,7 +646,7 @@
             }
         }
     },
-    "triticum_aestivum_GCA_900519105_1": {
+    "a73357ab-93e7-11ec-a39d-005056b38ce3": {
         "chromosome": {
             "1a": {
                 "is_chromosome": true,

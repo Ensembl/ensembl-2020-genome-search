@@ -41,7 +41,7 @@ paths:
         required: true
         schema:
           type: string
-          default: homo_sapiens_GCA_000001405_28
+          default: 3704ceb1-948d-11ec-a39d-005056b38ce3
       responses:
         200:
           description: successful operation
@@ -100,7 +100,7 @@ paths:
         required: true
         schema:
           type: string
-          default: homo_sapiens_GCA_000001405_28
+          default: 3704ceb1-948d-11ec-a39d-005056b38ce3
       responses:
         200:
           description: successful operation
@@ -121,134 +121,7 @@ paths:
           content: {}
       security:
       - api_key: []
-  /api/genome/track_categories/:
-    get:
-      tags:
-      - api
-      summary: Get track ctegories for given genome
-      description: Returns track categories for given genome
-      parameters:
-      - name: genome_id
-        in: query
-        description: genome_id for which track categories are requested
-        required: true
-        schema:
-          type: string
-          default: homo_sapiens_GCA_000001405_28
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  track_categories:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/TrackCategory'
-        400:
-          description: Invalid Genome ID
-          content: {}
-        404:
-          description: Genome ID not found
-          content: {}
-      security:
-      - api_key: [] 
-  /api/object/info/:
-    get:
-      tags:
-      - api
-      summary: Get object info for given object_id
-      description: Returns info for given object
-      parameters:
-      - name: genome_id
-        in: query
-        description: ID of genome to return
-        required: true
-        schema:
-          type: string
-          default: homo_sapiens_GCA_000001405_28
-      - name: object_id
-        in: query
-        description: object_id
-        required: true
-        schema:
-          type: string
-          default: gene:ENSG00000139618
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Object'
-              examples:
-                object-info-gene-success:
-                  $ref: '#/components/examples/object-info-gene-response'
-                object-info-region-success:
-                  $ref: '#/components/examples/object-info-region-response'
-        400:
-          description: Invalid Genome ID
-          content: 
-            application/json:
-              examples:
-                missing-genome_id-param:
-                  $ref: '#/components/examples/missing-genome_id-param-response'
-                missing-genome_id-value:
-                  $ref: '#/components/examples/missing-genome_id-value-response'
-                invalid-genome_id:
-                  $ref: '#/components/examples/invalid-genome_id-response'
-        404:
-          description: Genome ID not found
-          content: {}
-      security:
-      - api_key: []
-  /api/object/track_list:
-    get:
-      tags:
-      - api
-      summary: Get list of track for given object and genome_id
-      description: Returns info for given object
-      parameters:
-      - name: genome_id
-        in: query
-        description: genome id of the object
-        required: true
-        schema:
-          type: string
-          default: homo_sapiens_GCA_000001405_28
-      - name: object_id
-        in: query
-        description: object_id
-        required: true
-        schema:
-          type: string
-          default: gene:ENSG00000139618
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TrackList'
-              examples:
-                track-list-gene-success:
-                  $ref: '#/components/examples/track-list-gene-response'
-        400:
-          description: Invalid Genome ID
-          content:
-            application/json:
-              examples:
-                missing-genome_id-param:
-                  $ref: '#/components/examples/missing-genome_id-param-response'
-                missing-genome_id-value:
-                  $ref: '#/components/examples/missing-genome_id-value-response'
-                invalid-genome_id:
-                  $ref: '#/components/examples/invalid-genome_id-response'
-        404:
-          description: Genome ID not found
-          content: {}
+
   /api/genome/karyotype:
     get:
       tags:
@@ -262,7 +135,7 @@ paths:
         required: true
         schema:
           type: string
-          default: homo_sapiens_GCA_000001405_28
+          default: 3704ceb1-948d-11ec-a39d-005056b38ce3
       responses:
         200:
           description: successful operation
@@ -293,7 +166,7 @@ paths:
         required: true
         schema:
           type: string
-          default: homo_sapiens_GCA_000001405_28
+          default: 3704ceb1-948d-11ec-a39d-005056b38ce3
       - name: region
         in: query
         description: region to validate
@@ -336,7 +209,7 @@ components:
             $ref: '#/components/schemas/Object/properties/object_id'
         genome_id:
           type: string
-          example: homo_sapiens_GCA_000001405_28
+          example: 3704ceb1-948d-11ec-a39d-005056b38ce3
         image:
           type: string
           example: http://2020.ensembl.org/static/genome_images/homo_sapiens_38.svg
@@ -373,7 +246,7 @@ components:
           example: GRCh37.p13
         genome_id:
           type: string
-          example: homo_sapiens_GCA_000001405_14
+          example: 3704ceb1-948d-11ec-a39d-005056b38ce3
     TrackList:
       type: object
       properties:
@@ -581,7 +454,7 @@ components:
       value:
         bio_type: Protein coding
         description: BRCA2 DNA repair associated
-        genome_id: homo_sapiens_GCA_000001405_28
+        genome_id: 3704ceb1-948d-11ec-a39d-005056b38ce3
         label: BRCA2
         location:
           chromosome: '13'
@@ -594,7 +467,7 @@ components:
         versioned_stable_id: ENSG00000139618.15
     object-info-region-response:
       value:
-        genome_id: homo_sapiens_GCA_000001405_28
+        genome_id: 3704ceb1-948d-11ec-a39d-005056b38ce3
         label: '17:63992802-64038237'
         location:
           chromosome: '17'
@@ -628,14 +501,14 @@ components:
           error_code: null
           error_message: null
           is_valid: true
-          value: homo_sapiens_GCA_000001405_28
+          value: 3704ceb1-948d-11ec-a39d-005056b38ce3
         region:
           error_code: null
           error_message: null
           is_valid: true
           region_code: chromosome
           region_name: '1'
-        region_id: 'homo_sapiens_GCA_000001405_28:region:1:10000-1000000'
+        region_id: '3704ceb1-948d-11ec-a39d-005056b38ce3:region:1:10000-1000000'
         start:
           error_code: null
           error_message: null

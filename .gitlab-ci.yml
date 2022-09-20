@@ -21,8 +21,8 @@
 
 # Define stages for the CI/CD pipeline
 stages:
-  - test
   - build_docker_image
+#  - test
   - deploy
 
 # Template to build to docker image
@@ -36,7 +36,7 @@ stages:
   script:
   - docker build -t ${CONTAINER_IMAGE} --no-cache -f docker/${DOCKERFILE} .
   - docker push ${CONTAINER_IMAGE}
-  - docker rmi ${CONTAINER_IMAGE}
+  #- docker rmi ${CONTAINER_IMAGE}
   - docker logout $CI_REGISTRY
 
 # Template to deploy to WP k8s cluster
@@ -67,17 +67,13 @@ variables:
   DOCKER_TLS_CERTDIR: ""
 
 # Run Tests
-Test:
-  stage: test
+#Test:
+#  stage: test
 
-  image: python:3.9.6
+#  image: ${CONTAINER_IMAGE}
 
-  script:
-    - pip3 install --no-cache-dir -r requirements.txt
-    - python dump_species.py --fetch_by_genome Homo_sapiens Triticum_aestivum Caenorhabditis_elegans Escherichia_coli_str_k_12_substr_mg1655 Saccharomyces_cerevisiae Plasmodium_falciparum
-    - echo 'y' | python dump_species.py --create_from_file configs/grch37.json
-    - echo 'y' | python index_species.py
-    - python -m unittest discover -s tests
+#  script:
+#    - python -m unittest discover -s tests
 
 # Build docker image for live/Stage environment
 Docker-IMG:
@@ -108,8 +104,6 @@ Docker-IMG:review:
   - dev
   - master  
   - /^nodeploy\/.*$/
-
-  when: manual
 
 # Deploy staging to WP-HX cluster
 Staging:WP-HX:
@@ -191,5 +185,3 @@ Review:WP-HX:
   - dev
   - master  
   - /^nodeploy\/.*$/
-
-  when: manual

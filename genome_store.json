@@ -1,0 +1,156 @@
+{
+    "1": {
+        "alternative_assemblies": [
+            "3704ceb1-948d-11ec-a39d-005056b38ce3"
+        ],
+        "assembly_accession": "GCA_000001405.28",
+        "assembly_name": "GRCh38.p13",
+        "common_name": "Human",
+        "example_objects": {
+            "Gene": "ENSG00000139618",
+            "Region": "17:63992802-64038237"
+        },
+        "genome_id": "a7335667-93e7-11ec-a39d-005056b38ce3",
+        "is_available": true,
+        "is_popular": true,
+        "is_strain": false,
+        "popular_order": 0,
+        "production_name": "homo_sapiens",
+        "reference_genome_id": null,
+        "scientific_name": "Homo sapiens",
+        "genome_tag": "grch38"
+    },
+    "2": {
+        "alternative_assemblies": null,
+        "assembly_accession": "GCA_900519105.1",
+        "assembly_name": "IWGSC",
+        "common_name": null,
+        "division": [
+            "EnsemblPlants"
+        ],
+        "example_objects": {
+            "Gene": "TraesCS3D02G273600",
+            "Region": "3D:2585940-2634711"
+        },
+        "genome_id": "a73357ab-93e7-11ec-a39d-005056b38ce3",
+        "is_available": true,
+        "is_popular": true,
+        "is_strain": true,
+        "popular_order": 2,
+        "production_name": "triticum_aestivum",
+        "reference_genome_id": "triticum_aestivum",
+        "scientific_name": "Triticum aestivum",
+        "genome_tag": "iwgsc"
+    },
+    "3": {
+        "alternative_assemblies": null,
+        "assembly_accession": "GCA_000002985.3",
+        "assembly_name": "WBcel235",
+        "common_name": null,
+        "division": [
+            "EnsemblMetazoa",
+            "EnsemblVertebrates"
+        ],
+        "example_objects": {
+            "Gene": "WBGene00004893",
+            "Region": "X:937766-957832"
+        },
+        "genome_id": "a733550b-93e7-11ec-a39d-005056b38ce3",
+        "is_available": true,
+        "is_popular": true,
+        "is_strain": true,
+        "popular_order": 25,
+        "production_name": "caenorhabditis_elegans",
+        "reference_genome_id": "caenorhabditis_elegans",
+        "scientific_name": "Caenorhabditis elegans",
+        "genome_tag": "wbcel235"
+    },
+    "4": {
+        "alternative_assemblies": null,
+        "assembly_accession": "GCA_000005845.2",
+        "assembly_name": "ASM584v2",
+        "common_name": null,
+        "division": [
+            "EnsemblBacteria"
+        ],
+        "example_objects": {
+            "Gene": "b2614",
+            "Region": "Chromosome:2750115-2750708"
+        },
+        "genome_id": "a73351f7-93e7-11ec-a39d-005056b38ce3",
+        "is_available": true,
+        "is_popular": true,
+        "is_strain": true,
+        "popular_order": 40,
+        "production_name": "escherichia_coli_str_k_12_substr_mg1655_gca_000005845",
+        "reference_genome_id": "escherichia_coli_str_k_12_substr_mg1655_gca_000005845",
+        "scientific_name": "Escherichia coli str. K-12 substr. MG1655",
+        "genome_tag": "asm584v2"
+    },
+    "5": {
+        "alternative_assemblies": null,
+        "assembly_accession": "GCA_000146045.2",
+        "assembly_name": "R64-1-1",
+        "common_name": null,
+        "division": [
+            "EnsemblVertebrates",
+            "EnsemblFungi"
+        ],
+        "example_objects": {
+            "Gene": "YDL168W",
+            "Region": "VII:786054-786920"
+        },
+        "genome_id": "a733574a-93e7-11ec-a39d-005056b38ce3",
+        "is_available": true,
+        "is_popular": true,
+        "is_strain": true,
+        "popular_order": 24,
+        "production_name": "saccharomyces_cerevisiae",
+        "reference_genome_id": "saccharomyces_cerevisiae",
+        "scientific_name": "Saccharomyces cerevisiae",
+        "genome_tag": "r64-1-1"
+    },
+    "6": {
+        "alternative_assemblies": null,
+        "assembly_accession": "GCA_000002765.2",
+        "assembly_name": "ASM276v2",
+        "common_name": null,
+        "division": [
+            "EnsemblProtists"
+        ],
+        "example_objects": {
+            "Gene": "PF3D7_1143500",
+            "Region": "11:1737256-1740029"
+        },
+        "genome_id": "a73356e1-93e7-11ec-a39d-005056b38ce3",
+        "is_available": true,
+        "is_popular": true,
+        "is_strain": false,
+        "popular_order": 41,
+        "production_name": "plasmodium_falciparum",
+        "reference_genome_id": null,
+        "scientific_name": "Plasmodium falciparum 3D7",
+        "genome_tag": "asm276v2"
+    },
+    "7": {
+        "alternative_assemblies": [
+            "a7335667-93e7-11ec-a39d-005056b38ce3"
+        ],
+        "assembly_accession": "GCA_000001405.14",
+        "assembly_name": "GRCh37.p13",
+        "common_name": "Human",
+        "example_objects": {
+            "Gene": "ENSG00000139618",
+            "Region": "17:64155265-64255266"
+        },
+        "genome_id": "3704ceb1-948d-11ec-a39d-005056b38ce3",
+        "is_available": true,
+        "is_popular": true,
+        "is_strain": false,
+        "popular_order": 6,
+        "production_name": "homo_sapiens",
+        "reference_genome_id": null,
+        "scientific_name": "Homo sapiens",
+        "genome_tag": "grch37"
+    }
+}

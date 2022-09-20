@@ -53,24 +53,24 @@ parser.add_argument('--index_genome_store_ids', help='List of genome store ids o
 args = parser.parse_args()
 
 if os.path.exists(config['GENOME_STORE_FILE']):
-    user_response = input('Indexing Genome store: {}. Continue? Y/N:'.format(config['GENOME_STORE_FILE']))
-    if user_response.lower().startswith("y"):
-        with open(config['GENOME_STORE_FILE'], "r") as genome_store_file:
-            genome_store_data = json.load(genome_store_file)
-            genome_store = GenomeStore(genome_store_data)
-    else:
-        sys.exit('OK, exiting script!')
+    #user_response = input('Indexing Genome store: {}. Continue? Y/N:'.format(config['GENOME_STORE_FILE']))
+    #if user_response.lower().startswith("y"):
+    with open(config['GENOME_STORE_FILE'], "r") as genome_store_file:
+        genome_store_data = json.load(genome_store_file)
+        genome_store = GenomeStore(genome_store_data)
+    #else:
+    #    sys.exit('OK, exiting script!')
 else:
     raise Exception('No Genome store present: {}'.format(config['GENOME_STORE_FILE']))
 
 if os.path.exists(config['INDEX_FILE']):
-    user_response = input('Adding indexes to existing index file: {}. Continue? Y/N:'.format(config['INDEX_FILE']))
-    if user_response.lower().startswith("y"):
-        with open(config['INDEX_FILE'], 'r') as index_file:
-            indexes = json.load(index_file)
-            indexer = Indexer(indexes)
-    else:
-        sys.exit('OK, exiting script!')
+    #user_response = input('Adding indexes to existing index file: {}. Continue? Y/N:'.format(config['INDEX_FILE']))
+    #if user_response.lower().startswith("y"):
+    with open(config['INDEX_FILE'], 'r') as index_file:
+        indexes = json.load(index_file)
+        indexer = Indexer(indexes)
+    #else:
+    #    sys.exit('OK, exiting script!')
 else:
     os.makedirs(config['DATA_FILE_PATH'], exist_ok=True)
     indexer = Indexer()

@@ -1,7 +1,7 @@
 ASSOCIATED_ASSEMBLIES:
       human:
-          - 'homo_sapiens_GCA_000001405_28'
-          - 'homo_sapiens_GCA_000001405_14'
+          - 'a7335667-93e7-11ec-a39d-005056b38ce3'
+          - '3704ceb1-948d-11ec-a39d-005056b38ce3'
       test:
           - 'wheat_test1'
           - 'wheat_test2'
@@ -10,7 +10,7 @@ ASSOCIATED_ASSEMBLIES:
           - 'wheat_test5'
           - 'wheat_test6'
 POPULAR_GENOMES:
-      'homo_sapiens_GCA_000001405_28':
+      'a7335667-93e7-11ec-a39d-005056b38ce3':
               Order: 0
               Icon: 'homo_sapiens_38.svg'
       'mus_musculus_GCA_000001635_9':
@@ -19,7 +19,7 @@ POPULAR_GENOMES:
       'danio_rerio_GCA_000002035_4':
               Order: 2
               Icon: 'danio_rerio.svg'
-      'triticum_aestivum_GCA_900519105_1':
+      'a73357ab-93e7-11ec-a39d-005056b38ce3':
               Order: 3
               Icon: 'triticum_aestivum.svg'
       'oryza_sativa_GCA_001433935_1':
@@ -28,7 +28,7 @@ POPULAR_GENOMES:
       'arabidopsis_thaliana_GCA_000001735_1':
               Order: 5
               Icon: 'arabidopsis_thaliana.svg'
-      'homo_sapiens_GCA_000001405_14':
+      '3704ceb1-948d-11ec-a39d-005056b38ce3':
               Order: 6
               Icon: 'homo_sapiens_37.svg'
       'bos_taurus_GCA_002263795_2':
@@ -67,7 +67,7 @@ POPULAR_GENOMES:
       'solanum_lycopersicum_GCA_000188115_3':
               Order: 18
               Icon: 'solanum_lycopersicum.svg'
-      'caenorhabditis_elegans_GCA_000002985_3':
+      'a733550b-93e7-11ec-a39d-005056b38ce3':
               Order: 19
               Icon: 'caenorhabditis_elegans.svg'
       'equus_caballus_GCA_002863925_1':
@@ -82,7 +82,7 @@ POPULAR_GENOMES:
       'oryctolagus_cuniculus_GCA_000003625_1':
               Order: 23
               Icon: 'oryctolagus_cuniculus.svg'
-      'saccharomyces_cerevisiae_GCA_000146045_2':
+      'a733574a-93e7-11ec-a39d-005056b38ce3':
               Order: 24
               Icon: 'saccharomyces_cerevisiae.svg'
       'felis_catus_GCA_000181335_4':
@@ -130,31 +130,31 @@ POPULAR_GENOMES:
       'aegilops_tauschii_GCA_002575655_1':
               Order: 39
               Icon: 'aegilops_tauschii.svg'
-      'escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2':
+      'a73351f7-93e7-11ec-a39d-005056b38ce3':
               Order: 40
               Icon: 'escherichia_coli.svg'
-      'plasmodium_falciparum_GCA_000002765_2':
+      'a73356e1-93e7-11ec-a39d-005056b38ce3':
               Order: 41
               Icon: 'plasmodium_falciparum.svg'
 AVAILABLE_GENOMES:
-      'homo_sapiens_GCA_000001405_28':
+      'a7335667-93e7-11ec-a39d-005056b38ce3':
               Gene: 'ENSG00000139618'
               Region: '17:63992802-64038237'
-      'homo_sapiens_GCA_000001405_14':
+      '3704ceb1-948d-11ec-a39d-005056b38ce3':
               Gene: 'ENSG00000139618'
               Region: '17:64155265-64255266'
-      'triticum_aestivum_GCA_900519105_1':
+      'a73357ab-93e7-11ec-a39d-005056b38ce3':
               Gene: 'TraesCS3D02G273600'
               Region: '3D:2585940-2634711'
-      'saccharomyces_cerevisiae_GCA_000146045_2':
+      'a733574a-93e7-11ec-a39d-005056b38ce3':
               Gene: 'YDL168W'
               Region: 'VII:786054-786920'
-      'escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2':
+      'a73351f7-93e7-11ec-a39d-005056b38ce3':
               Gene: 'b2614'
               Region: 'Chromosome:2750115-2750708'
-      'caenorhabditis_elegans_GCA_000002985_3':
+      'a733550b-93e7-11ec-a39d-005056b38ce3':
               Gene: 'WBGene00004893'
               Region: 'X:937766-957832'
-      'plasmodium_falciparum_GCA_000002765_2':
+      'a73356e1-93e7-11ec-a39d-005056b38ce3':
               Gene: 'PF3D7_1143500'
               Region: '11:1737256-1740029'

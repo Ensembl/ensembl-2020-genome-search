@@ -38,7 +38,7 @@ class GenomeInfo(Resource):
             genome_key = app.genome_store.check_if_genome_exists('genome_id', genome_id)
 
             if genome_key is None:
-                return abort(400, {'error': 'Invalid Genome ID: {}'.format(genome_id)})
+                return abort(404, {'error': 'Invalid Genome ID: {}'.format(genome_id)})
 
             raw_genome = app.genome_store.get_genome(genome_key)
 
@@ -61,10 +61,6 @@ class GenomeInfo(Resource):
             genome.update({'example_objects': processed_example_objects})
 
         return genome
-
-
-
-
 
 api.add_resource(GenomeInfo, 'info/')
 

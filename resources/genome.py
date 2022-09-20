@@ -117,7 +117,8 @@ class Genome(object):
 
         # Tmp hack until GCA value is loaded into Metadata registry
         if self.production_name == 'plasmodium_falciparum':
-            return 'plasmodium_falciparum_GCA_000002765_2'
+            genome_id_key = 'plasmodium_falciparum_GCA_000002765_2'
+            return self.genome_uuids[genome_id_key]
 
         if self.assembly_accession is None and \
                 self.assembly_name is None:
@@ -126,11 +127,11 @@ class Genome(object):
                 'Assembly name: {}, \n'
                 'Assembly accession: {}'.format(self.common_name, self.assembly_name, self.assembly_accession))
         else:
-                genome_id = '{}_{}'.format(
+                genome_id_key = '{}_{}'.format(
                     Genome.genome_id_regex.sub('_', self.production_name),
                     Genome.genome_id_regex.sub('_', self.assembly_accession if self.assembly_accession else self.assembly_name))
 
-                return genome_id
+                return self.genome_uuids[genome_id_key]
 
     def __find_alternative_assemblies(self):
 

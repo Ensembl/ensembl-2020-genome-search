@@ -44,7 +44,7 @@ class PopularGenomes(Resource):
                 popular_genome = app.genome_store.get_genome(genome_key)
             else:
                 popular_genome['genome_id'] = genome_id
-                popular_genome['url_slug'] = genome_id
+                popular_genome['genome_tag'] = genome_id
                 popular_genome['popular_order'] = genome_data['Order']
                 popular_genome['is_available'] = False
 
@@ -61,7 +61,7 @@ class PopularGenomes(Resource):
 
         popular_genome_info = dict(
             genome_id=popular_genome['genome_id'],
-            url_slug=popular_genome['url_slug'],
+            genome_tag=popular_genome['genome_tag'],
             popular_order=popular_genome.get('popular_order'),
             is_available=popular_genome.get('is_available'),
             image=url_for('temp_static_blueprint.static', 

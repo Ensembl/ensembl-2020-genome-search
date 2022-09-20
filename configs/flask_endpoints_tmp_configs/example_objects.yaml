@@ -1,4 +1,4 @@
-homo_sapiens_GCA_000001405_28:
+a7335667-93e7-11ec-a39d-005056b38ce3:
   Gene:
     ENSG00000139618:
       label: 'BRCA2'
@@ -18,7 +18,7 @@ homo_sapiens_GCA_000001405_28:
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'
-triticum_aestivum_GCA_900519105_1:
+a73357ab-93e7-11ec-a39d-005056b38ce3:
   Gene:
     TraesCS3D02G273600:
       label: 'TraesCS3D02G273600'
@@ -38,7 +38,7 @@ triticum_aestivum_GCA_900519105_1:
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'
-homo_sapiens_GCA_000001405_14:
+3704ceb1-948d-11ec-a39d-005056b38ce3:
   Gene:
     ENSG00000139618:
       label: 'BRCA2'
@@ -58,7 +58,7 @@ homo_sapiens_GCA_000001405_14:
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'
-escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2:
+a73351f7-93e7-11ec-a39d-005056b38ce3:
   Gene:
     b2614:
       label: 'grpE'
@@ -78,7 +78,7 @@ escherichia_coli_str_k_12_substr_mg1655_gca_000005845_GCA_000005845_2:
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'
-saccharomyces_cerevisiae_GCA_000146045_2:
+a733574a-93e7-11ec-a39d-005056b38ce3:
   Gene:
     YDL168W:
       label: 'SFA1'
@@ -98,7 +98,7 @@ saccharomyces_cerevisiae_GCA_000146045_2:
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'
-caenorhabditis_elegans_GCA_000002985_3:
+a733550b-93e7-11ec-a39d-005056b38ce3:
   Gene:
     WBGene00004893:
       label: 'sms-2'
@@ -118,7 +118,7 @@ caenorhabditis_elegans_GCA_000002985_3:
               colour: 'BLUE'
               support_level: 'Canonical'
               track_id: 'gene-feat-1'
-plasmodium_falciparum_GCA_000002765_2:
+a73356e1-93e7-11ec-a39d-005056b38ce3:
   Gene:
     PF3D7_1143500:
       label: 'PF3D7_1143500'
