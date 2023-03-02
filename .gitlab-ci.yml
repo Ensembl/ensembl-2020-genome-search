@@ -74,6 +74,23 @@ Test:
 
   script:
     - python -m unittest discover -s tests
+  
+  except:
+  - nkh-integration
+
+# Run Tests
+Test:Review:
+  stage: test
+  variables:
+    CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
+
+  image: ${CONTAINER_IMAGE}
+
+  script:
+    - python -m unittest discover -s tests
+  
+  only:
+  - nkh-integration
 
 # Build docker image for live/Stage environment
 Docker-IMG:
