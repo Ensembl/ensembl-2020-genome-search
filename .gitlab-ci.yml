@@ -183,11 +183,12 @@ Review:WP-HX:
 
   except:
   - dev
-  - master  
+  - master
+  - nkh-integration
   - /^nodeploy\/.*$/
 
 # Deploy Review apps to WP-HH k8s cluster version 1.21
-Review:WP-HX:
+NKH:WP-HL:
   extends: .deploy-wp-review
   environment:
     name : nkh-prod
@@ -195,7 +196,5 @@ Review:WP-HX:
     DEPLOYENV: ${CI_COMMIT_REF_SLUG}
     CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
 
-  except:
-  - dev
-  - master  
-  - /^nodeploy\/.*$/
+  only:
+  - nkh-integration
