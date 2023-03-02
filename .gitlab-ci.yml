@@ -59,6 +59,7 @@ stages:
   - git -C ensembl-k8s-manifests/ checkout wp-k8s-review
   - sed -i "s#<DOCKER_IMAGE>#${CONTAINER_IMAGE}#g" ensembl-k8s-manifests/ensembl_genome_search_deployment.yaml
   - sed -i "s#<DEPLOYMENT_ENV>#${CI_COMMIT_REF_SLUG}#g" ensembl-k8s-manifests/ensembl_genome_search_deployment.yaml
+  - sed -i "s#apps/v1beta1#apps#g" ensembl-k8s-manifests/ensembl_genome_search_deployment.yaml
   - kubectl apply -f ensembl-k8s-manifests/ensembl_genome_search_deployment.yaml
 
 variables:
