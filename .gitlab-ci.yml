@@ -61,6 +61,17 @@ stages:
   - sed -i "s#<DEPLOYMENT_ENV>#${CI_COMMIT_REF_SLUG}#g" ensembl-k8s-manifests/ensembl_genome_search_deployment.yaml
   - kubectl apply -f ensembl-k8s-manifests/ensembl_genome_search_deployment.yaml
 
+# Template to deploy to staging, internal, prod
+.deploy-wp40:
+  stage: deploy
+  image: dockerhub.ebi.ac.uk/ensembl-web/deploy-tools:0.6
+  script:
+    - git clone https://gitlab.ebi.ac.uk/ensembl-web/ensembl-k8s-manifests.git
+    - git -C ensembl-k8s-manifests/ checkout k8s123-migration
+    - cd ensembl-k8s-manifests/ensembl-2020-genome-search
+    - kustomize edit set image DOCKER_IMAGE=${DOCKER_IMAGE}
+    - kubectl apply -k ./
+
 variables:
   CONTAINER_IMAGE: $GITLAB_REGISTRY_URL/$GITLAB_REGISTRY_NAMESPACE/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
   DOCKERFILE: Dockerfile.prod
@@ -185,3 +196,10 @@ Review:WP-HX:
   - dev
   - master  
   - /^nodeploy\/.*$/
+
+Live:wp40:HL:
+  extends: .deploy-wp40
+  environment:
+    name: wp40-hl-prod
+  rules:
+    - if: '$CI_DEPLOY_FREEZE == null && $CI_COMMIT_BRANCH == "k8s-migration"'
