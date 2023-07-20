@@ -200,4 +200,4 @@ Live:wp40:HL:
   environment:
     name: wp40-hl-prod
   rules:
-    - if: '$CI_DEPLOY_FREEZE == null && $CI_COMMIT_BRANCH == "k8s-migration"'
+    - if: '$CI_DEPLOY_FREEZE == null && $CI_COMMIT_BRANCH == "k8s-2020-genome-search"'
