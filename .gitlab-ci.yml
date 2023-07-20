@@ -68,7 +68,7 @@ stages:
   script:
     - git clone https://gitlab.ebi.ac.uk/ensembl-web/ensembl-k8s-manifests.git
     - git -C ensembl-k8s-manifests/ checkout k8s123-migration
-    - cd ensembl-k8s-manifests/ensembl-2020-genome-search
+    - cd ensembl-k8s-manifests/ensembl-genome-search
     - kustomize edit set image DOCKER_IMAGE=${{CONTAINER_IMAGE}}
     - kubectl apply -k ./
 
