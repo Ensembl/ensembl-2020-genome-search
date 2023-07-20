@@ -69,11 +69,11 @@ stages:
     - git clone https://gitlab.ebi.ac.uk/ensembl-web/ensembl-k8s-manifests.git
     - git -C ensembl-k8s-manifests/ checkout k8s123-migration
     - cd ensembl-k8s-manifests/ensembl-2020-genome-search
-    - kustomize edit set image DOCKER_IMAGE=${DOCKER_IMAGE}
+    - kustomize edit set image DOCKER_IMAGE=${{CONTAINER_IMAGE}}
     - kubectl apply -k ./
 
 variables:
-  CONTAINER_IMAGE: $GITLAB_REGISTRY_URL/$GITLAB_REGISTRY_NAMESPACE/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
+  CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}
   DOCKERFILE: Dockerfile.prod
   DOCKER_TLS_CERTDIR: ""
 
@@ -85,19 +85,6 @@ Test:
 
   script:
     - python -m unittest discover -s tests
-
-# Run Tests
-Test:Review:
-  stage: test
-  variables:
-    CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
-  image: ${CONTAINER_IMAGE}
-
-  script:
-    - python -m unittest discover -s tests
-    
-  rules:
-    - if: '$CI_DEPLOY_FREEZE == null && $CI_COMMIT_BRANCH == "k8s-migration"'
 
 # Build docker image for live/Stage environment
 Docker-IMG:
@@ -121,7 +108,6 @@ Docker-IMG:internal:
 Docker-IMG:review:
   extends: .build
   variables:
-    CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
     DOCKERFILE: Dockerfile.feature
 
   except:
@@ -203,7 +189,6 @@ Review:WP-HX:
     name : wp-hx-dev
   variables:
     DEPLOYENV: ${CI_COMMIT_REF_SLUG}
-    CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-${CI_COMMIT_REF_SLUG}
 
   except:
   - dev
