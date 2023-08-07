@@ -62,7 +62,7 @@ stages:
   - kubectl apply -f ensembl-k8s-manifests/ensembl_genome_search_deployment.yaml
 
 # Template to deploy to staging, internal, prod
-.deploy-wp40:
+.deploy-newcluster:
   stage: deploy
   image: dockerhub.ebi.ac.uk/ensembl-web/deploy-tools:0.6
   script:
@@ -195,9 +195,68 @@ Review:WP-HX:
   - master  
   - /^nodeploy\/.*$/
 
-Live:wp40:HL:
-  extends: .deploy-wp40
+# Deploy live to the new cluster in Harlow (WP40-HL)
+Prod:WP40:HL:
+  extends: .deploy-newcluster
   environment:
     name: wp40-hl-prod
-  rules:
-    - if: '$CI_DEPLOY_FREEZE == null && $CI_COMMIT_BRANCH == "master"'
+  # REMOVE THIS ONLY BLOCK AND RESTORE THE COMMENTED OUT RULES BLOCK
+  only:
+    - update-gitlab-ci
+  # rules:
+  #   - if: '$CI_DEPLOY_FREEZE == null && $CI_COMMIT_BRANCH == "master"'
+
+# Deploy live fallback to the new cluster in Hinxton (WP41-HX)
+Prod:WP41:HX:
+  extends: .deploy-newcluster
+  environment:
+    name: wp41-hx-prod
+  # REMOVE THIS ONLY BLOCK AND RESTORE THE COMMENTED OUT RULES BLOCK
+  only:
+    - update-gitlab-ci
+  # rules:
+  #   - if: '$CI_DEPLOY_FREEZE == null && $CI_COMMIT_BRANCH == "master"'
+
+# Deploy staging to the new cluster in Harlow (WP40-HL)
+Staging:WP40:HL:
+  extends: .deploy-newcluster
+  environment:
+    name : wp40-hl-staging
+  only:
+  - dev
+  - update-gitlab-ci
+
+# Deploy internal to the new cluster in Harlow (WP40-HL)
+Internal:WP40:HL:
+  extends: .deploy-newcluster
+  variables:
+    CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-internal
+  environment:
+    name : wp40-hl-internal
+  only:
+  - dev
+  - update-gitlab-ci
+
+# Deploy review apps to the new cluster in Harlow (WP40-HL)
+Review:WP40:HL:
+  extends: .deploy-newcluster
+  environment:
+    name : wp40-hl-development
+  variables:
+    DEPLOYENV: ${CI_COMMIT_REF_SLUG}
+  except:
+  - dev
+  - master
+  - /^nodeploy\/.*$/
+
+# Deploy review apps to the new cluster in Hinxton (WP41-HX)
+Review:WP41:HX:
+  extends: .deploy-newcluster
+  environment:
+    name : wp41-hx-development
+  variables:
+    DEPLOYENV: ${CI_COMMIT_REF_SLUG}
+  except:
+  - dev
+  - master
+  - /^nodeploy\/.*$/
