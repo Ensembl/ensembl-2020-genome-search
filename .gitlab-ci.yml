@@ -222,9 +222,8 @@ Staging:WP40:HL:
   extends: .deploy-newcluster
   environment:
     name : wp40-hl-staging
-  only:
-  - dev
-  - update-gitlab-ci
+  rules:
+    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "update-gitlab-ci"
 
 # Deploy internal to the new cluster in Harlow (WP40-HL)
 Internal:WP40:HL:
@@ -233,9 +232,8 @@ Internal:WP40:HL:
     CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}-internal
   environment:
     name : wp40-hl-internal
-  only:
-  - dev
-  - update-gitlab-ci
+  rules:
+    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "update-gitlab-ci"
 
 # Deploy review apps to the new cluster in Harlow (WP40-HL)
 Review:WP40:HL:
@@ -244,10 +242,8 @@ Review:WP40:HL:
     name : wp40-hl-development
   variables:
     DEPLOYENV: ${CI_COMMIT_REF_SLUG}
-  except:
-  - dev
-  - master
-  - /^nodeploy\/.*$/
+  rules:
+    - if: $CI_COMMIT_BRANCH != "dev" && $CI_COMMIT_BRANCH != "master" && $CI_COMMIT_BRANCH !~ /^nodeploy\/.*$/
 
 # Deploy review apps to the new cluster in Hinxton (WP41-HX)
 Review:WP41:HX:
@@ -256,7 +252,5 @@ Review:WP41:HX:
     name : wp41-hx-development
   variables:
     DEPLOYENV: ${CI_COMMIT_REF_SLUG}
-  except:
-  - dev
-  - master
-  - /^nodeploy\/.*$/
+  rules:
+    - if: $CI_COMMIT_BRANCH != "dev" && $CI_COMMIT_BRANCH != "master" && $CI_COMMIT_BRANCH !~ /^nodeploy\/.*$/
