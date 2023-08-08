@@ -103,6 +103,7 @@ Docker-IMG:internal:
 
   only:
   - dev
+  - update-gitlab-ci
 
 # Build docker image for feature_branch environment
 Docker-IMG:review:
