@@ -181,14 +181,14 @@ Review:WP40:HL:
   variables:
     DEPLOYENV: ${CI_COMMIT_REF_SLUG}
   rules:
-    - if: $CI_COMMIT_BRANCH != "dev" && $CI_COMMIT_BRANCH != "master" && $CI_COMMIT_BRANCH !~ /^nodeploy\/.*$/
+    - if: $CI_COMMIT_BRANCH == "master"
 
 # Deploy review apps to the new cluster in Hinxton (WP41-HX)
-Review:WP41:HX:
+Dev:WP41:HX:
   extends: .deploy-newcluster
   environment:
     name : wp41-hx-development
   variables:
     DEPLOYENV: ${CI_COMMIT_REF_SLUG}
   rules:
-    - if: $CI_COMMIT_BRANCH != "dev" && $CI_COMMIT_BRANCH != "master" && $CI_COMMIT_BRANCH !~ /^nodeploy\/.*$/
+    - if: $CI_COMMIT_BRANCH == "master"
